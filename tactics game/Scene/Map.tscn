@@ -1,0 +1,763 @@
+[gd_scene load_steps=25 format=3 uid="uid://b8o77r1wrb1e"]
+
+[ext_resource type="Script" path="res://Scene/finite_state_machine.gd" id="1_otiv0"]
+[ext_resource type="Texture2D" uid="uid://k2yji8jgyyew" path="res://textures/Solaria Demo Update 01.png" id="1_yo5su"]
+[ext_resource type="Texture2D" uid="uid://bvihcmfl32545" path="res://textures/red_indicator_panel.png" id="2_tehw5"]
+[ext_resource type="Script" path="res://Scene/Map.gd" id="2_xpoqu"]
+[ext_resource type="PackedScene" uid="uid://bg33mog6pk2xd" path="res://Scene/Pointer.tscn" id="3_bibh5"]
+[ext_resource type="Texture2D" uid="uid://dc0oe0qc47if3" path="res://textures/blue_indicator_panel.png" id="3_ow06f"]
+[ext_resource type="Script" path="res://Scene/grid_interact.gd" id="3_xg3l2"]
+[ext_resource type="Texture2D" uid="uid://d038kadtx0tlb" path="res://textures/GUI.png" id="4_u1ji5"]
+[ext_resource type="PackedScene" uid="uid://by4ql4qsokv0d" path="res://Scene/character_interaction.tscn" id="5_7o20e"]
+[ext_resource type="Script" path="res://Scene/Pointer.gd" id="6_csbl3"]
+[ext_resource type="PackedScene" uid="uid://dmkiucyrdgyhc" path="res://Scene/movement_selection.tscn" id="7_px5wm"]
+[ext_resource type="Script" path="res://Scene/fight_selection.gd" id="9_wy1ic"]
+[ext_resource type="Script" path="res://Scene/BattleLists.gd" id="10_yivf3"]
+[ext_resource type="PackedScene" uid="uid://jsenx7negnbp" path="res://Scene/enemy_list.tscn" id="11_np4e6"]
+[ext_resource type="PackedScene" uid="uid://cv07x1lbu51v8" path="res://Scene/player_list.tscn" id="12_fpqu4"]
+[ext_resource type="PackedScene" uid="uid://caqroselkedbj" path="res://Scene/Character.tscn" id="13_pjd0v"]
+[ext_resource type="PackedScene" uid="uid://ccnqpbi2cakl6" path="res://Scene/fight_menu.tscn" id="14_l63jg"]
+[ext_resource type="PackedScene" uid="uid://2ceg2fgbqvbq" path="res://Scene/input.tscn" id="14_lnf04"]
+[ext_resource type="PackedScene" uid="uid://ccsje0piy6svi" path="res://Scene/selected_character_info.tscn" id="19_vapic"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a4hmv"]
+texture = ExtResource("1_yo5su")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+12:0/0 = 0
+13:0/0 = 0
+14:0/0 = 0
+15:0/0 = 0
+16:0/0 = 0
+17:0/0 = 0
+18:0/0 = 0
+19:0/0 = 0
+20:0/0 = 0
+21:0/0 = 0
+22:0/0 = 0
+23:0/0 = 0
+24:0/0 = 0
+25:0/0 = 0
+26:0/0 = 0
+0:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+9:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+12:1/0 = 0
+13:1/0 = 0
+15:1/0 = 0
+16:1/0 = 0
+17:1/0 = 0
+18:1/0 = 0
+19:1/0 = 0
+21:1/0 = 0
+22:1/0 = 0
+23:1/0 = 0
+24:1/0 = 0
+25:1/0 = 0
+26:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+9:2/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+12:2/0 = 0
+13:2/0 = 0
+14:2/0 = 0
+15:2/0 = 0
+16:2/0 = 0
+17:2/0 = 0
+18:2/0 = 0
+19:2/0 = 0
+20:2/0 = 0
+21:2/0 = 0
+22:2/0 = 0
+23:2/0 = 0
+24:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
+9:3/0 = 0
+10:3/0 = 0
+11:3/0 = 0
+12:3/0 = 0
+13:3/0 = 0
+14:3/0 = 0
+15:3/0 = 0
+16:3/0 = 0
+17:3/0 = 0
+18:3/0 = 0
+19:3/0 = 0
+20:3/0 = 0
+21:3/0 = 0
+22:3/0 = 0
+23:3/0 = 0
+24:3/0 = 0
+25:3/0 = 0
+27:3/0 = 0
+0:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+9:4/0 = 0
+10:4/0 = 0
+11:4/0 = 0
+12:4/0 = 0
+13:4/0 = 0
+14:4/0 = 0
+15:4/0 = 0
+16:4/0 = 0
+17:4/0 = 0
+18:4/0 = 0
+19:4/0 = 0
+20:4/0 = 0
+22:4/0 = 0
+23:4/0 = 0
+24:4/0 = 0
+27:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+8:5/0 = 0
+9:5/0 = 0
+10:5/0 = 0
+11:5/0 = 0
+12:5/0 = 0
+13:5/0 = 0
+14:5/0 = 0
+15:5/0 = 0
+16:5/0 = 0
+17:5/0 = 0
+18:5/0 = 0
+19:5/0 = 0
+20:5/0 = 0
+21:5/0 = 0
+22:5/0 = 0
+23:5/0 = 0
+24:5/0 = 0
+25:5/0 = 0
+26:5/0 = 0
+27:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+6:6/0 = 0
+7:6/0 = 0
+8:6/0 = 0
+9:6/0 = 0
+10:6/0 = 0
+11:6/0 = 0
+12:6/0 = 0
+13:6/0 = 0
+14:6/0 = 0
+15:6/0 = 0
+16:6/0 = 0
+17:6/0 = 0
+18:6/0 = 0
+19:6/0 = 0
+20:6/0 = 0
+21:6/0 = 0
+22:6/0 = 0
+23:6/0 = 0
+24:6/0 = 0
+25:6/0 = 0
+26:6/0 = 0
+27:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+6:7/0 = 0
+7:7/0 = 0
+8:7/0 = 0
+9:7/0 = 0
+10:7/0 = 0
+11:7/0 = 0
+12:7/0 = 0
+13:7/0 = 0
+14:7/0 = 0
+15:7/0 = 0
+16:7/0 = 0
+17:7/0 = 0
+18:7/0 = 0
+19:7/0 = 0
+21:7/0 = 0
+22:7/0 = 0
+23:7/0 = 0
+24:7/0 = 0
+25:7/0 = 0
+26:7/0 = 0
+27:7/0 = 0
+0:8/0 = 0
+1:8/0 = 0
+2:8/0 = 0
+3:8/0 = 0
+4:8/0 = 0
+5:8/0 = 0
+6:8/0 = 0
+7:8/0 = 0
+8:8/0 = 0
+9:8/0 = 0
+10:8/0 = 0
+12:8/0 = 0
+13:8/0 = 0
+14:8/0 = 0
+15:8/0 = 0
+16:8/0 = 0
+17:8/0 = 0
+18:8/0 = 0
+19:8/0 = 0
+20:8/0 = 0
+21:8/0 = 0
+22:8/0 = 0
+23:8/0 = 0
+24:8/0 = 0
+25:8/0 = 0
+26:8/0 = 0
+27:8/0 = 0
+0:9/0 = 0
+1:9/0 = 0
+2:9/0 = 0
+3:9/0 = 0
+4:9/0 = 0
+5:9/0 = 0
+6:9/0 = 0
+7:9/0 = 0
+8:9/0 = 0
+9:9/0 = 0
+10:9/0 = 0
+11:9/0 = 0
+12:9/0 = 0
+13:9/0 = 0
+14:9/0 = 0
+15:9/0 = 0
+16:9/0 = 0
+17:9/0 = 0
+18:9/0 = 0
+19:9/0 = 0
+21:9/0 = 0
+23:9/0 = 0
+24:9/0 = 0
+25:9/0 = 0
+26:9/0 = 0
+0:10/0 = 0
+1:10/0 = 0
+2:10/0 = 0
+3:10/0 = 0
+4:10/0 = 0
+5:10/0 = 0
+6:10/0 = 0
+7:10/0 = 0
+8:10/0 = 0
+9:10/0 = 0
+10:10/0 = 0
+11:10/0 = 0
+12:10/0 = 0
+13:10/0 = 0
+14:10/0 = 0
+15:10/0 = 0
+16:10/0 = 0
+17:10/0 = 0
+18:10/0 = 0
+19:10/0 = 0
+20:10/0 = 0
+21:10/0 = 0
+22:10/0 = 0
+23:10/0 = 0
+24:10/0 = 0
+25:10/0 = 0
+26:10/0 = 0
+27:10/0 = 0
+0:11/0 = 0
+1:11/0 = 0
+2:11/0 = 0
+3:11/0 = 0
+4:11/0 = 0
+5:11/0 = 0
+6:11/0 = 0
+7:11/0 = 0
+8:11/0 = 0
+9:11/0 = 0
+10:11/0 = 0
+11:11/0 = 0
+12:11/0 = 0
+13:11/0 = 0
+14:11/0 = 0
+15:11/0 = 0
+16:11/0 = 0
+17:11/0 = 0
+18:11/0 = 0
+19:11/0 = 0
+20:11/0 = 0
+22:11/0 = 0
+23:11/0 = 0
+24:11/0 = 0
+25:11/0 = 0
+26:11/0 = 0
+27:11/0 = 0
+0:12/0 = 0
+1:12/0 = 0
+2:12/0 = 0
+3:12/0 = 0
+4:12/0 = 0
+5:12/0 = 0
+6:12/0 = 0
+7:12/0 = 0
+8:12/0 = 0
+10:12/0 = 0
+11:12/0 = 0
+12:12/0 = 0
+13:12/0 = 0
+14:12/0 = 0
+15:12/0 = 0
+16:12/0 = 0
+17:12/0 = 0
+18:12/0 = 0
+19:12/0 = 0
+22:12/0 = 0
+23:12/0 = 0
+24:12/0 = 0
+25:12/0 = 0
+27:12/0 = 0
+0:13/0 = 0
+2:13/0 = 0
+3:13/0 = 0
+5:13/0 = 0
+6:13/0 = 0
+7:13/0 = 0
+8:13/0 = 0
+9:13/0 = 0
+10:13/0 = 0
+11:13/0 = 0
+12:13/0 = 0
+13:13/0 = 0
+14:13/0 = 0
+15:13/0 = 0
+16:13/0 = 0
+17:13/0 = 0
+0:14/0 = 0
+2:14/0 = 0
+3:14/0 = 0
+5:14/0 = 0
+6:14/0 = 0
+7:14/0 = 0
+8:14/0 = 0
+9:14/0 = 0
+10:14/0 = 0
+11:14/0 = 0
+12:14/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vu77o"]
+texture = ExtResource("2_tehw5")
+0:0/0 = 0
+0:0/0/z_index = 1
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wuyc"]
+texture = ExtResource("3_ow06f")
+0:0/0 = 0
+0:0/0/z_index = 1
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7pijs"]
+texture = ExtResource("4_u1ji5")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+9:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+9:2/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
+9:3/0 = 0
+10:3/0 = 0
+11:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+9:4/0 = 0
+10:4/0 = 0
+11:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+8:5/0 = 0
+9:5/0 = 0
+10:5/0 = 0
+11:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+6:6/0 = 0
+7:6/0 = 0
+8:6/0 = 0
+9:6/0 = 0
+10:6/0 = 0
+11:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+6:7/0 = 0
+7:7/0 = 0
+8:7/0 = 0
+9:7/0 = 0
+10:7/0 = 0
+11:7/0 = 0
+0:8/0 = 0
+1:8/0 = 0
+2:8/0 = 0
+3:8/0 = 0
+4:8/0 = 0
+5:8/0 = 0
+6:8/0 = 0
+7:8/0 = 0
+8:8/0 = 0
+9:8/0 = 0
+10:8/0 = 0
+11:8/0 = 0
+0:9/0 = 0
+1:9/0 = 0
+2:9/0 = 0
+3:9/0 = 0
+4:9/0 = 0
+5:9/0 = 0
+6:9/0 = 0
+7:9/0 = 0
+8:9/0 = 0
+9:9/0 = 0
+10:9/0 = 0
+11:9/0 = 0
+0:10/0 = 0
+1:10/0 = 0
+2:10/0 = 0
+3:10/0 = 0
+4:10/0 = 0
+5:10/0 = 0
+6:10/0 = 0
+7:10/0 = 0
+8:10/0 = 0
+9:10/0 = 0
+10:10/0 = 0
+11:10/0 = 0
+0:11/0 = 0
+1:11/0 = 0
+2:11/0 = 0
+3:11/0 = 0
+4:11/0 = 0
+5:11/0 = 0
+6:11/0 = 0
+7:11/0 = 0
+8:11/0 = 0
+9:11/0 = 0
+10:11/0 = 0
+11:11/0 = 0
+0:12/0 = 0
+1:12/0 = 0
+2:12/0 = 0
+3:12/0 = 0
+4:12/0 = 0
+5:12/0 = 0
+6:12/0 = 0
+7:12/0 = 0
+8:12/0 = 0
+9:12/0 = 0
+10:12/0 = 0
+11:12/0 = 0
+0:13/0 = 0
+1:13/0 = 0
+2:13/0 = 0
+3:13/0 = 0
+4:13/0 = 0
+5:13/0 = 0
+6:13/0 = 0
+7:13/0 = 0
+8:13/0 = 0
+9:13/0 = 0
+10:13/0 = 0
+11:13/0 = 0
+0:14/0 = 0
+1:14/0 = 0
+2:14/0 = 0
+3:14/0 = 0
+4:14/0 = 0
+5:14/0 = 0
+6:14/0 = 0
+7:14/0 = 0
+8:14/0 = 0
+9:14/0 = 0
+10:14/0 = 0
+11:14/0 = 0
+0:15/0 = 0
+1:15/0 = 0
+2:15/0 = 0
+3:15/0 = 0
+4:15/0 = 0
+5:15/0 = 0
+6:15/0 = 0
+7:15/0 = 0
+8:15/0 = 0
+9:15/0 = 0
+10:15/0 = 0
+11:15/0 = 0
+0:16/0 = 0
+1:16/0 = 0
+2:16/0 = 0
+3:16/0 = 0
+4:16/0 = 0
+5:16/0 = 0
+6:16/0 = 0
+7:16/0 = 0
+8:16/0 = 0
+9:16/0 = 0
+10:16/0 = 0
+11:16/0 = 0
+0:17/0 = 0
+1:17/0 = 0
+2:17/0 = 0
+3:17/0 = 0
+4:17/0 = 0
+5:17/0 = 0
+6:17/0 = 0
+7:17/0 = 0
+8:17/0 = 0
+9:17/0 = 0
+10:17/0 = 0
+11:17/0 = 0
+0:18/0 = 0
+1:18/0 = 0
+2:18/0 = 0
+3:18/0 = 0
+4:18/0 = 0
+5:18/0 = 0
+6:18/0 = 0
+7:18/0 = 0
+8:18/0 = 0
+9:18/0 = 0
+10:18/0 = 0
+11:18/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_mu355"]
+sources/0 = SubResource("TileSetAtlasSource_a4hmv")
+sources/1 = SubResource("TileSetAtlasSource_vu77o")
+sources/2 = SubResource("TileSetAtlasSource_0wuyc")
+sources/3 = SubResource("TileSetAtlasSource_7pijs")
+
+[node name="Map" type="TileMap"]
+tile_set = SubResource("TileSet_mu355")
+format = 2
+layer_0/name = "terrain lower"
+layer_0/z_index = -1
+layer_0/tile_data = PackedInt32Array(0, 327680, 0, 65536, 327680, 0, 131072, 327680, 0, 196608, 327680, 0, 262144, 327680, 0, 327680, 327680, 0, 393216, 327680, 0, 458752, 327680, 0, 524288, 327680, 0, 589824, 327680, 0, 1, 327680, 6, 65537, 327680, 6, 131073, 327680, 0, 196609, 327680, 0, 262145, 327680, 0, 327681, 327680, 0, 393217, 327680, 0, 458753, 327680, 0, 524289, 327680, 0, 589825, 327680, 0, 2, 327680, 0, 65538, 327680, 0, 131074, 327680, 0, 196610, 327680, 0, 262146, 327680, 0, 327682, 327680, 0, 393218, 327680, 0, 458754, 327680, 0, 524290, 327680, 0, 589826, 327680, 0, 3, 327680, 0, 65539, 327680, 0, 131075, 327680, 0, 196611, 327680, 0, 262147, 327680, 0, 327683, 327680, 0, 393219, 327680, 0, 458755, 327680, 0, 524291, 327680, 0, 589827, 327680, 0, 4, 327680, 0, 65540, 327680, 0, 131076, 327680, 0, 196612, 327680, 0, 262148, 327680, 0, 327684, 327680, 0, 393220, 327680, 0, 458756, 327680, 0, 524292, 327680, 0, 589828, 327680, 0, 5, 327680, 0, 65541, 327680, 0, 131077, 327680, 0, 196613, 327680, 0, 262149, 327680, 0, 327685, 327680, 0, 393221, 327680, 0, 458757, 327680, 0, 524293, 327680, 0, 589829, 327680, 0, 6, 327680, 0, 65542, 327680, 0, 131078, 327680, 0, 196614, 327680, 0, 262150, 327680, 0, 327686, 327680, 0, 393222, 327680, 0, 458758, 327680, 0, 524294, 327680, 0, 589830, 327680, 0, 7, 327680, 0, 65543, 327680, 0, 131079, 327680, 0, 196615, 327680, 0, 262151, 327680, 0, 327687, 327680, 0, 393223, 327680, 0, 458759, 327680, 0, 524295, 327680, 0, 589831, 327680, 0, 8, 327680, 0, 65544, 327680, 0, 131080, 327680, 0, 196616, 327680, 0, 262152, 327680, 0, 327688, 327680, 0, 393224, 327680, 0, 458760, 327680, 0, 524296, 327680, 0, 589832, 327680, 0, 9, 327680, 0, 65545, 327680, 0, 131081, 327680, 0, 196617, 327680, 0, 262153, 327680, 0, 327689, 327680, 0, 393225, 327680, 0, 458761, 327680, 0, 524297, 327680, 0, 589833, 393216, 0)
+layer_1/name = "terrain higher"
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "highlights"
+layer_2/z_index = 1
+layer_2/tile_data = PackedInt32Array()
+layer_3/name = "pointer"
+layer_3/z_index = 2
+layer_3/tile_data = PackedInt32Array()
+script = ExtResource("2_xpoqu")
+
+[node name="FiniteStateMachine" type="Node" parent="."]
+script = ExtResource("1_otiv0")
+
+[node name="GridInteract" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("3_xg3l2")
+
+[node name="character_interaction" parent="FiniteStateMachine" instance=ExtResource("5_7o20e")]
+
+[node name="movement_selection" parent="FiniteStateMachine" instance=ExtResource("7_px5wm")]
+
+[node name="fight_selection" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("9_wy1ic")
+
+[node name="Pointer" parent="." instance=ExtResource("3_bibh5")]
+scale = Vector2(0.3, 0.3)
+offset = Vector2(-60, 0)
+script = ExtResource("6_csbl3")
+
+[node name="Camera2D2" type="Camera2D" parent="Pointer"]
+zoom = Vector2(3, 3)
+
+[node name="battle_lists" type="Node" parent="."]
+script = ExtResource("10_yivf3")
+
+[node name="enemy_list" parent="battle_lists" instance=ExtResource("11_np4e6")]
+
+[node name="test_enemy" parent="battle_lists/enemy_list" instance=ExtResource("13_pjd0v")]
+scale = Vector2(0.25, 0.25)
+character_name = "Gobbette"
+faction = "enemy"
+
+[node name="player_list" parent="battle_lists" instance=ExtResource("12_fpqu4")]
+
+[node name="Character" parent="battle_lists/player_list" instance=ExtResource("13_pjd0v")]
+scale = Vector2(0.25, 0.25)
+
+[node name="fight_menu" parent="." instance=ExtResource("14_l63jg")]
+
+[node name="input" parent="." instance=ExtResource("14_lnf04")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="mouse_position" type="RichTextLabel" parent="CanvasLayer"]
+offset_right = 83.0
+offset_bottom = 39.0
+text = "mouse_position"
+
+[node name="tile_info" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -221.0
+offset_right = 111.0
+grow_vertical = 0
+text = "tile_info"
+
+[node name="neighbors" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -145.0
+offset_bottom = 132.0
+grow_horizontal = 0
+text = "neighbors
+"
+
+[node name="selected_character_info" parent="CanvasLayer" instance=ExtResource("19_vapic")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_bottom = 0.0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="targeted_character_info" parent="CanvasLayer" instance=ExtResource("19_vapic")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -176.0
+offset_top = -77.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[connection signal="grid_interaction" from="FiniteStateMachine/GridInteract" to="." method="_on_grid_interact_grid_interaction"]
+[connection signal="moved" from="FiniteStateMachine/GridInteract" to="Pointer" method="_on_grid_interact_moved"]
+[connection signal="escape_pressed" from="FiniteStateMachine/character_interaction" to="." method="_on_character_interaction_escape_pressed"]
+[connection signal="moved" from="FiniteStateMachine/character_interaction" to="Pointer" method="_on_character_interaction_moved"]
+[connection signal="show_fight_menu" from="FiniteStateMachine/character_interaction" to="fight_menu" method="_on_character_interaction_show_fight_menu"]
+[connection signal="escape_pressed" from="FiniteStateMachine/movement_selection" to="." method="_on_movement_selection_escape_pressed"]
+[connection signal="grid_interaction" from="FiniteStateMachine/movement_selection" to="." method="_on_movement_selection_grid_interaction"]
+[connection signal="moved" from="FiniteStateMachine/movement_selection" to="Pointer" method="_on_movement_selection_moved"]
+[connection signal="escape_pressed" from="FiniteStateMachine/fight_selection" to="." method="_on_fight_selection_escape_pressed"]
+[connection signal="grid_interaction" from="FiniteStateMachine/fight_selection" to="." method="_on_fight_selection_grid_interaction"]
+[connection signal="moved" from="FiniteStateMachine/fight_selection" to="Pointer" method="_on_fight_selection_moved"]
+[connection signal="pointer_position" from="Pointer" to="." method="_on_pointer_pointer_position"]
+[connection signal="fight_selected" from="fight_menu" to="." method="_on_fight_menu_fight_selected"]
+[connection signal="movement_selected" from="fight_menu" to="." method="_on_fight_menu_movement_selected"]
+
+[editable path="fight_menu"]

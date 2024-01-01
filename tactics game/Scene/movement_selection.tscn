@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmkiucyrdgyhc"]
+
+[ext_resource type="Script" path="res://Scene/movement_selection.gd" id="1_rcrny"]
+
+[node name="movement_selection" type="Node"]
+script = ExtResource("1_rcrny")

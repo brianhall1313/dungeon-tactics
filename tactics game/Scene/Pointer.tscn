@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bg33mog6pk2xd"]
+
+[ext_resource type="Texture2D" uid="uid://cvaihhos8tdas" path="res://textures/menu_selection_arrow.png" id="1_eqi2c"]
+
+[node name="Pointer" type="Sprite2D"]
+rotation = 1.5708
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_eqi2c")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)

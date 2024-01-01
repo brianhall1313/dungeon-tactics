@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://ha4mjyym2h8a"]
+
+[sub_resource type="GDScript" id="GDScript_iq4l3"]
+script/source = "extends State
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[node name="action_selection_menu" type="Node"]
+script = SubResource("GDScript_iq4l3")

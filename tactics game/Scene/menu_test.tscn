@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://ubg6wg6tyfkp"]
+
+[sub_resource type="GDScript" id="GDScript_vgdp4"]
+script/source = "extends ItemList
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	show()
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[node name="menu_test" type="ItemList"]
+item_count = 3
+item_0/text = "move"
+item_1/text = "fight"
+item_2/text = "item"
+script = SubResource("GDScript_vgdp4")
