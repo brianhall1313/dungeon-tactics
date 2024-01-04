@@ -1,0 +1,174 @@
+[gd_scene load_steps=26 format=3 uid="uid://b8o77r1wrb1e"]
+
+[ext_resource type="Script" path="res://Scene/finite_state_machine.gd" id="1_otiv0"]
+[ext_resource type="Texture2D" uid="uid://djcfnjsb24rgj" path="res://textures/red_indicator_panel.png" id="2_tehw5"]
+[ext_resource type="Script" path="res://Scene/Map.gd" id="2_xpoqu"]
+[ext_resource type="PackedScene" uid="uid://bg33mog6pk2xd" path="res://Scene/Pointer.tscn" id="3_bibh5"]
+[ext_resource type="Texture2D" uid="uid://c5vowgx7ngi60" path="res://textures/floor_1.png" id="3_jqgdf"]
+[ext_resource type="Texture2D" uid="uid://dfllpk6r1olxd" path="res://textures/blue_indicator_panel.png" id="3_ow06f"]
+[ext_resource type="Script" path="res://Scene/grid_interact.gd" id="3_xg3l2"]
+[ext_resource type="Texture2D" uid="uid://c1jwyix2jfjbb" path="res://textures/hole.png" id="4_yg56k"]
+[ext_resource type="PackedScene" uid="uid://by4ql4qsokv0d" path="res://Scene/character_interaction.tscn" id="5_7o20e"]
+[ext_resource type="Script" path="res://Scene/Pointer.gd" id="6_csbl3"]
+[ext_resource type="Script" path="res://Scene/tactical_encounter.gd" id="6_idbvn"]
+[ext_resource type="PackedScene" uid="uid://dmkiucyrdgyhc" path="res://Scene/movement_selection.tscn" id="7_px5wm"]
+[ext_resource type="Script" path="res://Scene/fight_selection.gd" id="9_wy1ic"]
+[ext_resource type="Script" path="res://Scene/BattleLists.gd" id="10_yivf3"]
+[ext_resource type="PackedScene" uid="uid://jsenx7negnbp" path="res://Scene/enemy_list.tscn" id="11_np4e6"]
+[ext_resource type="PackedScene" uid="uid://cv07x1lbu51v8" path="res://Scene/player_list.tscn" id="12_fpqu4"]
+[ext_resource type="PackedScene" uid="uid://b1cum44ye8yvp" path="res://Scene/Character.tscn" id="13_pjd0v"]
+[ext_resource type="PackedScene" uid="uid://ccnqpbi2cakl6" path="res://Scene/fight_menu.tscn" id="14_l63jg"]
+[ext_resource type="PackedScene" uid="uid://2ceg2fgbqvbq" path="res://Scene/input.tscn" id="14_lnf04"]
+[ext_resource type="PackedScene" uid="uid://ccsje0piy6svi" path="res://Scene/selected_character_info.tscn" id="19_vapic"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vu77o"]
+texture = ExtResource("2_tehw5")
+0:0/0 = 0
+0:0/0/z_index = 1
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wuyc"]
+texture = ExtResource("3_ow06f")
+0:0/0 = 0
+0:0/0/z_index = 1
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_adsn7"]
+texture = ExtResource("3_jqgdf")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rcc2c"]
+texture = ExtResource("4_yg56k")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_mu355"]
+sources/1 = SubResource("TileSetAtlasSource_vu77o")
+sources/2 = SubResource("TileSetAtlasSource_0wuyc")
+sources/4 = SubResource("TileSetAtlasSource_adsn7")
+sources/5 = SubResource("TileSetAtlasSource_rcc2c")
+
+[node name="Map" type="TileMap"]
+tile_set = SubResource("TileSet_mu355")
+format = 2
+layer_0/name = "terrain lower"
+layer_0/z_index = -1
+layer_0/tile_data = PackedInt32Array(0, 4, 0, 65536, 4, 0, 131072, 4, 0, 196608, 4, 0, 262144, 4, 0, 327680, 4, 0, 1, 4, 0, 65537, 4, 0, 131073, 4, 0, 196609, 4, 0, 262145, 4, 0, 327681, 4, 0, 2, 4, 0, 65538, 4, 0, 131074, 4, 0, 196610, 4, 0, 262146, 4, 0, 327682, 4, 0, 3, 4, 0, 65539, 4, 0, 131075, 4, 0, 196611, 4, 0, 262147, 4, 0, 327683, 4, 0, 4, 4, 0, 65540, 4, 0, 131076, 4, 0, 196612, 4, 0, 262148, 4, 0, 327684, 4, 0, 5, 4, 0, 65541, 4, 0, 131077, 4, 0, 196613, 4, 0, 262149, 4, 0, 327685, 4, 0, 6, 4, 0, 65542, 4, 0, 131078, 4, 0, 196614, 4, 0, 262150, 4, 0, 327686, 4, 0, 7, 4, 0, 65543, 4, 0, 131079, 4, 0, 196615, 4, 0, 262151, 4, 0, 327687, 4, 0, 8, 4, 0, 65544, 4, 0, 131080, 4, 0, 196616, 4, 0, 262152, 4, 0, 327688, 4, 0, 9, 4, 0, 65545, 4, 0, 131081, 4, 0, 196617, 4, 0, 262153, 4, 0, 327689, 4, 0, 393216, 4, 0, 458752, 4, 0, 524288, 4, 0, 589824, 4, 0, 393217, 4, 0, 458753, 4, 0, 524289, 4, 0, 589825, 4, 0, 393218, 4, 0, 458754, 4, 0, 524290, 4, 0, 589826, 4, 0, 393219, 4, 0, 458755, 4, 0, 524291, 4, 0, 589827, 4, 0, 393220, 4, 0, 458756, 4, 0, 524292, 4, 0, 589828, 4, 0, 393221, 4, 0, 458757, 4, 0, 524293, 4, 0, 589829, 4, 0, 393222, 4, 0, 458758, 4, 0, 524294, 4, 0, 589830, 4, 0, 393223, 4, 0, 458759, 4, 0, 524295, 4, 0, 589831, 4, 0, 393224, 4, 0, 458760, 4, 0, 524296, 4, 0, 589832, 4, 0, 393225, 4, 0, 458761, 4, 0, 524297, 4, 0, 589833, 4, 0)
+layer_1/name = "terrain higher"
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "highlights"
+layer_2/z_index = 1
+layer_2/tile_data = PackedInt32Array()
+layer_3/name = "pointer"
+layer_3/z_index = 2
+layer_3/tile_data = PackedInt32Array()
+script = ExtResource("2_xpoqu")
+
+[node name="tactical_encounter" type="Node" parent="."]
+script = ExtResource("6_idbvn")
+
+[node name="FiniteStateMachine" type="Node" parent="."]
+script = ExtResource("1_otiv0")
+
+[node name="GridInteract" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("3_xg3l2")
+
+[node name="character_interaction" parent="FiniteStateMachine" instance=ExtResource("5_7o20e")]
+
+[node name="movement_selection" parent="FiniteStateMachine" instance=ExtResource("7_px5wm")]
+
+[node name="fight_selection" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("9_wy1ic")
+
+[node name="Pointer" parent="." instance=ExtResource("3_bibh5")]
+z_index = 5
+offset = Vector2(0, -10)
+script = ExtResource("6_csbl3")
+
+[node name="Camera2D2" type="Camera2D" parent="Pointer"]
+zoom = Vector2(3, 3)
+
+[node name="battle_lists" type="Node" parent="."]
+script = ExtResource("10_yivf3")
+
+[node name="enemy_list" parent="battle_lists" instance=ExtResource("11_np4e6")]
+
+[node name="test_enemy" parent="battle_lists/enemy_list" instance=ExtResource("13_pjd0v")]
+scale = Vector2(0.25, 0.25)
+faction = "enemy"
+character_name = "Dee"
+
+[node name="player_list" parent="battle_lists" instance=ExtResource("12_fpqu4")]
+
+[node name="Character" parent="battle_lists/player_list" instance=ExtResource("13_pjd0v")]
+scale = Vector2(0.25, 0.25)
+faction = "player"
+character_name = "Bob"
+
+[node name="fight_menu" parent="." instance=ExtResource("14_l63jg")]
+
+[node name="input" parent="." instance=ExtResource("14_lnf04")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="mouse_position" type="RichTextLabel" parent="CanvasLayer"]
+offset_right = 83.0
+offset_bottom = 39.0
+text = "mouse_position"
+
+[node name="tile_info" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -221.0
+offset_right = 111.0
+grow_vertical = 0
+text = "tile_info"
+
+[node name="neighbors" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -145.0
+offset_bottom = 132.0
+grow_horizontal = 0
+text = "neighbors
+"
+
+[node name="selected_character_info" parent="CanvasLayer" instance=ExtResource("19_vapic")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_bottom = 0.0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="targeted_character_info" parent="CanvasLayer" instance=ExtResource("19_vapic")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -176.0
+offset_top = -77.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[connection signal="grid_interaction" from="FiniteStateMachine/GridInteract" to="." method="_on_grid_interact_grid_interaction"]
+[connection signal="moved" from="FiniteStateMachine/GridInteract" to="Pointer" method="_on_grid_interact_moved"]
+[connection signal="escape_pressed" from="FiniteStateMachine/character_interaction" to="." method="_on_character_interaction_escape_pressed"]
+[connection signal="moved" from="FiniteStateMachine/character_interaction" to="Pointer" method="_on_character_interaction_moved"]
+[connection signal="show_fight_menu" from="FiniteStateMachine/character_interaction" to="fight_menu" method="_on_character_interaction_show_fight_menu"]
+[connection signal="escape_pressed" from="FiniteStateMachine/movement_selection" to="." method="_on_movement_selection_escape_pressed"]
+[connection signal="grid_interaction" from="FiniteStateMachine/movement_selection" to="." method="_on_movement_selection_grid_interaction"]
+[connection signal="moved" from="FiniteStateMachine/movement_selection" to="Pointer" method="_on_movement_selection_moved"]
+[connection signal="escape_pressed" from="FiniteStateMachine/fight_selection" to="." method="_on_fight_selection_escape_pressed"]
+[connection signal="grid_interaction" from="FiniteStateMachine/fight_selection" to="." method="_on_fight_selection_grid_interaction"]
+[connection signal="moved" from="FiniteStateMachine/fight_selection" to="Pointer" method="_on_fight_selection_moved"]
+[connection signal="fight_selected" from="fight_menu" to="." method="_on_fight_menu_fight_selected"]
+[connection signal="movement_selected" from="fight_menu" to="." method="_on_fight_menu_movement_selected"]
+
+[editable path="fight_menu"]
