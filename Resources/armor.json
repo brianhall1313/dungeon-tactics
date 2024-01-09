@@ -1,0 +1,5 @@
+{"unarmored":{"name":"None","type":"cloth","Bonus":0,"move_modifier":0,"add_effects":[]},
+"light_armor":{"name":"Light Armor","type":"armor","Bonus":1,"move_modifier":0,"add_effects":[]},
+"heavy_armor":{"name":"Heavy Armor","type":"armor","Bonus":2,"move_modifier":-1,"add_effects":[]},
+"shield":{"name":"Shield","type":"shield","Bonus":1,"move_modifier":0,"add_effects":[]}
+}
