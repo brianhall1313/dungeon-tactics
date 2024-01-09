@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bg33mog6pk2xd"]
+[gd_scene load_steps=3 format=3 uid="uid://bg33mog6pk2xd"]
 
 [ext_resource type="Texture2D" uid="uid://d34gofavch7pt" path="res://textures/arrow_1.png" id="1_64cka"]
+[ext_resource type="Script" path="res://Scene/Pointer.gd" id="2_c5l2w"]
 
 [node name="Pointer" type="Sprite2D"]
 texture = ExtResource("1_64cka")
+script = ExtResource("2_c5l2w")

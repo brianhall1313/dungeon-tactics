@@ -19,6 +19,14 @@ config/icon="res://textures/icon.svg"
 
 Global="*res://Global/Global.gd"
 GlobalSignalBus="*res://Global/global_signal_bus.gd"
+GlobalInput="*res://Global/input.gd"
+Armor="*res://Resources/armor.gd"
+Weapons="*res://Resources/weapons.gd"
+ClassData="*res://Resources/class_data.gd"
+
+[filesystem]
+
+import/blender/enabled=false
 
 [rendering]
 

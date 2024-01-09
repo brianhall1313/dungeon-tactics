@@ -22,7 +22,7 @@ func move(pos:Vector2):
 func _ready():
 	hide()
 
-func _on_character_interaction_show_fight_menu():
+func show_menu():
 	show()
 	$fight_menu_move.grab_focus()
 

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1d23rdcv88xt"]
+
+[ext_resource type="Script" path="res://Scene/fight_selection.gd" id="1_u8e2f"]
+
+[node name="fight_selection" type="Node"]
+script = ExtResource("1_u8e2f")

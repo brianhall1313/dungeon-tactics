@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=3 uid="uid://0j8kw0k5bi27"]
+
+[ext_resource type="Script" path="res://Scene/encounter_manager.gd" id="1_2augq"]
+[ext_resource type="PackedScene" uid="uid://b8o77r1wrb1e" path="res://Scene/Map.tscn" id="2_1j2if"]
+[ext_resource type="PackedScene" uid="uid://6smikba3wpea" path="res://Scene/finite_state_machine.tscn" id="3_ftqpm"]
+[ext_resource type="PackedScene" uid="uid://cncg22787ydoo" path="res://Scene/grid_interact.tscn" id="4_lav4m"]
+[ext_resource type="PackedScene" uid="uid://by4ql4qsokv0d" path="res://Scene/character_interaction.tscn" id="5_1axpy"]
+[ext_resource type="PackedScene" uid="uid://dmkiucyrdgyhc" path="res://Scene/movement_selection.tscn" id="6_d1ri7"]
+[ext_resource type="PackedScene" uid="uid://b1d23rdcv88xt" path="res://Scene/fight_selection.tscn" id="7_poupd"]
+
+[node name="encounter_manager" type="Node"]
+script = ExtResource("1_2augq")
+
+[node name="Map" parent="." instance=ExtResource("2_1j2if")]
+
+[node name="FiniteStateMachine" parent="." instance=ExtResource("3_ftqpm")]
+
+[node name="grid_interact" parent="FiniteStateMachine" instance=ExtResource("4_lav4m")]
+
+[node name="character_interaction" parent="FiniteStateMachine" instance=ExtResource("5_1axpy")]
+
+[node name="movement_selection" parent="FiniteStateMachine" instance=ExtResource("6_d1ri7")]
+
+[node name="fight_selection" parent="FiniteStateMachine" instance=ExtResource("7_poupd")]
+
+[connection signal="change_state" from="Map" to="FiniteStateMachine" method="_on_map_change_state"]
+[connection signal="escape_pressed" from="FiniteStateMachine/grid_interact" to="Map" method="_on_grid_interact_escape_pressed"]
+[connection signal="grid_interaction" from="FiniteStateMachine/grid_interact" to="Map" method="_on_grid_interact_grid_interaction"]
+[connection signal="escape_pressed" from="FiniteStateMachine/character_interaction" to="Map" method="_on_character_interaction_escape_pressed"]
+[connection signal="grid_interaction" from="FiniteStateMachine/character_interaction" to="Map" method="_on_character_interaction_grid_interaction"]
+[connection signal="show_fight_menu" from="FiniteStateMachine/character_interaction" to="Map" method="_on_character_interaction_show_fight_menu"]
+[connection signal="escape_pressed" from="FiniteStateMachine/movement_selection" to="Map" method="_on_movement_selection_escape_pressed"]
+[connection signal="grid_interaction" from="FiniteStateMachine/movement_selection" to="Map" method="_on_movement_selection_grid_interaction"]
+[connection signal="escape_pressed" from="FiniteStateMachine/fight_selection" to="Map" method="_on_fight_selection_escape_pressed"]
+[connection signal="grid_interaction" from="FiniteStateMachine/fight_selection" to="Map" method="_on_fight_selection_grid_interaction"]

@@ -10,8 +10,13 @@ func _ready():
 
 
 func remove(character):
-	for x in list:
-		if x == character:
-			dead_list.append(character)
-			alive_list.erase(character)
-			character.position=Global.dead_position
+	if character in alive_list:
+		dead_list.append(character)
+		alive_list.erase(character)
+		character.position=Global.dead_position
+
+func revive(character,pos):
+	if character in dead_list:
+		alive_list.append(character)
+		dead_list.erase(character)
+		character.position=pos

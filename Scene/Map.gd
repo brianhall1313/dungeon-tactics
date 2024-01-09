@@ -1,10 +1,9 @@
 extends TileMap
 @onready var Pointer=$Pointer
-@onready var state_machine=$FiniteStateMachine
 @onready var fight_menu=$fight_menu
 @onready var battle_lists=$battle_lists
-@onready var players_list=$battle_lists/player_list.alive_list
-@onready var enemies_list=$battle_lists/enemy_list.alive_list
+@onready var players_list
+@onready var enemies_list
 @onready var mouse_position=$CanvasLayer/mouse_position
 @onready var neighbors=$CanvasLayer/neighbors
 @onready var tile_info=$CanvasLayer/tile_info
@@ -15,10 +14,10 @@ extends TileMap
 @onready var targeted_ui=$CanvasLayer/targeted_character_info
 
 
+var dir:Dictionary={"Down":Vector2i(0,1),"Up":Vector2i(0,-1),"Left":Vector2i(-1,0),"Right":Vector2i(1,0)}
 var input_timer:float=0.0
 var height:int=10
 var width:int=10
-var current_state:State
 var board_state
 var current_character
 var selected_character
@@ -34,13 +33,17 @@ var possible_targets:Array=[]
 var in_attack_range:Array=[]
 var crit_damage_bonus: int =5
 
+signal change_state(state_name:String)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	connected_to_signal_bus()
 	Global.set_death_position(death_spot)
 	Pointer.movement(Vector2i(0,0),map_to_local(Vector2i(0,0)))
-	$battle_lists/player_list/Character.position=Pointer.position
-	$battle_lists/enemy_list/test_enemy.position=map_to_local(Vector2i(2,2))
+	enemies_list=battle_lists.get_enemies()
+	players_list=battle_lists.get_player()
+	$battle_lists/player_list/Character.position=map_to_local($battle_lists/player_list/Character.default_position)
+	$battle_lists/enemy_list/test_enemy.position=map_to_local($battle_lists/enemy_list/test_enemy.default_position)
 	
 	astar=AStar2D.new()
 	fightstar=AStar2D.new()
@@ -82,11 +85,10 @@ func _process(delta):
 	#neighbors.text=str(astar.get_point_connections(current_cell_id))
 
 func connected_to_signal_bus():
-	GlobalSignalBus.connect('death',_on_character_death)
 	GlobalSignalBus.connect('update_board',_on_update_board)
+	GlobalSignalBus.connect('death',_on_character_death)
 	GlobalSignalBus.connect('turn_over',_on_turn_over)
-	GlobalSignalBus.connect('movement',movement_received)
-
+	GlobalSignalBus.connect("movement",movement_received)
 
 func get_board_state():
 	var map_info=[]
@@ -285,7 +287,7 @@ func ui_update():
 			targeted_ui.hide()
 	else:
 		targeted_ui.hide()
-		if current_state != $FiniteStateMachine/movement_selection:
+		if Global.current_state.name != 'movement_selection':
 			selected_ui.hide()
 
 
@@ -321,7 +323,8 @@ func _on_grid_interact_grid_interaction():#I don't know if this should go here
 			current_character=x
 			if Global.debug == true:#we only have this like this so that we can test stuff effectively for now
 				current_character.turn_start()
-			state_machine.change_state($FiniteStateMachine/character_interaction)
+			change_state.emit('character_interaction')
+			fight_menu.show_menu()
 			GlobalSignalBus.update_board.emit()
 			return
 
@@ -330,11 +333,10 @@ func _on_grid_interact_grid_interaction():#I don't know if this should go here
 func _on_movement_selection_grid_interaction():
 	if Vector2i(local_to_map(Pointer.position)) in possible_movement:
 		possible_movement=[]
-		current_character.previous_position=current_character.position
-		current_character.position=Pointer.position
+		current_character.movement(Pointer.position)
 		clear_layer(1)
-		current_character.turn('moved')
-		state_machine.change_state($FiniteStateMachine/character_interaction)
+		change_state.emit('character_interaction')
+		fight_menu.show_menu()
 		#TODO:Remember, when we change the final state of the turn this needs to move to that one
 		GlobalSignalBus.update_board.emit()
 		
@@ -342,20 +344,20 @@ func _on_movement_selection_grid_interaction():
 
 
 func _on_fight_menu_movement_selected():
-	state_machine.change_state($FiniteStateMachine/movement_selection)
+	change_state.emit('movement_selection')
 	construct_astar(current_character)
 	display_move_range(current_character)
 
 
 func _on_movement_selection_escape_pressed():
-	Pointer.position=current_character.position
+	current_character.undo_movement()
 	possible_movement=[]
 	clear_layer(1)
-	state_machine.change_state($FiniteStateMachine/character_interaction)
+	change_state.emit('character_interaction')
 
 
 func _on_fight_menu_fight_selected():
-	state_machine.change_state($FiniteStateMachine/fight_selection)
+	change_state.emit('fight_selection')
 	#TODO the rest of the fight stuff
 	#show fight range
 	display_attack_range(current_character)
@@ -367,6 +369,7 @@ func _on_fight_menu_fight_selected():
 
 func _on_character_death(character):
 	battle_lists.remove_character(character)
+	character.position=map_to_local(death_spot)
 	print('removing character')
 	ui_update()
 
@@ -378,7 +381,7 @@ func _on_fight_selection_grid_interaction():
 	if defender and defender in possible_targets:
 		resolve_attack(current_character,defender)
 		current_character.turn('action')
-		state_machine.change_state($FiniteStateMachine/GridInteract)
+		change_state.emit('grid_interact')
 		GlobalSignalBus.update_board.emit()
 		clear_layer(1)
 		clear_layer(2)
@@ -405,7 +408,7 @@ func _on_character_interaction_escape_pressed():
 		fight_menu.move(Pointer.position)
 		fight_menu.update_menu(current_character)
 	else:
-		state_machine.change_state($FiniteStateMachine/GridInteract)
+		change_state.emit("grid_interact")
 		fight_menu.hide()
 
 
@@ -414,9 +417,9 @@ func _on_fight_selection_escape_pressed():
 	
 	clear_layer(1)
 	clear_layer(2)
-	state_machine.change_state($FiniteStateMachine/character_interaction)
+	change_state.emit("character_interaction")
 
-var dir:Dictionary={"Down":Vector2i(0,1),"Up":Vector2i(0,-1),"Left":Vector2i(-1,0),"Right":Vector2i(1,0)}
+
 func movement_received(direction):
 	var y:int = Pointer.grid_position.y
 	var x:int = Pointer.grid_position.x
@@ -429,3 +432,7 @@ func movement_received(direction):
 	elif direction == 'Left' and x-1>=0:
 		Pointer.movement(Pointer.grid_position+dir[direction],map_to_local(Pointer.grid_position+dir[direction]))
 	ui_update()
+
+
+func _on_grid_interact_escape_pressed():
+	pass # Replace with function body.

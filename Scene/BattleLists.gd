@@ -13,3 +13,9 @@ func remove_character(character):
 		player.remove(character)
 	elif character.faction=='enemy':
 		enemies.remove(character)
+
+func get_enemies():
+	return enemies.list
+
+func get_player():
+	return player.list

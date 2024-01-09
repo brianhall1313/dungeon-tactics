@@ -13,6 +13,7 @@ func _unhandled_input(event):
 		if event.is_released() and event.as_text_keycode() in interaction:
 			GlobalSignalBus.interact.emit()
 			get_viewport().set_input_as_handled()
+			print("interaction pressed:input manager")
 		if event.is_released() and event.as_text_keycode() in direction:
 			GlobalSignalBus.moved.emit(event.as_text_keycode())
 			get_viewport().set_input_as_handled()

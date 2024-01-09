@@ -1,5 +1,5 @@
 extends BattleLists
-var list
+var list:Array
 var alive_list:Array
 var dead_list:Array
 
@@ -15,3 +15,9 @@ func remove(character):
 			dead_list.append(character)
 			alive_list.erase(character)
 			character.position=Global.dead_position
+
+func revive(character,pos):
+	if character in dead_list:
+		alive_list.append(character)
+		dead_list.erase(character)
+		character.position=pos
