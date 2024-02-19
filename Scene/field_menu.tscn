@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://r8mhoiii4nhu"]
+
+[ext_resource type="Script" path="res://Scene/field_menu.gd" id="1_ofjwi"]
+
+[node name="field_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ofjwi")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="continue" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "continue"
+
+[node name="end_turn" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "End Turn"
+
+[connection signal="button_up" from="VBoxContainer/continue" to="." method="_on_continue_button_up"]
+[connection signal="button_up" from="VBoxContainer/end_turn" to="." method="_on_end_turn_button_up"]

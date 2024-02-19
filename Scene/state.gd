@@ -20,6 +20,8 @@ func cancle():
 	pass
 
 
+func test():
+	print('test touched')
 
 
 '''

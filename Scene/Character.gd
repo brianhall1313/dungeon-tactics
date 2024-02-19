@@ -1,6 +1,7 @@
 extends AnimatedSprite2D
 
 @export var default_position:Vector2i=Vector2i(0,0)
+@export var grid_position:Vector2i
 @export var job:String
 @export var move:int = 5
 @export var combat:int = 5
@@ -9,13 +10,15 @@ extends AnimatedSprite2D
 @export var armor:int = 10
 @export var health:int = 5
 @export var current_health:int=health
-@export var equipment:Dictionary={'weapon':{'name':'dagger','range':1,'attack bonus':1,'damage bonus':-1},
+@export var current_weapon:String="weapon"
+@export var equipment:Dictionary={'weapon':{'name':'dagger','range':1,'attack_bonus':1,'damage_bonus':-1},
+									'ranged_weapon':{'name':'Bow','range':5,'attack_bonus':1,'damage_bonus':0},
 									'armor':{'name':'shirt','bonus':0},
 									'accessory 1':{},
 									'accessory 2':{}
 									}
-@export var spells:Dictionary={}
-@export var abilities:Dictionary={}
+@export var spells:Array=["Elemental Bolt"]
+@export var abilities:Array=[]
 @export var experience:int=0
 @export var inventory:Array=[]
 @export var status:Array=[]
@@ -23,20 +26,24 @@ extends AnimatedSprite2D
 @export var character_name:String='Default'
 @export var turn_tracker:Dictionary={'moved':false,'action':false,'turn_complete':false}
 var previous_position:Vector2
+var previous_position_coor:Vector2i
+var possible_targets:Array=[]
 
 
-signal turn_over
 signal dead(character)	
 
 func turn_start():
-	for point in turn_tracker:
-		turn_tracker[point] = false
-	print("turn start")
+	for point in self.turn_tracker:
+		self.turn_tracker[point] = false
+	previous_position=self.position
+	previous_position_coor=self.grid_position
 	#we will add updates for start of turn stuff here
 
 
 func character_setup(character_data):
-	self.character_name=character_data['name']
+	print('character setup')
+	$Sprite2D["scale"]=Vector2(.1,.1)
+	self.character_name=character_data['character_name']
 	self.default_position=character_data.default_position
 	self.experience=character_data.experience
 	self.faction=character_data['faction']
@@ -45,65 +52,94 @@ func character_setup(character_data):
 	equipment_setup(character_data['equipment'])
 	spell_setup(character_data['spells'])
 	ability_setup(character_data['abilities'])
+	select_weapon(false)
+	turn_start()
 
 
-func stat_setup(job:Dictionary):
-	self.move=job['move']
-	self.combat=job['combat']
-	self.ranged_combat=job['ranged_combat']
-	self.will=job['will']
-	self.health=job['health']
-	self.current_health=job['health']
+func stat_setup(njob:Dictionary):
+	self.move=njob['move']
+	self.combat=njob['combat']
+	self.ranged_combat=njob['ranged_combat']
+	self.will=njob['will']
+	self.health=njob['health']
+	self.current_health=njob['health']
 
 
 
-func equipment_setup(equipment:Array):
+func equipment_setup(new_equipment:Array):
+	equipment={}
+	for x in new_equipment:
+		print(x)
+		if Weapons.weapons_dictionary.has(x):
+			if Weapons.weapons_dictionary[x]['range']<2:
+				equipment['weapon']=Weapons.weapons_dictionary[x].duplicate()
+			else:
+				equipment['ranged_weapon']=Weapons.weapons_dictionary[x].duplicate()
+		elif Armor.armor_dictionary.has(x):
+			equipment[x]=Armor.armor_dictionary[x].duplicate()
+	print(equipment)
+	calculate_armor()
+	if equipment.has('weapon'):
+		current_weapon = 'weapon'
+	else:
+		equipment['weapon']=Weapons.weapons_dictionary['unarmed'].duplicate()
+	if equipment.has('ranged_weapon'):
+		current_weapon = 'ranged_weapon'
+
+func spell_setup(spell_list:Array):
 	pass
 
 
-func spell_setup(spell_list:Dictionary):
+func ability_setup(new_abilities:Array):
 	pass
 
 
-func ability_setup(abilities:Array):
-	pass
-
+func select_weapon(in_combat:bool):
+	if in_combat:
+		current_weapon='weapon'
+	elif equipment.has('ranged_weapon'):
+		current_weapon='ranged_weapon'
+	else:
+		current_weapon='weapon'
 
 
 func get_attack():
 	var bonus:int
-	bonus=equipment['weapon']['attack bonus']+combat
+	if current_weapon=='weapon':
+		bonus=equipment[current_weapon]['attack_bonus']+combat
+	else:
+		bonus=equipment[current_weapon]['attack_bonus']+ranged_combat
 	return bonus
 
 func get_damage_bonus():
 	var bonus:int
-	bonus=equipment['weapon']['damage bonus']
+	bonus=equipment[current_weapon]['damage_bonus']
 	return bonus
 
 func turn(turn_action):
 	if turn_action=='turn_complete':
 		turn_tracker[turn_action]=true
+		GlobalSignalBus.turn_over.emit(self)
+		print("turn is over1")
 	if turn_action=='moved':
 		turn_tracker[turn_action]=true
 	if turn_action=='action':
 		turn_tracker[turn_action]=true
 	if turn_tracker['action'] and turn_tracker['moved']:
 		turn_tracker['turn_complete']=true
-		GlobalSignalBus.turn_over.emit()
-		print("turn is over")
+		print("turn is over "+self.character_name)
+		GlobalSignalBus.turn_over.emit(self)
 
 
 func take_damage(damage:int):
 	damage=damage-armor
+	print("The damage dealt is "+str(damage))
 	if damage >=0:
 		if current_health<=damage:
 			current_health=0
 			on_lethal_hit()
 		else:
 			current_health-=damage
-			print()
-	else:
-		print('no damage dealt')
 
 
 
@@ -111,12 +147,25 @@ func on_lethal_hit():
 	GlobalSignalBus.death.emit(self)
 	print('oh shit you got me!!')
 
-func movement(new_position:Vector2):
+func movement(new_position:Vector2,new_grid_position:Vector2i):
 	self.previous_position=self.position
+	self.previous_position_coor=self.grid_position
 	self.position=new_position
+	self.grid_position=new_grid_position
 	turn_tracker['moved']=true
 
 
 func undo_movement():
-	position=previous_position
-	turn_tracker['moved']=false
+	if previous_position:
+		position=previous_position
+		grid_position=previous_position_coor
+		turn_tracker['moved']=false
+
+
+func calculate_armor():
+	for x in equipment:
+		if equipment[x].has("type"):
+			if equipment[x].has("bonus"):
+				self.armor+=equipment[x]["bonus"]
+			if equipment[x].has("move_modifier"):
+				self.move+=equipment[x]['move_modifier']

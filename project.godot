@@ -23,6 +23,10 @@ GlobalInput="*res://Global/input.gd"
 Armor="*res://Resources/armor.gd"
 Weapons="*res://Resources/weapons.gd"
 ClassData="*res://Resources/class_data.gd"
+RangeFinder="*res://Resources/range_finder.gd"
+MovementTools="*res://Resources/movement_tools.gd"
+AttackTools="*res://Resources/attack_tools.gd"
+SpellsAndAbilities="*res://Resources/spells_and_abilities.gd"
 
 [filesystem]
 

@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://dr08k2flb1q6"]
+
+[ext_resource type="Script" path="res://Scene/test_environment.gd" id="1_rroor"]
+[ext_resource type="PackedScene" uid="uid://b1cum44ye8yvp" path="res://Scene/Character.tscn" id="2_bdck3"]
+[ext_resource type="PackedScene" uid="uid://ccnqpbi2cakl6" path="res://Scene/fight_menu.tscn" id="2_qhvdi"]
+
+[node name="TestEnvironment" type="Node2D"]
+script = ExtResource("1_rroor")
+
+[node name="Character" parent="." instance=ExtResource("2_bdck3")]
+faction = "player"
+character_name = "Funke"
+
+[node name="menus" parent="." instance=ExtResource("2_qhvdi")]

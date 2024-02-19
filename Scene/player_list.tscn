@@ -1,6 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://cv07x1lbu51v8"]
+[gd_scene load_steps=2 format=3 uid="uid://cj722mui0aala"]
 
-[ext_resource type="Script" path="res://Scene/player_list.gd" id="1_ck0td"]
+[sub_resource type="GDScript" id="GDScript_pwnq3"]
+script/source = "extends BattleLists
+var list:Array
+var alive_list:Array
+var dead_list:Array
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	list=get_children()
+	alive_list=list.duplicate()
+
+
+func remove(character):
+	if character in alive_list:
+		dead_list.append(character)
+		alive_list.erase(character)
+		character.position=Global.dead_position
+
+func revive(character,pos):
+	if character in dead_list:
+		alive_list.append(character)
+		dead_list.erase(character)
+		character.position=pos
+"
 
 [node name="player_list" type="Node"]
-script = ExtResource("1_ck0td")
+script = SubResource("GDScript_pwnq3")

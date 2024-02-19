@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ts3ik5np0kii"]
+
+[ext_resource type="Script" path="res://Scene/party_list.gd" id="1_sx7pd"]
+
+[node name="party_list" type="Node"]
+script = ExtResource("1_sx7pd")

@@ -6,10 +6,16 @@ extends Node
 @onready var states:Dictionary = {'grid_interact' : $grid_interact,
 								'character_interaction': $character_interaction,
 								'movement_selection': $movement_selection,
-								'fight_selection' : $fight_selection}
-# Called when the node enters the scene tree for the first time.
+								'fight_selection' : $fight_selection,
+								'ai_turn':$ai_turn,
+								'sa_resolution':$sa_resolution,
+								'pause_menu':$pause_menu
+								}
 func _ready():
-	change_state(initial_state)
+	connect_bus()
+	
+func connect_bus():
+	GlobalSignalBus.connect('change_state',_on_change_state)
 
 func change_state(new_state:State):
 	
@@ -20,5 +26,5 @@ func change_state(new_state:State):
 	Global.current_state=new_state
 
 
-func _on_map_change_state(state_name):
+func _on_change_state(state_name):
 	change_state(states[state_name])

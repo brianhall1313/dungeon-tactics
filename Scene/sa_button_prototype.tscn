@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://usyamy6cq515"]
+
+[ext_resource type="Script" path="res://sa_button_prototype.gd" id="1_ogveg"]
+
+[node name="sa_button_prototype" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "default"
+script = ExtResource("1_ogveg")
+
+[connection signal="button_up" from="." to="." method="_on_button_up"]

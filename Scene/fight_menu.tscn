@@ -1,32 +1,76 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccnqpbi2cakl6"]
+[gd_scene load_steps=8 format=3 uid="uid://ccnqpbi2cakl6"]
 
+[ext_resource type="Script" path="res://Scene/menus.gd" id="1_fp5t1"]
 [ext_resource type="Script" path="res://Scene/fight_menu.gd" id="1_i3yku"]
 [ext_resource type="Script" path="res://Scene/fight_menu_move.gd" id="1_yikbl"]
 [ext_resource type="Script" path="res://Scene/fight_menu_fight.gd" id="3_cpa2e"]
+[ext_resource type="Script" path="res://Scene/fight_menu_spells_and_abilities.gd" id="4_a1o32"]
+[ext_resource type="Script" path="res://Scene/fight_menu_end_turn.gd" id="4_k6kbs"]
+[ext_resource type="Script" path="res://Scene/sa_menu.gd" id="6_cu1po"]
 
-[node name="fight_menu" type="VBoxContainer"]
-offset_right = 51.0
-offset_bottom = 101.0
+[node name="menus" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 153.0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_fp5t1")
+metadata/_edit_group_ = true
+
+[node name="fight_menu" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_top = 35.0
+offset_right = 153.0
+offset_bottom = 171.0
 focus_mode = 2
 script = ExtResource("1_i3yku")
 
-[node name="fight_menu_move" type="Button" parent="."]
+[node name="fight_menu_move" type="Button" parent="fight_menu"]
 layout_mode = 2
 action_mode = 0
 text = "move"
 script = ExtResource("1_yikbl")
 
-[node name="fight_menu_fight" type="Button" parent="."]
+[node name="fight_menu_fight" type="Button" parent="fight_menu"]
 layout_mode = 2
 text = "fight"
 script = ExtResource("3_cpa2e")
 
-[node name="fight_menu_item" type="Button" parent="."]
+[node name="fight_menu_spells_and_abilities" type="Button" parent="fight_menu"]
 layout_mode = 2
-text = "item"
+text = "Spells/Abilities"
+script = ExtResource("4_a1o32")
 
-[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]
-[connection signal="button_up" from="fight_menu_move" to="fight_menu_move" method="_on_button_up"]
-[connection signal="move_selected" from="fight_menu_move" to="." method="_on_fight_menu_move_move_selected"]
-[connection signal="button_up" from="fight_menu_fight" to="fight_menu_fight" method="_on_button_up"]
-[connection signal="fight_selected" from="fight_menu_fight" to="." method="_on_fight_menu_fight_fight_selected"]
+[node name="fight_menu_end_turn" type="Button" parent="fight_menu"]
+layout_mode = 2
+text = "turn end"
+script = ExtResource("4_k6kbs")
+
+[node name="sa_menu" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 4.0
+offset_top = 37.0
+offset_right = 153.0
+offset_bottom = 206.0
+script = ExtResource("6_cu1po")
+
+[node name="sa_menu_go_back" type="Button" parent="sa_menu"]
+layout_mode = 2
+text = "Go Back"
+
+[connection signal="fight_selected" from="fight_menu" to="." method="_on_fight_menu_fight_selected"]
+[connection signal="movement_selected" from="fight_menu" to="." method="_on_fight_menu_movement_selected"]
+[connection signal="sa_selected" from="fight_menu" to="sa_menu" method="_on_fight_menu_sa_selected"]
+[connection signal="sa_setup" from="fight_menu" to="sa_menu" method="_on_fight_menu_sa_setup"]
+[connection signal="turn_end_selected" from="fight_menu" to="." method="_on_fight_menu_turn_end_selected"]
+[connection signal="button_up" from="fight_menu/fight_menu_move" to="fight_menu/fight_menu_move" method="_on_button_up"]
+[connection signal="move_selected" from="fight_menu/fight_menu_move" to="fight_menu" method="_on_fight_menu_move_move_selected"]
+[connection signal="button_up" from="fight_menu/fight_menu_fight" to="fight_menu/fight_menu_fight" method="_on_button_up"]
+[connection signal="fight_selected" from="fight_menu/fight_menu_fight" to="fight_menu" method="_on_fight_menu_fight_fight_selected"]
+[connection signal="button_up" from="fight_menu/fight_menu_spells_and_abilities" to="fight_menu/fight_menu_spells_and_abilities" method="_on_button_up"]
+[connection signal="sa_selected" from="fight_menu/fight_menu_spells_and_abilities" to="fight_menu" method="_on_fight_menu_spells_and_abilities_sa_selected"]
+[connection signal="button_up" from="fight_menu/fight_menu_end_turn" to="fight_menu/fight_menu_end_turn" method="_on_button_up"]
+[connection signal="end_selected" from="fight_menu/fight_menu_end_turn" to="fight_menu" method="_on_fight_menu_end_turn_end_selected"]
+[connection signal="go_back_pressed" from="sa_menu" to="." method="_on_sa_menu_go_back_pressed"]
+[connection signal="go_back_pressed" from="sa_menu" to="fight_menu" method="_on_sa_menu_go_back_pressed"]
+[connection signal="open" from="sa_menu" to="." method="_on_sa_menu_open"]
+[connection signal="button_up" from="sa_menu/sa_menu_go_back" to="sa_menu" method="_on_sa_menu_go_back_button_up"]
