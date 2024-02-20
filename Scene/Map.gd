@@ -63,6 +63,7 @@ func _ready():
 						'job':'templar',
 						'spells':[],
 						'abilities':[],
+						'tags':ClassData.class_dictionary['templar']['tags'],
 						'equipment':ClassData.class_dictionary['templar']["equipment"],
 						'stats':ClassData.class_dictionary['templar']
 						}
@@ -74,6 +75,7 @@ func _ready():
 						'job':'templar',
 						'spells':[],
 						'abilities':[],
+						'tags':ClassData.class_dictionary['templar']['tags'],
 						'equipment':ClassData.class_dictionary['templar']["equipment"],
 						'stats':ClassData.class_dictionary['templar']
 						}
@@ -84,6 +86,7 @@ func _ready():
 						'job':'templar',
 						'spells':[],
 						'abilities':[],
+						'tags':ClassData.class_dictionary['templar']['tags'],
 						'equipment':ClassData.class_dictionary['templar']["equipment"],
 						'stats':ClassData.class_dictionary['templar']
 						}
@@ -94,6 +97,7 @@ func _ready():
 						'job':'ranger',
 						'spells':[],
 						'abilities':[],
+						'tags':ClassData.class_dictionary['templar']['tags'],
 						'equipment':ClassData.class_dictionary['ranger']["equipment"],
 						'stats':ClassData.class_dictionary['ranger']
 						}
