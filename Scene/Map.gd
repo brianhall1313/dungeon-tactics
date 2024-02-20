@@ -201,6 +201,8 @@ func display_range_sa(character,sa):
 		if t != character.grid_position:
 			if SpellsAndAbilities.spells_and_abilities_directory[sa]['type']=='attack':
 				set_cell(1,t,1,Vector2i(0,0))
+			if SpellsAndAbilities.spells_and_abilities_directory[sa]['type']=='heal':
+				set_cell(1,t,0,Vector2i(0,0))
 
 
 func ui_update():
@@ -245,6 +247,38 @@ func range_finder(origin:Vector2i,target:Vector2i):
 	var shortest_path=astar.get_point_path(origin_id,target_id)
 	return shortest_path
 
+func sa_attack():
+	var defenders:Array=[]
+	var tiles_in_range:Array
+	tiles_in_range=RangeFinder.tiles_in_attack_range_of_sa(board_state,current_character,action)
+	if Pointer.grid_position in tiles_in_range:
+		defenders=RangeFinder.sa_area_targets(board_state,Pointer.grid_position,action)
+		for defender in defenders:
+			print(defender.character_name)
+			AttackTools.special_action(current_character,defender,action)
+		GlobalSignalBus.change_state.emit('grid_interact')
+		current_character.turn('action')
+		action=''
+		GlobalSignalBus.update_board.emit()
+		clear_layer(1)
+		clear_layer(2)
+
+
+func sa_heal():
+	var targets:Array=[]
+	var tiles_in_range:Array
+	tiles_in_range=RangeFinder.tiles_in_attack_range_of_sa(board_state,current_character,action)
+	if Pointer.grid_position in tiles_in_range:
+		targets=RangeFinder.sa_area_targets(board_state,Pointer.grid_position,action)
+		for target in targets:
+			print(target.character_name)
+			target.heal(SpellsAndAbilities.spells_and_abilities_directory[action]["power"])
+		GlobalSignalBus.change_state.emit('grid_interact')
+		current_character.turn('action')
+		action=''
+		GlobalSignalBus.update_board.emit()
+		clear_layer(1)
+		clear_layer(2)
 
 
 func _on_grid_interact_grid_interaction():#I don't know if this should go here
@@ -427,17 +461,8 @@ func _on_sa_button_pressed(action_name):
 
 
 func _on_sa_resolution_grid_interaction():
-	var defenders:Array=[]
-	var tiles_in_range:Array
-	tiles_in_range=RangeFinder.tiles_in_attack_range_of_sa(board_state,current_character,action)
-	if Pointer.grid_position in tiles_in_range:
-		defenders=RangeFinder.sa_area_targets(board_state,Pointer.grid_position,action)
-		for defender in defenders:
-			print(defender.character_name)
-			AttackTools.special_action(current_character,defender,action)
-		GlobalSignalBus.change_state.emit('grid_interact')
-		current_character.turn('action')
-		action=''
-		GlobalSignalBus.update_board.emit()
-		clear_layer(1)
-		clear_layer(2)
+	if action in SpellsAndAbilities.spells_and_abilities_directory:
+		if SpellsAndAbilities.spells_and_abilities_directory[action]['type']=='attack':
+			sa_attack()
+		elif SpellsAndAbilities.spells_and_abilities_directory[action]['type']=='heal':
+			sa_heal()
