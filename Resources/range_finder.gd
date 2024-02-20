@@ -202,3 +202,14 @@ func sa_area_targets(board_state,space,action):
 				if is_path_clear(board_state,path):
 					targets.append(occupant)
 	return targets
+
+func cells_in_sa_area(board_state,space,action):
+	construct_astar()
+	var cells:Array=[]
+	var attack_range:int=SpellsAndAbilities.spells_and_abilities_directory[action]['area']
+	for row in range(len(board_state)):
+		for column in range(len(board_state[0])):
+			var range_to_tile=abs(row-space.x)+abs(column-space.y)
+			if range_to_tile<=attack_range:
+				cells.append(Vector2i(row,column))
+	return cells

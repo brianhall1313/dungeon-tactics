@@ -226,7 +226,17 @@ func ui_update():
 		targeted_ui.hide()
 		if Global.current_state.name != 'movement_selection':
 			selected_ui.hide()
-
+	if Global.current_state:
+		if Global.current_state.name == 'fight_selection':
+			clear_layer(2)
+			set_cell(2,Pointer.grid_position,3,Vector2i(0,0))
+		elif Global.current_state.name =='sa_resolution':
+			var cells:Array=RangeFinder.cells_in_sa_area(board_state,Pointer.grid_position,action)
+			clear_layer(2)
+			for cell in cells:
+				set_cell(2,cell,3,Vector2i(0,0))
+			
+			
 
 
 func range_finder(origin:Vector2i,target:Vector2i):
@@ -427,7 +437,7 @@ func _on_sa_resolution_grid_interaction():
 			AttackTools.special_action(current_character,defender,action)
 		GlobalSignalBus.change_state.emit('grid_interact')
 		current_character.turn('action')
+		action=''
 		GlobalSignalBus.update_board.emit()
 		clear_layer(1)
 		clear_layer(2)
-		

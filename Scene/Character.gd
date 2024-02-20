@@ -17,7 +17,7 @@ extends AnimatedSprite2D
 									'accessory 1':{},
 									'accessory 2':{}
 									}
-@export var spells:Array=["Elemental Bolt"]
+@export var spells:Array=["Elemental Bolt",'Elemental Burst']
 @export var abilities:Array=[]
 @export var experience:int=0
 @export var inventory:Array=[]
