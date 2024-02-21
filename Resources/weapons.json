@@ -1,5 +1,5 @@
 {"dagger":{"name":"Dagger","hands":1,"range":1,"attack_bonus":0,"damage_bonus":-1,"add_effects":[]},
-"unarmed":{"name":"Unarmed","hands":1,"range":1,"attack_bonus":-2,"damage_bonus":-2,"add_effects":[]},
+"unarmed":{"name":"Unarmed","hands":2,"range":1,"attack_bonus":-2,"damage_bonus":-2,"add_effects":[]},
 "sword":{"name":"Sword","hands":1,"range":1,"attack_bonus":0,"damage_bonus":0,"add_effects":[]},
 "axe":{"name":"Axe","hands":1,"range":1,"attack_bonus":-1,"damage_bonus":1,"add_effects":[]},
 "great_weapon":{"name":"Greatsword","hands":2,"range":1,"attack_bonus":0,"damage_bonus":2,"add_effects":[]},

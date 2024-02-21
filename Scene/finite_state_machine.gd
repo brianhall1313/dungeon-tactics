@@ -9,7 +9,8 @@ extends Node
 								'fight_selection' : $fight_selection,
 								'ai_turn':$ai_turn,
 								'sa_resolution':$sa_resolution,
-								'pause_menu':$pause_menu
+								'pause_menu':$pause_menu,
+								'game_over':$game_over
 								}
 func _ready():
 	connect_bus()
@@ -18,12 +19,12 @@ func connect_bus():
 	GlobalSignalBus.connect('change_state',_on_change_state)
 
 func change_state(new_state:State):
-	
-	if state is State:
-		state._exit_state()
-	new_state._enter_state()
-	state=new_state
-	Global.current_state=new_state
+	if state != $game_over:
+		if state is State:
+			state._exit_state()
+		new_state._enter_state()
+		state=new_state
+		Global.current_state=new_state
 
 
 func _on_change_state(state_name):

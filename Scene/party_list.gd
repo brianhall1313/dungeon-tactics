@@ -53,6 +53,7 @@ func add(character_data):
 			x.character_setup(character_data)
 			list.append(x)
 			alive_list.append(x)
+			x.turn_start()
 			GlobalSignalBus.place_character_default.emit(x)
 			print('character added')
 

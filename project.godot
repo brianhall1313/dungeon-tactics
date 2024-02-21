@@ -27,6 +27,9 @@ RangeFinder="*res://Resources/range_finder.gd"
 MovementTools="*res://Resources/movement_tools.gd"
 AttackTools="*res://Resources/attack_tools.gd"
 SpellsAndAbilities="*res://Resources/spells_and_abilities.gd"
+Bestiary="*res://Resources/bestiary.gd"
+BeastWeapons="*res://Resources/beast_weapons.gd"
+Names="*res://Resources/names.gd"
 
 [filesystem]
 

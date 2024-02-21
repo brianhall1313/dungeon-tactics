@@ -4,7 +4,7 @@ extends Node
 var turn_counter:int
 var turn:String
 @export var default_turn:String='player'
-@export var victory:Array=[]
+@export var victory:Array=['Defeat all enemies']
 @onready var map=$Map
 var ai_skip_turn=true
 
@@ -27,6 +27,7 @@ func connect_input():
 	GlobalSignalBus.connect('cancel',cancel)
 	GlobalSignalBus.connect('all_units_activated',turn_handover)
 	GlobalSignalBus.connect('party_wipe',_on_party_wipe)
+	
 	
 
 
@@ -81,5 +82,6 @@ func _on_party_wipe(faction:String):
 		print("Player Wins")
 	else:
 		print("player looses~")
+	GlobalSignalBus.change_state.emit('game_over')
 
 

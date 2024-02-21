@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://0j8kw0k5bi27"]
+[gd_scene load_steps=13 format=3 uid="uid://0j8kw0k5bi27"]
 
 [ext_resource type="Script" path="res://Scene/encounter_manager.gd" id="1_2augq"]
 [ext_resource type="PackedScene" uid="uid://b8o77r1wrb1e" path="res://Scene/Map.tscn" id="2_1j2if"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Scene/ai_manager.gd" id="9_hwfkw"]
 [ext_resource type="Script" path="res://Scene/pause_menu.gd" id="9_xvw34"]
 [ext_resource type="Script" path="res://Scene/sa_resolution.gd" id="10_6eo1y"]
+[ext_resource type="Script" path="res://Scene/game_over.gd" id="11_fia2i"]
 
 [node name="encounter_manager" type="Node"]
 script = ExtResource("1_2augq")
@@ -35,6 +36,9 @@ script = ExtResource("9_xvw34")
 
 [node name="sa_resolution" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("10_6eo1y")
+
+[node name="game_over" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("11_fia2i")
 
 [node name="ai_manager" type="Node" parent="."]
 script = ExtResource("9_hwfkw")

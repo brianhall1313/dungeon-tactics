@@ -60,24 +60,24 @@ func _ready():
 						'default_position':Vector2i(9,9),
 						'experience':0,
 						'faction':'enemy',
-						'job':'templar',
+						'job':'thief',
 						'spells':[],
 						'abilities':[],
-						'tags':ClassData.class_dictionary['templar']['tags'],
-						'equipment':ClassData.class_dictionary['templar']["equipment"],
-						'stats':ClassData.class_dictionary['templar']
+						'tags':ClassData.class_dictionary['thief']['tags'],
+						'equipment':ClassData.class_dictionary['thief']["equipment"],
+						'stats':ClassData.class_dictionary['thief']
 						}
 	
 	var test_character2={'character_name':'Franklin',
 						'default_position':Vector2i(3,7),
 						'experience':0,
 						'faction':'enemy',
-						'job':'templar',
+						'job':'thug',
 						'spells':[],
 						'abilities':[],
-						'tags':ClassData.class_dictionary['templar']['tags'],
-						'equipment':ClassData.class_dictionary['templar']["equipment"],
-						'stats':ClassData.class_dictionary['templar']
+						'tags':ClassData.class_dictionary['thug']['tags'],
+						'equipment':ClassData.class_dictionary['thug']["equipment"],
+						'stats':ClassData.class_dictionary['thug']
 						}
 	var test_character3={'character_name':'Ohmanny',
 						'default_position':Vector2i(0,1),
@@ -97,7 +97,7 @@ func _ready():
 						'job':'ranger',
 						'spells':[],
 						'abilities':[],
-						'tags':ClassData.class_dictionary['templar']['tags'],
+						'tags':ClassData.class_dictionary['ranger']['tags'],
 						'equipment':ClassData.class_dictionary['ranger']["equipment"],
 						'stats':ClassData.class_dictionary['ranger']
 						}
@@ -130,6 +130,7 @@ func connected_to_signal_bus():
 	GlobalSignalBus.connect('place_character_default',_place_default)
 	GlobalSignalBus.connect('move_request',_move_request_received)
 	GlobalSignalBus.connect("sa_button_pressed",_on_sa_button_pressed)
+	GlobalSignalBus.connect("summoning",_on_summoning)
 
 func get_board_state():
 	var map_info=[]
@@ -283,6 +284,7 @@ func sa_heal():
 		GlobalSignalBus.update_board.emit()
 		clear_layer(1)
 		clear_layer(2)
+
 
 
 func _on_grid_interact_grid_interaction():#I don't know if this should go here
@@ -470,3 +472,7 @@ func _on_sa_resolution_grid_interaction():
 			sa_attack()
 		elif SpellsAndAbilities.spells_and_abilities_directory[action]['type']=='heal':
 			sa_heal()
+
+func _on_summoning(summon):
+	var ok_to_summon=MovementTools.can_move_to(board_state,summon,summon.default_position)
+	

@@ -15,3 +15,4 @@ signal move_request(character,space:Vector2i)
 signal party_wipe(faction)
 signal hide_menu
 signal sa_button_pressed(action:String)
+signal summoning(summon)
