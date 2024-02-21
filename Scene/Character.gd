@@ -51,7 +51,10 @@ func character_setup(character_data):
 	self.job=character_data['job']
 	self.tags=character_data['tags']
 	stat_setup(character_data['stats'])
-	equipment_setup(character_data['equipment'])
+	if 'humanoid' in tags:
+		equipment_setup(character_data['equipment'])
+	else:
+		equipment['weapon']=BeastWeapons.beast_weapons[character_data['equipment'][0]].duplicate()
 	spell_setup(character_data['spells'])
 	ability_setup(character_data['abilities'])
 	select_weapon(false)

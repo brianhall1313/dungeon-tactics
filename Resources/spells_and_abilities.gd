@@ -16,17 +16,24 @@ extends Node
 }
 
 
+func resolve_effect(effect,character,target):
+	if effect in effect_directory:
+		effect_directory[effect].call(character,target)
+	
+
+
 func summon_animal(character,target):
 	var summonables=['Bear']
 	var job=summonables.pick_random()
-	var summon={'character_name':'Harold',
+	var summon={'character_name':'Harold',#we will try random name gen later
 						'default_position':target,
 						'experience':0,
 						'faction':'player',
 						'job':job,
 						'spells':[],
 						'abilities':[],
-						'tags':Bestiary.class_dictionary[job]['tags'],
-						'equipment':Bestiary.class_dictionary[job]["equipment"],
+						'tags':Bestiary.bestiary[job]['tags'],
+						'equipment':Bestiary.bestiary[job]["equipment"],
 						'stats':Bestiary.bestiary[job]
 						}
+	GlobalSignalBus.summoning.emit(summon)

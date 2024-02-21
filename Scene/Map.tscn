@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b8o77r1wrb1e"]
+[gd_scene load_steps=28 format=3 uid="uid://b8o77r1wrb1e"]
 
 [ext_resource type="Texture2D" uid="uid://dh08b4qup0itx" path="res://textures/green_indicator_panel.png" id="1_13gvn"]
 [ext_resource type="Texture2D" uid="uid://oruggxc88fk1" path="res://textures/wall_edge_bottom_left.png" id="1_dldbh"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://c1jwyix2jfjbb" path="res://textures/hole.png" id="4_yg56k"]
 [ext_resource type="PackedScene" uid="uid://dgc22y5uorvtp" path="res://Scene/BattleLists.tscn" id="6_qg3yy"]
 [ext_resource type="Texture2D" uid="uid://c4y56ad41nemf" path="res://textures/reticle.png" id="6_tgq7n"]
+[ext_resource type="Texture2D" uid="uid://brqy3ufkygnll" path="res://textures/purple_indicator_panel.png" id="9_olphb"]
 [ext_resource type="PackedScene" uid="uid://r8mhoiii4nhu" path="res://Scene/field_menu.tscn" id="13_ushiy"]
 [ext_resource type="PackedScene" uid="uid://ccnqpbi2cakl6" path="res://Scene/fight_menu.tscn" id="14_l63jg"]
 [ext_resource type="PackedScene" uid="uid://ccsje0piy6svi" path="res://Scene/selected_character_info.tscn" id="19_vapic"]
@@ -50,6 +51,10 @@ texture = ExtResource("3_jqgdf")
 texture = ExtResource("4_yg56k")
 0:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_frawr"]
+texture = ExtResource("9_olphb")
+0:0/0 = 0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xqx1b"]
 texture = ExtResource("1_dldbh")
 0:0/0 = 0
@@ -64,6 +69,7 @@ sources/9 = SubResource("TileSetAtlasSource_xqx1b")
 sources/11 = SubResource("TileSetAtlasSource_yropa")
 sources/0 = SubResource("TileSetAtlasSource_y8y1k")
 sources/3 = SubResource("TileSetAtlasSource_vfspu")
+sources/6 = SubResource("TileSetAtlasSource_frawr")
 
 [node name="Map" type="TileMap"]
 tile_set = SubResource("TileSet_mu355")

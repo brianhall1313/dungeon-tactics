@@ -208,6 +208,8 @@ func display_range_sa(character,sa):
 				set_cell(1,t,1,Vector2i(0,0))
 			if SpellsAndAbilities.spells_and_abilities_directory[sa]['type']=='heal':
 				set_cell(1,t,0,Vector2i(0,0))
+			if SpellsAndAbilities.spells_and_abilities_directory[sa]['type']=='summon':
+				set_cell(1,t,6,Vector2i(0,0)) 
 
 
 func ui_update():
@@ -467,12 +469,34 @@ func _on_sa_button_pressed(action_name):
 
 
 func _on_sa_resolution_grid_interaction():
+	var current_action=SpellsAndAbilities.spells_and_abilities_directory[action]
 	if action in SpellsAndAbilities.spells_and_abilities_directory:
-		if SpellsAndAbilities.spells_and_abilities_directory[action]['type']=='attack':
+		if current_action['type']=='attack':
 			sa_attack()
-		elif SpellsAndAbilities.spells_and_abilities_directory[action]['type']=='heal':
+		elif current_action['type']=='heal':
 			sa_heal()
+		elif current_action['type']=='summon':
+			SpellsAndAbilities.resolve_effect(current_action['effect'][0],current_character,Pointer.grid_position)
 
 func _on_summoning(summon):
 	var ok_to_summon=MovementTools.can_move_to(board_state,summon,summon.default_position)
+	print('time to summon')
+	if ok_to_summon:
+		battle_lists.add_character(summon)
+		GlobalSignalBus.change_state.emit('grid_interact')
+		current_character.turn('action')
+		action=''
+		GlobalSignalBus.update_board.emit()
+		clear_layer(1)
+		clear_layer(2)
 	
+
+
+func _on_sa_resolution_escape_pressed():
+	Pointer.position=current_character.position
+	
+	clear_layer(1)
+	clear_layer(2)
+	fight_menu.show()
+	fight_menu.fight_button.grab_focus()
+	GlobalSignalBus.change_state.emit("character_interaction")
