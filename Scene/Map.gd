@@ -112,7 +112,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 
-func _process(delta):
+func _process(_delta):
 	mouse_position.text=str(local_to_map(get_local_mouse_position()))
 	if board_state[local_to_map(Pointer.position).x][local_to_map(Pointer.position).y]['id']:
 		current_cell_id=board_state[local_to_map(Pointer.position).x][local_to_map(Pointer.position).y]['id']
@@ -301,8 +301,8 @@ func _on_grid_interact_grid_interaction():#I don't know if this should go here
 			GlobalSignalBus.update_board.emit()
 			var possible_targets=RangeFinder.targets_from_space(board_state,current_character,current_character.grid_position)
 			if len(possible_targets)>0:
-				for char in possible_targets:
-					print(char.character_name)
+				for chara in possible_targets:
+					print(chara.character_name)
 			return
 
 

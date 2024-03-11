@@ -21,8 +21,8 @@ func sa_close():
 	$sa_menu.close()
  
 
-func update(char):
-	$fight_menu.update_menu(char)
+func update(chara):
+	$fight_menu.update_menu(chara)
 
 
 func _on_fight_menu_fight_selected():

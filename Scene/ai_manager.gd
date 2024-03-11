@@ -23,7 +23,6 @@ func ai_character_turn(character):
 	character.possible_targets=RangeFinder.targets_in_range_AI(board_state,character)
 	var possible_movement=MovementTools.tiles_in_movement_range(board_state,character)
 	var target
-	var enemey_in_range:bool
 	for dude in character.possible_targets:
 		if dude.faction != 'enemy':
 			if is_in_combat:

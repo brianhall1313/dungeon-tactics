@@ -1,9 +1,12 @@
 extends Node
 
 @onready var spells_and_abilities_directory:Dictionary={
-	'Bone Dart':{"type":'attack',"range":5, "power":5,'bonus':0,'area':0,'effect':[]},
-	'Elemental Bolt': {"type":'attack',"range":5, "power":8,'bonus':0,'area':0,'effect':[]},
-	'Elemental Burst': {"type":'attack',"range":5, "power":5,'bonus':0,'area':1,'effect':[]},
+	'Bone Dart':{"type":'attack',"range":5, "power":5,'bonus':0,'area':0,'effect':[]
+	,'description':'Fire a shard of bone at your opponent'},
+	'Elemental Bolt': {"type":'attack',"range":5, "power":8,'bonus':0,'area':0,'effect':[],
+	'description':'Fire a bolt of pure energy at your target'},
+	'Elemental Burst': {"type":'attack',"range":5, "power":5,'bonus':0,'area':1,'effect':[],
+	'description':''},
 	'Heal':{"type":'heal',"range":5, "power":8,'bonus':0,'area':0,'effect':[]},
 	'Heal Burst':{"type":'heal',"range":5, "power":5,'bonus':0,'area':1,'effect':[]},
 	'Summon Animal':{"type":'summon',"range":5, "power":0,'bonus':0,'area':0,'effect':['summon animal']},
@@ -23,12 +26,12 @@ func resolve_effect(effect,character,target):
 
 
 func summon_animal(character,target):
-	var summonables=['Bear']
+	var summonables=['Bear','Wolf']
 	var job=summonables.pick_random()
 	var summon={'character_name':'Harold',#we will try random name gen later
 						'default_position':target,
 						'experience':0,
-						'faction':'player',
+						'faction':character.faction,
 						'job':job,
 						'spells':[],
 						'abilities':[],

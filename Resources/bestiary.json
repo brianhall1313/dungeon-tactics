@@ -1,3 +1,4 @@
 {
-	"Bear":{"class_name":"Bear","tags":["animal","large","strong"],"move":6,"combat":4,"ranged_combat":0,"armor":12,"will":0,"health":14,"equipment":["Bear claws"],"spells":[],"abilities":[],"experience":0,"cost":0}
+	"Bear":{"class_name":"Bear","tags":["animal","large","strong"],"move":6,"combat":4,"ranged_combat":0,"armor":12,"will":0,"health":14,"equipment":["Bear claws"],"spells":[],"abilities":[],"experience":0,"cost":0},
+	"Wolf":{"class_name":"Wolf","tags":["animal","group fighter"],"move":8,"combat":1,"ranged_combat":0,"armor":10,"will":0,"health":8,"equipment":["Bite"],"spells":[],"abilities":[],"experience":0,"cost":0}
 }

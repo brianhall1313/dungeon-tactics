@@ -92,11 +92,13 @@ func equipment_setup(new_equipment:Array):
 		current_weapon = 'ranged_weapon'
 
 func spell_setup(spell_list:Array):
-	pass
+	for spell in spell_list:
+		self.spells.append(spell)
 
 
 func ability_setup(new_abilities:Array):
-	pass
+	for ability in new_abilities:
+		self.spells.append(ability)
 
 
 func select_weapon(in_combat:bool):
