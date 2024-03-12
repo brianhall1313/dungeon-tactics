@@ -22,3 +22,16 @@ func load_json():
 	else:
 		print('Json parse error:file does not exist')
 		return false
+
+
+func get_random_name(type=null):
+	var selected_name:String
+	if type:
+		selected_name=names[type].pick_random()
+	else:
+		var num = randi_range(0,1)
+		if num == 0:
+			selected_name=names['boys'].pick_random()
+		else:
+			selected_name=names['girls'].pick_random()
+	return selected_name

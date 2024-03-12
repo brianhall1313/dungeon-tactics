@@ -28,7 +28,7 @@ func resolve_effect(effect,character,target):
 func summon_animal(character,target):
 	var summonables=['Bear','Wolf']
 	var job=summonables.pick_random()
-	var summon={'character_name':'Harold',#we will try random name gen later
+	var summon={'character_name':Names.get_random_name(),#we will try random name gen later
 						'default_position':target,
 						'experience':0,
 						'faction':character.faction,
