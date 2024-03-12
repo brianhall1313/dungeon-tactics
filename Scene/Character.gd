@@ -2,7 +2,7 @@ extends AnimatedSprite2D
 
 @export var default_position:Vector2i=Vector2i(0,0)
 @export var grid_position:Vector2i
-@export var job:String
+@export var job:String='default'
 @export var tags:Array=['humanoid']
 @export var move:int = 5
 @export var combat:int = 5
@@ -18,7 +18,7 @@ extends AnimatedSprite2D
 									'accessory 1':{},
 									'accessory 2':{}
 									}
-@export var spells:Array=["Elemental Bolt",'Summon Animal']
+@export var spells:Array=["Elemental Bolt",'Summon Undead']
 @export var abilities:Array=[]
 @export var experience:int=0
 @export var inventory:Array=[]
