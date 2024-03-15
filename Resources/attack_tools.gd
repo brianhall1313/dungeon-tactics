@@ -11,11 +11,11 @@ func fight(attacker,defender):
 	if attacker.faction=='player':
 		attack=_dice_roll(2)+attacker.get_attack()
 	else:
-		attack=_dice_roll(2,false)+attacker.get_attack()
+		attack=_dice_roll()+attacker.get_attack()
 	if defender.faction=='player':
 		defence=_dice_roll(2)+defender.get_attack()
 	else:
-		defence=_dice_roll(2,false)+defender.get_attack()
+		defence=_dice_roll()+defender.get_attack()
 	if Global.debug:
 		print('Attack: ',attack,', Defence: ',defence)
 	if attack>=defence:
@@ -74,11 +74,11 @@ func special_action(attacker,defender,action):
 	if attacker.faction=='player':
 		attack=_dice_roll(2)+SpellsAndAbilities.spells_and_abilities_directory[action]['power']
 	else:
-		attack=_dice_roll(2,false)+SpellsAndAbilities.spells_and_abilities_directory[action]['power']
+		attack=_dice_roll()+SpellsAndAbilities.spells_and_abilities_directory[action]['power']
 	if defender.faction=='player':
 		defence=_dice_roll(2)+defender.get_attack()
 	else:
-		defence=_dice_roll(2,false)+defender.get_attack()
+		defence=_dice_roll()+defender.get_attack()
 	if attack>=defence:
 		damage=attack+SpellsAndAbilities.spells_and_abilities_directory[action]['bonus']
 		print('attacker: '+attacker.character_name+ ' hits defender: '+defender.character_name+" with "+action)
