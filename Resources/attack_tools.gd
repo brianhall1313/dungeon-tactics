@@ -9,13 +9,13 @@ func fight(attacker,defender):
 	var defence:int
 	var damage:int
 	if attacker.faction=='player':
-		attack=advantage_roll()+attacker.get_attack()
+		attack=_dice_roll(2)+attacker.get_attack()
 	else:
-		attack=disadvantage_roll()+attacker.get_attack()
+		attack=_dice_roll(2,false)+attacker.get_attack()
 	if defender.faction=='player':
-		defence=advantage_roll()+defender.get_attack()
+		defence=_dice_roll(2)+defender.get_attack()
 	else:
-		defence=disadvantage_roll()+defender.get_attack()
+		defence=_dice_roll(2,false)+defender.get_attack()
 	if Global.debug:
 		print('Attack: ',attack,', Defence: ',defence)
 	if attack>=defence:
@@ -30,45 +30,37 @@ func fight(attacker,defender):
 		print("attack missed:" + str(attack)+ " vs "+str(defence))
 
 
-func dice_roll():
-	var roll:int = 0
-	roll = randi_range(1,20)
-	if roll==20:
-		print('critical hit!!!')
+func _dice_roll(num_rolls:int=1,advantage:bool=true):
+	var rolls:Array=_generate_rolls(num_rolls)
+	var result:int
+	if num_rolls>1:
+		result=_die_result(rolls,advantage)
+	else:
+		result=rolls[0]
+	result=_check_crit(result)
+	return result
+
+
+func _generate_rolls(num_rolls:int):
+	var results:Array=[]
+	for i in range(num_rolls):
+		results.append(randi_range(1,20))
+	return results
+
+
+func _die_result(rolls:Array,advantage:bool):
+	if advantage:
+		return rolls.max()
+	return rolls.min()
+
+
+func _check_crit(roll:int,range:int=0):
+	#if we ever want a bigger crit range range gets used
+	if roll >= 20-range:
+		#print('Critical Hit!!!!')
 		return roll+crit_damage_bonus
-	else:
-		return roll
-
-
-func advantage_roll():
-	var roll:int = 0
-	var roll1 = randi_range(1,20)
-	var roll2 = randi_range(1,20)
-	if roll1>roll2:
-		roll = roll1
-	else:
-		roll = roll2
-	if roll==20:
-		print('critical hit!!!')
-		return roll+crit_damage_bonus
-	else:
-		return roll
-
-
-func disadvantage_roll():
-	var roll:int = 0
-	var roll1 = randi_range(1,20)
-	var roll2 = randi_range(1,20)
-	if roll1<roll2:
-		roll = roll1
-	else:
-		roll = roll2
-	if roll==20:
-		print('critical hit!!!')
-		return roll+crit_damage_bonus
-	else:
-		return roll
-
+	return roll
+		
 
 
 func multi_target_fight(attacker,defenders:Array):
@@ -80,13 +72,13 @@ func special_action(attacker,defender,action):
 	var defence:int
 	var damage:int
 	if attacker.faction=='player':
-		attack=advantage_roll()+SpellsAndAbilities.spells_and_abilities_directory[action]['power']
+		attack=_dice_roll(2)+SpellsAndAbilities.spells_and_abilities_directory[action]['power']
 	else:
-		attack=disadvantage_roll()+SpellsAndAbilities.spells_and_abilities_directory[action]['power']
+		attack=_dice_roll(2,false)+SpellsAndAbilities.spells_and_abilities_directory[action]['power']
 	if defender.faction=='player':
-		defence=advantage_roll()+defender.get_attack()
+		defence=_dice_roll(2)+defender.get_attack()
 	else:
-		defence=disadvantage_roll()+defender.get_attack()
+		defence=_dice_roll(2,false)+defender.get_attack()
 	if attack>=defence:
 		damage=attack+SpellsAndAbilities.spells_and_abilities_directory[action]['bonus']
 		print('attacker: '+attacker.character_name+ ' hits defender: '+defender.character_name+" with "+action)
