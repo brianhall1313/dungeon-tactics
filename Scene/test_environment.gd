@@ -5,18 +5,19 @@ extends Node2D
 
 
 func _ready():
-	for i in range(10):
-		test()
+	pass
 	
-func test():
-	var results:Dictionary={'player':0,'enemy':0}
+func test_dice():
+	var results:Dictionary={'player':0,'enemy':0,'tie':0}
 	var player:int
 	var enemy:int
 	for i in range(100000):
 		player = AttackTools._dice_roll(2)
-		enemy = AttackTools._dice_roll(2)
+		enemy = AttackTools._dice_roll()
 		if player>enemy:
 			results['player']+=1
+		elif player == enemy:
+			results['tie']+=1
 		else:
 			results['enemy']+=1
 	print(results)
