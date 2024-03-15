@@ -6,7 +6,7 @@ extends TileMap
 @onready var players_list
 @onready var enemies_list
 @onready var mouse_position=$CanvasLayer/mouse_position
-@onready var neighbors=$CanvasLayer/neighbors
+@onready var combat_log=$CanvasLayer/combat_log
 @onready var tile_info=$CanvasLayer/tile_info
 @onready var selected_ui=$CanvasLayer/selected_character_info
 @onready var targeted_ui=$CanvasLayer/targeted_character_info
@@ -131,6 +131,7 @@ func connected_to_signal_bus():
 	GlobalSignalBus.connect('move_request',_move_request_received)
 	GlobalSignalBus.connect("sa_button_pressed",_on_sa_button_pressed)
 	GlobalSignalBus.connect("summoning",_on_summoning)
+	GlobalSignalBus.connect('combat_message',_combat_log_message_received)
 
 func get_board_state():
 	var map_info=[]
@@ -500,3 +501,8 @@ func _on_sa_resolution_escape_pressed():
 	fight_menu.show()
 	fight_menu.fight_button.grab_focus()
 	GlobalSignalBus.change_state.emit("character_interaction")
+
+func _combat_log_message_received(message):
+	combat_log.append_text('\n')
+	combat_log.append_text(message)
+

@@ -17,17 +17,17 @@ func fight(attacker,defender):
 	else:
 		defence=_dice_roll()+defender.get_attack()
 	if Global.debug:
-		print('Attack: ',attack,', Defence: ',defence)
+		GlobalSignalBus.combat_message.emit('Attack: '+ str(attack)+', Defence: '+ str(defence))
 	if attack>=defence:
 		damage=attack+attacker.get_damage_bonus()
-		print('attacker: '+attacker.character_name+ ' hits defender: '+defender.character_name)
+		GlobalSignalBus.combat_message.emit('attacker: '+attacker.character_name+ ' hits defender: '+defender.character_name)
 		defender.take_damage(damage)
 	elif attacker.current_weapon=='weapon':
 		damage=defence+defender.get_damage_bonus()
-		print('defender: '+defender.character_name+ ' hits attacker: '+attacker.character_name)
+		GlobalSignalBus.combat_message.emit('defender: '+defender.character_name+ ' hits attacker: '+attacker.character_name)
 		attacker.take_damage(damage)
 	else:
-		print("attack missed:" + str(attack)+ " vs "+str(defence))
+		GlobalSignalBus.combat_message.emit("attack missed:" + str(attack)+ " vs "+str(defence))
 
 
 func _dice_roll(num_rolls:int=1,advantage:bool=true):
@@ -54,10 +54,10 @@ func _die_result(rolls:Array,advantage:bool):
 	return rolls.min()
 
 
-func _check_crit(roll:int,range:int=0):
+func _check_crit(roll:int,crit_range:int=0):
 	#if we ever want a bigger crit range range gets used
-	if roll >= 20-range:
-		#print('Critical Hit!!!!')
+	if roll >= 20-crit_range:
+		GlobalSignalBus.combat_message.emit('Critical Hit!!!!')
 		return roll+crit_damage_bonus
 	return roll
 		
@@ -81,7 +81,7 @@ func special_action(attacker,defender,action):
 		defence=_dice_roll()+defender.get_attack()
 	if attack>=defence:
 		damage=attack+SpellsAndAbilities.spells_and_abilities_directory[action]['bonus']
-		print('attacker: '+attacker.character_name+ ' hits defender: '+defender.character_name+" with "+action)
+		GlobalSignalBus.combat_message.emit('attacker: '+attacker.character_name+ ' hits defender: '+defender.character_name+" with "+action)
 		defender.take_damage(damage)
 	else:
-		print("attack missed:" + str(attack)+ " vs "+str(defence))
+		GlobalSignalBus.combat_message.emit("attack missed:" + str(attack)+ " vs "+str(defence))

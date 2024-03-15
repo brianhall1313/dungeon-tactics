@@ -140,7 +140,7 @@ func turn(turn_action):
 
 func take_damage(damage:int):
 	damage=damage-armor
-	print("The damage dealt is "+str(damage))
+	GlobalSignalBus.combat_message.emit("The damage dealt is "+str(damage))
 	if damage >=0:
 		if current_health<=damage:
 			current_health=0

@@ -123,15 +123,17 @@ offset_right = 111.0
 grow_vertical = 0
 text = "tile_info"
 
-[node name="neighbors" type="RichTextLabel" parent="CanvasLayer"]
+[node name="combat_log" type="RichTextLabel" parent="CanvasLayer"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -145.0
+offset_left = -352.0
+offset_right = -51.9998
 offset_bottom = 132.0
 grow_horizontal = 0
-text = "neighbors
+text = "Combat Log
 "
+scroll_following = true
 
 [node name="selected_character_info" parent="CanvasLayer" instance=ExtResource("19_vapic")]
 anchors_preset = 2
