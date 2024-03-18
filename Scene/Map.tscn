@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://b8o77r1wrb1e"]
+[gd_scene load_steps=29 format=3 uid="uid://b8o77r1wrb1e"]
 
 [ext_resource type="Texture2D" uid="uid://dh08b4qup0itx" path="res://textures/green_indicator_panel.png" id="1_13gvn"]
 [ext_resource type="Texture2D" uid="uid://oruggxc88fk1" path="res://textures/wall_edge_bottom_left.png" id="1_dldbh"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://brqy3ufkygnll" path="res://textures/purple_indicator_panel.png" id="9_olphb"]
 [ext_resource type="PackedScene" uid="uid://r8mhoiii4nhu" path="res://Scene/field_menu.tscn" id="13_ushiy"]
 [ext_resource type="PackedScene" uid="uid://ccnqpbi2cakl6" path="res://Scene/fight_menu.tscn" id="14_l63jg"]
+[ext_resource type="Script" path="res://Scene/combat_log.gd" id="16_k84q2"]
 [ext_resource type="PackedScene" uid="uid://ccsje0piy6svi" path="res://Scene/selected_character_info.tscn" id="19_vapic"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y8y1k"]
@@ -109,31 +110,18 @@ metadata/_edit_use_anchors_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="mouse_position" type="RichTextLabel" parent="CanvasLayer"]
-offset_right = 83.0
-offset_bottom = 39.0
-text = "mouse_position"
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+offset_left = 800.0
+offset_right = 1152.0
+offset_bottom = 192.0
 
-[node name="tile_info" type="RichTextLabel" parent="CanvasLayer"]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -221.0
-offset_right = 111.0
-grow_vertical = 0
-text = "tile_info"
-
-[node name="combat_log" type="RichTextLabel" parent="CanvasLayer"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -352.0
-offset_right = -51.9998
-offset_bottom = 132.0
-grow_horizontal = 0
-text = "Combat Log
+[node name="combat_log" type="RichTextLabel" parent="CanvasLayer/PanelContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 16
+text = " Combat Log
 "
 scroll_following = true
+script = ExtResource("16_k84q2")
 
 [node name="selected_character_info" parent="CanvasLayer" instance=ExtResource("19_vapic")]
 anchors_preset = 2
