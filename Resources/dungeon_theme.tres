@@ -1,3 +1,10 @@
-[gd_resource type="Theme" format=3 uid="uid://5fu88ou1dk5"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://5fu88ou1dk5"]
+
+[ext_resource type="Texture2D" uid="uid://dimkdtwax3x3g" path="res://textures/gui.tres" id="1_hrj3e"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1fhaq"]
+texture = ExtResource("1_hrj3e")
 
 [resource]
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_1fhaq")
+RichTextLabel/fonts/normal_font = null
