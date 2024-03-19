@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4jkulprh2s7s"
-path="res://.godot/imported/GUI.png-fc08dd072b230b3e2e8161d145f1fb7a.ctex"
+uid="uid://bn6tbhu2txgn2"
+path="res://.godot/imported/Wooden Pixel Art GUI 32x32.png-005f07a7f5a6002c8b51c34a2003414c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/GUI.png"
-dest_files=["res://.godot/imported/GUI.png-fc08dd072b230b3e2e8161d145f1fb7a.ctex"]
+source_file="res://textures/Wooden Pixel Art GUI 32x32.png"
+dest_files=["res://.godot/imported/Wooden Pixel Art GUI 32x32.png-005f07a7f5a6002c8b51c34a2003414c.ctex"]
 
 [params]
 

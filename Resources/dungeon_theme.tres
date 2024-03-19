@@ -1,10 +1,16 @@
 [gd_resource type="Theme" load_steps=3 format=3 uid="uid://5fu88ou1dk5"]
 
-[ext_resource type="Texture2D" uid="uid://dimkdtwax3x3g" path="res://textures/gui.tres" id="1_hrj3e"]
+[ext_resource type="Texture2D" uid="uid://bn6tbhu2txgn2" path="res://textures/Wooden Pixel Art GUI 32x32.png" id="1_cgaqg"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1fhaq"]
-texture = ExtResource("1_hrj3e")
+texture = ExtResource("1_cgaqg")
+texture_margin_left = 15.0
+texture_margin_top = 15.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
+region_rect = Rect2(160, 640, 96, 96)
 
 [resource]
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_1fhaq")
+RichTextLabel/colors/default_color = Color(1, 1, 1, 1)
 RichTextLabel/fonts/normal_font = null

@@ -17,3 +17,4 @@ signal hide_menu
 signal sa_button_pressed(action:String)
 signal summoning(summon)
 signal combat_message(message:String)
+signal toggle_log

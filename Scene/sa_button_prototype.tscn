@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://usyamy6cq515"]
 
-[ext_resource type="Script" path="res://sa_button_prototype.gd" id="1_ogveg"]
+[ext_resource type="Script" path="res://Scene/sa_button_prototype.gd" id="1_ogveg"]
 
 [node name="sa_button_prototype" type="Button"]
 offset_right = 8.0

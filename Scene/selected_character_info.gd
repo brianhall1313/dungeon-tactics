@@ -1,14 +1,14 @@
-extends FlowContainer
+extends Control
 
 #all dice will come in an array[number of sides,number of dice that are being used/we need to display]
-@onready var character_name_label=$character_name
-@onready var character_job_label=$character_job
-@onready var move_label=$GridContainer/move
-@onready var combat_label=$GridContainer/combat
-@onready var ranged_combat_label=$GridContainer/ranged_combat
-@onready var will_label=$GridContainer/will
-@onready var armor_label=$GridContainer/armor
-@onready var health_label=$GridContainer/health
+@onready var character_name_label=$PanelContainer/MarginContainer/FlowContainer/HBoxContainer/character_name
+@onready var character_job_label=$PanelContainer/MarginContainer/FlowContainer/HBoxContainer/character_job
+@onready var move_label=$PanelContainer/MarginContainer/FlowContainer/GridContainer/move
+@onready var combat_label=$PanelContainer/MarginContainer/FlowContainer/GridContainer/combat
+@onready var ranged_combat_label=$PanelContainer/MarginContainer/FlowContainer/GridContainer/ranged_combat
+@onready var will_label=$PanelContainer/MarginContainer/FlowContainer/GridContainer/will
+@onready var armor_label=$PanelContainer/MarginContainer/FlowContainer/GridContainer/armor
+@onready var health_label=$PanelContainer/MarginContainer/FlowContainer/GridContainer/health
 
 
 func _ready():
