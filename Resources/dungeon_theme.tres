@@ -1,6 +1,9 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://5fu88ou1dk5"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://5fu88ou1dk5"]
 
+[ext_resource type="FontFile" uid="uid://cgeqqxharig4e" path="res://Resources/GoudyBookletter1911-Regular.ttf" id="1_4uqtn"]
 [ext_resource type="Texture2D" uid="uid://bn6tbhu2txgn2" path="res://textures/Wooden Pixel Art GUI 32x32.png" id="1_cgaqg"]
+[ext_resource type="StyleBox" uid="uid://bcoqgx8in6e51" path="res://textures/gui_button_hover.tres" id="1_v0v4v"]
+[ext_resource type="StyleBox" uid="uid://ds4wm71v8qjca" path="res://textures/gui_button.tres" id="2_jkgow"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1fhaq"]
 texture = ExtResource("1_cgaqg")
@@ -11,6 +14,13 @@ texture_margin_bottom = 15.0
 region_rect = Rect2(160, 640, 96, 96)
 
 [resource]
+Button/font_sizes/font_size = 25
+Button/fonts/font = ExtResource("1_4uqtn")
+Button/styles/hover = ExtResource("1_v0v4v")
+Button/styles/normal = ExtResource("2_jkgow")
+Label/font_sizes/font_size = 25
+Label/fonts/font = ExtResource("1_4uqtn")
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_1fhaq")
 RichTextLabel/colors/default_color = Color(1, 1, 1, 1)
-RichTextLabel/fonts/normal_font = null
+RichTextLabel/font_sizes/normal_font_size = 25
+RichTextLabel/fonts/normal_font = ExtResource("1_4uqtn")

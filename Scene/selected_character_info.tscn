@@ -28,12 +28,10 @@ size_flags_horizontal = 3
 
 [node name="character_name" type="Label" parent="PanelContainer/MarginContainer/FlowContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
 text = "default"
 
 [node name="character_job" type="Label" parent="PanelContainer/MarginContainer/FlowContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
 text = "default"
 
 [node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer/FlowContainer"]
@@ -44,30 +42,24 @@ columns = 3
 
 [node name="move" type="Label" parent="PanelContainer/MarginContainer/FlowContainer/GridContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
 text = "default"
 
 [node name="combat" type="Label" parent="PanelContainer/MarginContainer/FlowContainer/GridContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
 text = "default"
 
 [node name="ranged_combat" type="Label" parent="PanelContainer/MarginContainer/FlowContainer/GridContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
 text = "default"
 
 [node name="will" type="Label" parent="PanelContainer/MarginContainer/FlowContainer/GridContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
 text = "default"
 
 [node name="armor" type="Label" parent="PanelContainer/MarginContainer/FlowContainer/GridContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
 text = "default"
 
 [node name="health" type="Label" parent="PanelContainer/MarginContainer/FlowContainer/GridContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
 text = "default"

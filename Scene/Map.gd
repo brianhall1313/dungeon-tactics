@@ -411,6 +411,7 @@ func _on_grid_interact_escape_pressed():
 	var is_pause:bool = true
 	for x in players_list.alive_list:
 		if local_to_map(x.position)==local_to_map(Pointer.position):
+			current_character=x
 			if current_character.turn_tracker['moved'] and current_character.turn_tracker['turn_complete']==false:
 				is_pause = false
 				current_character.undo_movement()
