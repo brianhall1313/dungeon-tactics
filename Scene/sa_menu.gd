@@ -43,6 +43,8 @@ func _on_fight_menu_sa_setup(character):
 			var button = prototype_button.instantiate()
 			button.name=i
 			button.text=i
+			if character.turn_tracker['action']:
+				button.disabled=true
 			add_child(button)
 
 	if len(character.spells)>0:
@@ -50,6 +52,8 @@ func _on_fight_menu_sa_setup(character):
 			var button = prototype_button.instantiate()
 			button.name=i
 			button.text=i
+			if character.turn_tracker['action']:
+				button.disabled=true
 			add_child(button)
 
 

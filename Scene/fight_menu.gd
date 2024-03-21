@@ -18,20 +18,24 @@ func _ready():
 
 
 func update_menu(character):
+	print('the update menu has been interacted with')
 	if character:
-		if character.turn_tracker["moved"]==true:
-			move_button.set_disabled(true)
-		else:
-			move_button.set_disabled(false)
-		if character.turn_tracker["action"]==true:
-			fight_button.set_disabled(true)
-		else:
-			fight_button.set_disabled(false)
 		if len(character.abilities)>0 or len(character.spells)>0:
 			populate_submenu(character)
 			sa_button.set_disabled(false)
 		else:
 			sa_button.set_disabled(true)
+		if character.turn_tracker["moved"]==true:
+			move_button.set_disabled(true)
+		else:
+			move_button.set_disabled(false)
+		if character.turn_tracker["action"]==true:
+			print('that shit should be hidden')
+			fight_button.set_disabled(true)
+			sa_button.set_disabled(true)
+		else:
+			fight_button.set_disabled(false)
+			sa_button.set_disabled(false)
 
 func move(pos:Vector2):
 	position=pos
