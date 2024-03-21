@@ -18,7 +18,6 @@ func _ready():
 
 
 func update_menu(character):
-	print('the update menu has been interacted with')
 	if character:
 		if len(character.abilities)>0 or len(character.spells)>0:
 			populate_submenu(character)
@@ -30,7 +29,6 @@ func update_menu(character):
 		else:
 			move_button.set_disabled(false)
 		if character.turn_tracker["action"]==true:
-			print('that shit should be hidden')
 			fight_button.set_disabled(true)
 			sa_button.set_disabled(true)
 		else:

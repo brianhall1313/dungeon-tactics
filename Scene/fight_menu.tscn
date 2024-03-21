@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://Scene/sa_menu.gd" id="6_cu1po"]
 
 [node name="menus" type="Control"]
+top_level = true
 layout_mode = 3
 anchors_preset = 0
 offset_right = 153.0

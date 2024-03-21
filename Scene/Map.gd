@@ -5,7 +5,6 @@ extends TileMap
 @onready var battle_lists=$battle_lists
 @onready var players_list
 @onready var enemies_list
-#@onready var combat_log=$CanvasLayer/PanelContainer/combat_log
 @onready var selected_ui=$CanvasLayer/selected_character_info
 @onready var targeted_ui=$CanvasLayer/targeted_character_info
 @onready var action:String=''
@@ -487,7 +486,12 @@ func _on_summoning(summon):
 	var ok_to_summon=MovementTools.can_move_to(board_state,summon,summon.default_position)
 	print('time to summon')
 	if ok_to_summon:
-		battle_lists.add_character(summon)
+		var cast = AttackTools._dice_roll()+current_character.will
+		if cast >= SpellsAndAbilities.spells_and_abilities_directory[action]['cost']: 
+			print(cast)
+			battle_lists.add_character(summon)
+		else:
+			GlobalSignalBus.combat_message.emit(current_character.character_name + ' has failed to cast: got a '+str(cast))
 		GlobalSignalBus.change_state.emit('grid_interact')
 		current_character.turn('action')
 		action=''

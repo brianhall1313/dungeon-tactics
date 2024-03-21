@@ -54,8 +54,6 @@ autoplay = true
 [connection signal="escape_pressed" from="FiniteStateMachine/grid_interact" to="Map" method="_on_grid_interact_escape_pressed"]
 [connection signal="grid_interaction" from="FiniteStateMachine/grid_interact" to="Map" method="_on_grid_interact_grid_interaction"]
 [connection signal="escape_pressed" from="FiniteStateMachine/character_interaction" to="Map" method="_on_character_interaction_escape_pressed"]
-[connection signal="grid_interaction" from="FiniteStateMachine/character_interaction" to="Map" method="_on_character_interaction_grid_interaction"]
-[connection signal="show_fight_menu" from="FiniteStateMachine/character_interaction" to="Map" method="_on_character_interaction_show_fight_menu"]
 [connection signal="escape_pressed" from="FiniteStateMachine/movement_selection" to="Map" method="_on_movement_selection_escape_pressed"]
 [connection signal="grid_interaction" from="FiniteStateMachine/movement_selection" to="Map" method="_on_movement_selection_grid_interaction"]
 [connection signal="escape_pressed" from="FiniteStateMachine/fight_selection" to="Map" method="_on_fight_selection_escape_pressed"]

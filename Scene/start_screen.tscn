@@ -45,12 +45,17 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="ColorRect/VBoxContainer"]
+[node name="start_demo_button" type="Button" parent="ColorRect/VBoxContainer"]
 layout_mode = 2
 text = "Start Demo"
+
+[node name="quit_button" type="Button" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_0am64")
 autoplay = true
 
-[connection signal="button_up" from="ColorRect/VBoxContainer/Button" to="." method="_on_button_button_up"]
+[connection signal="button_up" from="ColorRect/VBoxContainer/start_demo_button" to="." method="_on_button_button_up"]
+[connection signal="button_up" from="ColorRect/VBoxContainer/quit_button" to="." method="_on_quit_button_button_up"]
