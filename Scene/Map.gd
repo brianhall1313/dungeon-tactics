@@ -252,15 +252,21 @@ func sa_attack():
 	tiles_in_range=RangeFinder.tiles_in_attack_range_of_sa(board_state,current_character,action)
 	if Pointer.grid_position in tiles_in_range:
 		defenders=RangeFinder.sa_area_targets(board_state,Pointer.grid_position,action)
-		for defender in defenders:
-			print(defender.character_name)
-			AttackTools.special_action(current_character,defender,action)
-		GlobalSignalBus.change_state.emit('grid_interact')
-		current_character.turn('action')
-		action=''
-		GlobalSignalBus.update_board.emit()
-		clear_layer(1)
-		clear_layer(2)
+		if defenders:
+			var cast = AttackTools._dice_roll()+current_character.will
+			print(cast)
+			if cast >= SpellsAndAbilities.spells_and_abilities_directory[action]['cost']: 
+				for defender in defenders:
+					print(defender.character_name)
+					AttackTools.special_action(current_character,defender,action)
+			else:
+				GlobalSignalBus.combat_message.emit(current_character.character_name + ' has failed to cast: got a '+str(cast))
+			GlobalSignalBus.change_state.emit('grid_interact')
+			current_character.turn('action')
+			action=''
+			GlobalSignalBus.update_board.emit()
+			clear_layer(1)
+			clear_layer(2)
 
 
 func sa_heal():

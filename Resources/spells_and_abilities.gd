@@ -1,16 +1,16 @@
 extends Node
 
 @onready var spells_and_abilities_directory:Dictionary={
-	'Bone Dart':{"type":'attack',"range":5, "power":5,'bonus':0,'area':0,'effect':[]
+	'Bone Dart':{"type":'attack','cost':8,"range":5, "power":5,'bonus':0,'area':0,'effect':[]
 	,'description':'Fire a shard of bone at your opponent'},
-	'Elemental Bolt': {"type":'attack',"range":5, "power":8,'bonus':0,'area':0,'effect':[],
+	'Elemental Bolt': {"type":'attack','cost':10,"range":5, "power":8,'bonus':0,'area':0,'effect':[],
 	'description':'Fire a bolt of pure energy at your target'},
-	'Elemental Burst': {"type":'attack',"range":5, "power":5,'bonus':0,'area':1,'effect':[],
-	'description':''},
-	'Heal':{"type":'heal',"range":5, "power":8,'bonus':0,'area':0,'effect':[]},
-	'Heal Burst':{"type":'heal',"range":5, "power":5,'bonus':0,'area':1,'effect':[]},
-	'Summon Animal':{"type":'summon',"range":5, "power":0,'bonus':0,'area':0,'effect':['summon animal']},
-	'Summon Undead':{"type":'summon',"range":5, "power":0,'bonus':0,'area':0,'effect':['summon undead']},
+	'Elemental Burst': {"type":'attack','cost':10,"range":5, "power":5,'bonus':0,'area':1,'effect':[],
+	'description':'Fire an unstable elemental bolt, which explodes upon contact'},
+	'Heal':{"type":'heal','cost':8,"range":5, "power":8,'bonus':0,'area':0,'effect':[]},
+	'Heal Burst':{"type":'heal','cost':10,"range":5, "power":5,'bonus':0,'area':1,'effect':[]},
+	'Summon Animal':{"type":'summon','cost':10,"range":5, "power":0,'bonus':0,'area':0,'effect':['summon animal']},
+	'Summon Undead':{"type":'summon','cost':10,"range":5, "power":0,'bonus':0,'area':0,'effect':['summon undead']},
 	
 }
 
