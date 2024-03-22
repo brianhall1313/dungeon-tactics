@@ -8,7 +8,7 @@ signal escape_pressed
 
 func _enter_state():
 	print('entered pause menu')
-	show_pause_menu.emit()
+	GlobalSignalBus.show_pause_menu.emit()
 
 func _exit_state():
 	GlobalSignalBus.hide_menu.emit()

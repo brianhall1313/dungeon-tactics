@@ -419,18 +419,16 @@ func _place_default(character):
 
 
 func _on_grid_interact_escape_pressed():
-	var is_pause:bool = true
 	for x in players_list.alive_list:
 		if local_to_map(x.position)==local_to_map(Pointer.position):
 			current_character=x
 			if current_character.turn_tracker['moved'] and current_character.turn_tracker['turn_complete']==false:
-				is_pause = false
 				current_character.undo_movement()
 				Pointer.movement(local_to_map(current_character.position),current_character.position)
 				fight_menus.move(Pointer.position)
 				fight_menu.update_menu(current_character)
-	if is_pause:
-		GlobalSignalBus.change_state.emit("pause_menu")
+				return
+	GlobalSignalBus.change_state.emit("pause_menu")
 
 
 func _on_fight_menu_turn_end_selected():

@@ -60,7 +60,6 @@ autoplay = true
 [connection signal="grid_interaction" from="FiniteStateMachine/fight_selection" to="Map" method="_on_fight_selection_grid_interaction"]
 [connection signal="ai_turn_start" from="FiniteStateMachine/ai_turn" to="Map/battle_lists" method="_on_ai_turn_ai_turn_start"]
 [connection signal="escape_pressed" from="FiniteStateMachine/pause_menu" to="Map" method="_on_pause_menu_escape_pressed"]
-[connection signal="show_pause_menu" from="FiniteStateMachine/pause_menu" to="Map/Pointer/Camera2D2/field_menu" method="_on_pause_menu_show_pause_menu"]
 [connection signal="escape_pressed" from="FiniteStateMachine/sa_resolution" to="Map" method="_on_sa_resolution_escape_pressed"]
 [connection signal="grid_interaction" from="FiniteStateMachine/sa_resolution" to="Map" method="_on_sa_resolution_grid_interaction"]
 [connection signal="update_enemy_list" from="ai_manager" to="Map" method="_on_ai_manager_update_enemy_list"]

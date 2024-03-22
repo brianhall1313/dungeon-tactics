@@ -98,21 +98,18 @@ metadata/_edit_group_ = true
 
 [node name="Camera2D2" type="Camera2D" parent="Pointer"]
 zoom = Vector2(3, 3)
-
-[node name="field_menu" parent="Pointer/Camera2D2" instance=ExtResource("13_ushiy")]
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
-theme = ExtResource("16_lckb1")
-metadata/_edit_use_anchors_ = true
+limit_left = -100
+limit_top = -100
 
 [node name="fight_menus" parent="." instance=ExtResource("14_l63jg")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="field_menu" parent="CanvasLayer" instance=ExtResource("13_ushiy")]
+metadata/_edit_use_anchors_ = true
+
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+z_index = -1
 offset_left = 768.0
 offset_right = 1152.0
 offset_bottom = 192.0
@@ -158,8 +155,8 @@ grow_vertical = 0
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[connection signal="continue_pressed" from="Pointer/Camera2D2/field_menu" to="." method="_on_field_menu_continue_pressed"]
-[connection signal="end_turn_pressed" from="Pointer/Camera2D2/field_menu" to="." method="_on_field_menu_end_turn_pressed"]
 [connection signal="fight_selected" from="fight_menus" to="." method="_on_fight_menu_fight_selected"]
 [connection signal="movement_selected" from="fight_menus" to="." method="_on_fight_menu_movement_selected"]
 [connection signal="turn_end_selected" from="fight_menus" to="." method="_on_fight_menu_turn_end_selected"]
+[connection signal="continue_pressed" from="CanvasLayer/field_menu" to="." method="_on_field_menu_continue_pressed"]
+[connection signal="end_turn_pressed" from="CanvasLayer/field_menu" to="." method="_on_field_menu_end_turn_pressed"]

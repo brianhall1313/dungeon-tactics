@@ -14,6 +14,7 @@ signal turn_start(next)
 signal move_request(character,space:Vector2i)
 signal party_wipe(faction)
 signal hide_menu
+signal show_pause_menu
 signal sa_button_pressed(action:String)
 signal summoning(summon)
 signal combat_message(message:String)
