@@ -37,10 +37,15 @@ text = "continue"
 layout_mode = 2
 text = "End Turn"
 
+[node name="save_party" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Save Party"
+
 [node name="quit" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Quit"
 
 [connection signal="button_up" from="VBoxContainer/continue" to="." method="_on_continue_button_up"]
 [connection signal="button_up" from="VBoxContainer/end_turn" to="." method="_on_end_turn_button_up"]
+[connection signal="button_up" from="VBoxContainer/save_party" to="." method="_on_save_party_button_up"]
 [connection signal="button_up" from="VBoxContainer/quit" to="." method="_on_quit_button_up"]

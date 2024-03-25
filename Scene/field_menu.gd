@@ -34,3 +34,7 @@ func _on_end_turn_button_up():
 
 func _on_quit_button_up():
 	get_tree().change_scene_to_file("res://Scene/start_screen.tscn")
+
+
+func _on_save_party_button_up():
+	GlobalSignalBus.save.emit()

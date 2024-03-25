@@ -11,14 +11,13 @@ script = ExtResource("1_jsasr")
 
 [node name="Character" parent="player" instance=ExtResource("3_nwebe")]
 scale = Vector2(0.5, 0.5)
-health = 12
-faction = "player"
 character_name = "bob"
+faction = "player"
 
 [node name="enemies" parent="." instance=ExtResource("2_0ntdl")]
 
 [node name="test_enemy" parent="enemies" instance=ExtResource("3_nwebe")]
 scale = Vector2(0.5, 0.5)
+character_name = "Erasmus"
 default_position = Vector2i(3, 3)
 faction = "enemy"
-character_name = "Erasmus"

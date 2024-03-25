@@ -121,6 +121,7 @@ func connected_to_signal_bus():
 	GlobalSignalBus.connect('move_request',_move_request_received)
 	GlobalSignalBus.connect("sa_button_pressed",_on_sa_button_pressed)
 	GlobalSignalBus.connect("summoning",_on_summoning)
+	GlobalSignalBus.connect('save',_save)
 	
 
 func get_board_state():
@@ -508,3 +509,6 @@ func _on_sa_resolution_escape_pressed():
 	fight_menu.fight_button.grab_focus()
 	GlobalSignalBus.change_state.emit("character_interaction")
 
+func _save():
+	var data = battle_lists.save_party('player')
+	print(data)

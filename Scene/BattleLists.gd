@@ -52,3 +52,14 @@ func _on_turn_start(turn:String):
 		player.full_turn_start()
 	elif turn=='enemy':
 		enemies.full_turn_start()
+
+
+func save_party(faction:String):
+	var party_data:Array=[]
+	if faction=='player':
+		print(player.list)
+		for character in player.list:
+			var data:Dictionary=character.export_save_data()
+			print(character.character_name)
+			party_data.append(data)
+	return party_data
