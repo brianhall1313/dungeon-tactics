@@ -1,8 +1,9 @@
 extends AnimatedSprite2D
 
+@export var character_name:String="Default"
 @export var default_position:Vector2i=Vector2i(0,0)
 @export var grid_position:Vector2i
-@export var job:String='default'
+@export var job:String="classless"
 @export var tags:Array=['humanoid']
 @export var move:int = 5
 @export var combat:int = 5
@@ -21,10 +22,10 @@ extends AnimatedSprite2D
 @export var spells:Array=["Elemental Bolt",'Summon Undead','Heal']
 @export var abilities:Array=[]
 @export var experience:int=0
+@export var level:int=0
 @export var inventory:Array=[]
 @export var status:Array=[]
 @export var faction:String
-@export var character_name:String='Default'
 @export var turn_tracker:Dictionary={'moved':false,'action':false,'turn_complete':false}
 var previous_position:Vector2
 var previous_position_coor:Vector2i
@@ -185,3 +186,18 @@ func calculate_armor():
 				self.armor+=equipment[x]["bonus"]
 			if equipment[x].has("move_modifier"):
 				self.move+=equipment[x]['move_modifier']
+
+
+func export_save_data():
+	var data:Dictionary={
+		"character_name":self.character_name,
+		"job":self.job,
+		"tags":self.tags.duplicate(),
+		"equipment":self.equipment.duplicate(true),
+		"spells":self.spells.duplicate(),
+		"abilities":self.abilities.duplicate(),
+		"experience":self.experience,
+		"level":self.level,
+		"inventory":self.inventory.duplicate(),
+	}
+	return data
