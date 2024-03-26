@@ -10,7 +10,6 @@ extends TileMap
 @onready var action:String=''
 
 var dir:Dictionary={"Down":Vector2i(0,1),"Up":Vector2i(0,-1),"Left":Vector2i(-1,0),"Right":Vector2i(1,0)}
-var input_timer:float=0.0
 var height:int=10
 var width:int=10
 var board_state
@@ -52,60 +51,6 @@ func _ready():
 	
 	GlobalSignalBus.update_board.emit()
 	ui_update()
-	
-	var test_character={'character_name':'Buster',
-						'default_position':Vector2i(9,9),
-						'experience':0,
-						'faction':'enemy',
-						'job':'thief',
-						'spells':[],
-						'abilities':[],
-						'tags':ClassData.class_dictionary['thief']['tags'],
-						'equipment':ClassData.class_dictionary['thief']["equipment"],
-						'stats':ClassData.class_dictionary['thief']
-						}
-	
-	var test_character2={'character_name':'Franklin',
-						'default_position':Vector2i(3,7),
-						'experience':0,
-						'faction':'enemy',
-						'job':'thug',
-						'spells':[],
-						'abilities':[],
-						'tags':ClassData.class_dictionary['thug']['tags'],
-						'equipment':ClassData.class_dictionary['thug']["equipment"],
-						'stats':ClassData.class_dictionary['thug']
-						}
-	var test_character3={'character_name':'Ohmanny',
-						'default_position':Vector2i(0,1),
-						'experience':0,
-						'faction':'player',
-						'job':'templar',
-						'spells':[],
-						'abilities':[],
-						'tags':ClassData.class_dictionary['templar']['tags'],
-						'equipment':ClassData.class_dictionary['templar']["equipment"],
-						'stats':ClassData.class_dictionary['templar']
-						}
-	var test_character4={'character_name':'Daroupty',
-						'default_position':Vector2i(0,3),
-						'experience':0,
-						'faction':'player',
-						'job':'ranger',
-						'spells':[],
-						'abilities':[],
-						'tags':ClassData.class_dictionary['ranger']['tags'],
-						'equipment':ClassData.class_dictionary['ranger']["equipment"],
-						'stats':ClassData.class_dictionary['ranger']
-						}
-	
-	
-	
-	
-	battle_lists.add_character(test_character)
-	battle_lists.add_character(test_character2)
-	battle_lists.add_character(test_character3)
-	battle_lists.add_character(test_character4)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 
@@ -225,7 +170,7 @@ func ui_update():
 			targeted_ui.hide()
 	else:
 		targeted_ui.hide()
-		if Global.current_state.name != 'movement_selection':
+		if Global.current_state and Global.current_state.name != 'movement_selection':
 			selected_ui.hide()
 	if Global.current_state:
 		if Global.current_state.name == 'fight_selection':
@@ -237,14 +182,6 @@ func ui_update():
 			for cell in cells:
 				set_cell(2,cell,3,Vector2i(0,0))
 			
-			
-
-
-func range_finder(origin:Vector2i,target:Vector2i):
-	var origin_id=board_state[origin.x][origin.y]['id']
-	var target_id=board_state[target.x][target.y]['id']
-	var shortest_path=astar.get_point_path(origin_id,target_id)
-	return shortest_path
 
 func sa_attack():
 	var defenders:Array=[]
@@ -512,3 +449,78 @@ func _on_sa_resolution_escape_pressed():
 func _save():
 	var data = battle_lists.save_party('player')
 	print(data)
+
+func spawn_test_characters():
+	var test_character={'character_name':'Buster',
+						'default_position':Vector2i(2,1),
+						'experience':0,
+						'faction':'enemy',
+						'job':'thief',
+						'spells':[],
+						'abilities':[],
+						'tags':ClassData.class_dictionary['thief']['tags'],
+						'equipment':ClassData.class_dictionary['thief']["equipment"],
+						'stats':ClassData.class_dictionary['thief']
+						}
+	
+	var test_character2={'character_name':'Franklin',
+						'default_position':Vector2i(1,1),
+						'experience':0,
+						'faction':'enemy',
+						'job':'thug',
+						'spells':[],
+						'abilities':[],
+						'tags':ClassData.class_dictionary['thug']['tags'],
+						'equipment':ClassData.class_dictionary['thug']["equipment"],
+						'stats':ClassData.class_dictionary['thug']
+						}
+	var test_character3={'character_name':'Ohmanny',
+						'default_position':Vector2i(0,1),
+						'experience':0,
+						'faction':'player',
+						'job':'templar',
+						'spells':[],
+						'abilities':[],
+						'tags':ClassData.class_dictionary['templar']['tags'],
+						'equipment':ClassData.class_dictionary['templar']["equipment"],
+						'stats':ClassData.class_dictionary['templar']
+						}
+	var test_character4={'character_name':'Daroupty',
+						'default_position':Vector2i(0,0),
+						'experience':0,
+						'faction':'player',
+						'job':'ranger',
+						'spells':[],
+						'abilities':[],
+						'tags':ClassData.class_dictionary['ranger']['tags'],
+						'equipment':ClassData.class_dictionary['ranger']["equipment"],
+						'stats':ClassData.class_dictionary['ranger']
+						}
+	
+	
+	
+	
+	battle_lists.add_character(test_character)
+	battle_lists.add_character(test_character2)
+	battle_lists.add_character(test_character3)
+	battle_lists.add_character(test_character4)
+
+
+func setup_level(level):
+	var layout:Array=level['grid_layout'].split(':')
+	height=len(layout)
+	width=len(layout[0])
+	var row:int = 0
+	var column:int = 0
+	clear_layer(0)
+	clear_layer(-1)
+	
+	for r in layout:
+		row = 0
+		for c in r.split(''):
+			set_cell(0,Vector2i(row,column),int(c),Vector2i(0,0)) 
+			row+=1
+		column +=1
+	get_board_state()
+	spawn_test_characters()
+	

@@ -11,6 +11,7 @@ var ai_skip_turn=true
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	connect_input()
+	load_level(LevelData.level_data)
 	#Here we should handle cutscene stuff
 	#here we should handle party placement
 	match_start()
@@ -85,3 +86,6 @@ func _on_party_wipe(faction:String):
 	GlobalSignalBus.change_state.emit('game_over')
 
 
+func load_level(level_data):
+	var level:Dictionary=level_data[Global.current_level]
+	map.setup_level(level)
