@@ -451,50 +451,26 @@ func _save():
 	print(data)
 
 func spawn_test_characters():
-	var test_character={'character_name':'Buster',
+	var test_character={
 						'default_position':Vector2i(2,1),
-						'experience':0,
 						'faction':'enemy',
-						'job':'thief',
-						'spells':[],
-						'abilities':[],
-						'tags':ClassData.class_dictionary['thief']['tags'],
-						'equipment':ClassData.class_dictionary['thief']["equipment"],
-						'stats':ClassData.class_dictionary['thief']
+						'job':'thief'
 						}
 	
-	var test_character2={'character_name':'Franklin',
+	var test_character2={
 						'default_position':Vector2i(1,1),
-						'experience':0,
 						'faction':'enemy',
 						'job':'thug',
-						'spells':[],
-						'abilities':[],
-						'tags':ClassData.class_dictionary['thug']['tags'],
-						'equipment':ClassData.class_dictionary['thug']["equipment"],
-						'stats':ClassData.class_dictionary['thug']
 						}
 	var test_character3={'character_name':'Ohmanny',
 						'default_position':Vector2i(0,1),
-						'experience':0,
 						'faction':'player',
-						'job':'templar',
-						'spells':[],
-						'abilities':[],
-						'tags':ClassData.class_dictionary['templar']['tags'],
-						'equipment':ClassData.class_dictionary['templar']["equipment"],
-						'stats':ClassData.class_dictionary['templar']
+						'job':'templar'
 						}
 	var test_character4={'character_name':'Daroupty',
 						'default_position':Vector2i(0,0),
-						'experience':0,
 						'faction':'player',
-						'job':'ranger',
-						'spells':[],
-						'abilities':[],
-						'tags':ClassData.class_dictionary['ranger']['tags'],
-						'equipment':ClassData.class_dictionary['ranger']["equipment"],
-						'stats':ClassData.class_dictionary['ranger']
+						'job':'ranger'
 						}
 	
 	

@@ -43,21 +43,54 @@ func turn_start():
 
 
 func character_setup(character_data):
-	print('character setup')
 	$Sprite2D["scale"]=Vector2(.1,.1)
-	self.character_name=character_data['character_name']
+	if 'character_name' in character_data:
+		self.character_name=character_data['character_name']
+	else:
+		self.character_name=Names.get_random_name()
 	self.default_position=character_data.default_position
-	self.experience=character_data.experience
+	if 'experience' in character_data:
+		self.experience=character_data['experience']
 	self.faction=character_data['faction']
 	self.job=character_data['job']
-	self.tags=character_data['tags']
-	stat_setup(character_data['stats'])
-	if 'humanoid' in tags:
-		equipment_setup(character_data['equipment'])
+	if 'tags' in character_data:
+		self.tags=character_data['tags']
 	else:
-		equipment['weapon']=BeastWeapons.beast_weapons[character_data['equipment'][0]].duplicate()
-	spell_setup(character_data['spells'])
-	ability_setup(character_data['abilities'])
+		if 'humanoid' in tags:
+			self.tags=ClassData.class_dictionary[self.job]['tags'].duplicate()
+		else:
+			self.tags=Bestiary[self.job]['tags'].duplicate()
+	if 'stats' in character_data:
+		stat_setup(character_data['stats'])
+	else:
+		if 'humanoid' in tags:
+			stat_setup(ClassData.class_dictionary[self.job])
+		else:
+			stat_setup(Bestiary[self.job])
+	if 'equipment' in character_data:
+		if 'humanoid' in tags:
+			equipment_setup(character_data['equipment'])
+		else:
+			equipment['weapon']=BeastWeapons.beast_weapons[character_data['equipment'][0]].duplicate()
+	else:
+		if 'humanoid' in tags:
+			equipment_setup(ClassData.class_dictionary[self.job]['equipment'])
+		else:
+			equipment['weapon']=BeastWeapons.beast_weapons[Bestiary[self.job]['equipment'][0]].duplicate()
+	if 'spells' in character_data:
+		spell_setup(character_data['spells'])
+	else:
+		if 'humanoid' in tags:
+			spell_setup(ClassData.class_dictionary[self.job]['spells'])
+		else:
+			spell_setup(Bestiary[self.job]['spells'])
+	if 'abilities' in character_data:
+		ability_setup(character_data['abilities'])
+	else:
+		if 'humanoid' in tags:
+			ability_setup(ClassData.class_dictionary[self.job]['abilities'])
+		else:
+			ability_setup(Bestiary[self.job]['abilities'])
 	select_weapon(false)
 	turn_start()
 

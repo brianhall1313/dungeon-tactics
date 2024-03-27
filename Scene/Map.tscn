@@ -103,6 +103,7 @@ limit_top = -100
 [node name="fight_menus" parent="." instance=ExtResource("14_l63jg")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 3
 
 [node name="field_menu" parent="CanvasLayer" instance=ExtResource("13_ushiy")]
 metadata/_edit_use_anchors_ = true
@@ -129,6 +130,7 @@ scroll_following = true
 script = ExtResource("16_k84q2")
 
 [node name="selected_character_info" parent="CanvasLayer" instance=ExtResource("19_vapic")]
+z_index = -1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -140,6 +142,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 
 [node name="targeted_character_info" parent="CanvasLayer" instance=ExtResource("19_vapic")]
+z_index = -1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
