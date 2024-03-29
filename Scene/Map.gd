@@ -448,7 +448,8 @@ func _on_sa_resolution_escape_pressed():
 
 func _save():
 	var data = battle_lists.save_party('player')
-	print(data)
+	SaveAndLoad.save_game(data)
+	#SaveAndLoad.load_game()
 
 func spawn_test_characters():
 	var test_character={
@@ -462,7 +463,7 @@ func spawn_test_characters():
 						'faction':'enemy',
 						'job':'thug',
 						}
-	var test_character3={'character_name':'Ohmanny',
+	var test_character3={
 						'default_position':Vector2i(0,1),
 						'faction':'player',
 						'job':'templar'
