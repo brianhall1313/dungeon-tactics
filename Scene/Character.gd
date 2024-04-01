@@ -19,7 +19,7 @@ extends AnimatedSprite2D
 									'accessory 1':{},
 									'accessory 2':{}
 									}
-@export var spells:Array=["Elemental Bolt",'Summon Undead','Heal']
+@export var spells:Array=[]
 @export var abilities:Array=[]
 @export var experience:int=0
 @export var level:int=0

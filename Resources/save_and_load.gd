@@ -1,5 +1,5 @@
 extends Node
-@export var save_dictionary={}
+@export var save_dictionary: Dictionary={}
 @export var data_path="user://save_data.save"
 # Called when the node enters the scene tree for the first time.
 func initialize_data():
@@ -31,7 +31,7 @@ func load_json():
 	if FileAccess.file_exists(data_path):
 		var data_file=FileAccess.open(data_path,FileAccess.READ)
 		var parsed_data=JSON.parse_string(data_file.get_as_text())
-		if parsed_data is Array:
+		if parsed_data is Dictionary:
 			#print(parsed_data)
 			return parsed_data
 		else:

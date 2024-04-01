@@ -32,6 +32,7 @@ BeastWeapons="*res://Resources/beast_weapons.gd"
 Names="*res://Resources/names.gd"
 LevelData="*res://Resources/level_data.gd"
 SaveAndLoad="*res://Resources/save_and_load.gd"
+World="*res://Global/World.gd"
 
 [display]
 

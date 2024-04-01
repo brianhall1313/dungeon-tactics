@@ -447,7 +447,11 @@ func _on_sa_resolution_escape_pressed():
 	GlobalSignalBus.change_state.emit("character_interaction")
 
 func _save():
-	var data = battle_lists.save_party('player')
+	var data: Dictionary ={}
+	data['party']= battle_lists.save_party('player')
+	data['inventory']= World.player_inventory.duplicate(true)
+	data['gold']=World.player_gold
+	data['progress']=World.level_progress.duplicate()
 	SaveAndLoad.save_game(data)
 	#SaveAndLoad.load_game()
 
