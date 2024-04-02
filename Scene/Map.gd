@@ -446,14 +446,17 @@ func _on_sa_resolution_escape_pressed():
 	fight_menu.fight_button.grab_focus()
 	GlobalSignalBus.change_state.emit("character_interaction")
 
+
+#this is only for testing delete this later
 func _save():
 	var data: Dictionary ={}
+	data['metadata']={"wizard":"default","last save":Time.get_datetime_string_from_system()}
 	data['party']= battle_lists.save_party('player')
 	data['inventory']= World.player_inventory.duplicate(true)
 	data['gold']=World.player_gold
 	data['progress']=World.level_progress.duplicate()
-	SaveAndLoad.save_game(data)
-	#SaveAndLoad.load_game()
+	SaveAndLoad.save_game(data,1)
+	#SaveAndLoad.load_game(1)
 
 func spawn_test_characters():
 	var test_character={

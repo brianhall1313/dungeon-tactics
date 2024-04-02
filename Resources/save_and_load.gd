@@ -1,24 +1,18 @@
 extends Node
 @export var save_dictionary: Dictionary={}
-@export var data_path="user://save_data.save"
-# Called when the node enters the scene tree for the first time.
-func initialize_data():
-	save_dictionary=load_json()
-	if save_dictionary:
-		print('save dictionary loaded')
-	else:
-		print('failed to load saves')
+@export var data_path="user://save_data_"
 
 
-func save_game(data):
-	var save_file=FileAccess.open(data_path,FileAccess.WRITE)
+
+func save_game(data, slot):
+	var full_path = data_path + str(slot) + '.save'
+	var save_file=FileAccess.open(full_path,FileAccess.WRITE)
 	var json_string = JSON.stringify(data)
 	save_file.store_line(json_string)
 
 
-func load_game():
-	initialize_data()
-	var data = load_json()
+func load_game(slot:int):
+	var data = load_json(slot)
 	if data:
 		print(data)
 		return data
@@ -27,9 +21,10 @@ func load_game():
 		return data
 
 
-func load_json():
-	if FileAccess.file_exists(data_path):
-		var data_file=FileAccess.open(data_path,FileAccess.READ)
+func load_json(slot:int):
+	var full_path = data_path + str(slot) + '.save'
+	if FileAccess.file_exists(full_path):
+		var data_file=FileAccess.open(full_path,FileAccess.READ)
 		var parsed_data=JSON.parse_string(data_file.get_as_text())
 		if parsed_data is Dictionary:
 			#print(parsed_data)
@@ -39,4 +34,18 @@ func load_json():
 			return false
 	else:
 		print('Json parse error:file does not exist')
+		return false
+
+
+func load_metadata(slot:int):
+	var full_path = data_path + str(slot) + '.save'
+	if FileAccess.file_exists(full_path):
+		var data_file=FileAccess.open(full_path,FileAccess.READ)
+		var parsed_data=JSON.parse_string(data_file.get_as_text())
+		if parsed_data is Dictionary:
+			print(parsed_data)
+			return parsed_data['metadata']
+		else:
+			return false
+	else:
 		return false

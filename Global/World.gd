@@ -23,3 +23,13 @@ func gold_get(amount:int):
 	
 func character_get(character:Dictionary):
 	player_party.append(character)
+	
+func save():
+	var data: Dictionary ={}
+	data['metadata']={"wizard":"default","last save":Time.get_datetime_string_from_system()}
+	data['party']= player_party.duplicate(true)
+	data['inventory']= World.player_inventory.duplicate(true)
+	data['gold']=World.player_gold
+	data['progress']=World.level_progress.duplicate()
+	return data
+	#SaveAndLoad.load_game(1)

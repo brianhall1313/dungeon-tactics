@@ -19,4 +19,5 @@ signal sa_button_pressed(action:String)
 signal summoning(summon)
 signal combat_message(message:String)
 signal toggle_log
-signal save
+signal save(slot)
+signal load_data(slot)
