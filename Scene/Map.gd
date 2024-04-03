@@ -5,8 +5,6 @@ extends TileMap
 @onready var battle_lists=$battle_lists
 @onready var players_list
 @onready var enemies_list
-@onready var selected_ui=$CanvasLayer/selected_character_info
-@onready var targeted_ui=$CanvasLayer/targeted_character_info
 @onready var action:String=''
 
 var dir:Dictionary={"Down":Vector2i(0,1),"Up":Vector2i(0,-1),"Left":Vector2i(-1,0),"Right":Vector2i(1,0)}
@@ -26,7 +24,12 @@ var death_spot:Vector2=map_to_local(Vector2i(-100,-100))
 
 var in_attack_range:Array=[]
 
-
+signal update_selected_ui(character)
+signal show_selected_ui
+signal hide_selected_ui
+signal update_targeted_ui(character)
+signal show_targeted_ui
+signal hide_targeted_ui
 signal pass_board_state(board)
 signal ai_list_handover(list)
 # Called when the node enters the scene tree for the first time.
@@ -50,12 +53,7 @@ func _ready():
 	rangedfightstar=AStarGrid2D.new()
 	
 	GlobalSignalBus.update_board.emit()
-	ui_update()
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 
-
-func _process(_delta):
-	pass
 
 func connected_to_signal_bus():
 	GlobalSignalBus.connect('update_board',_on_update_board)
@@ -155,23 +153,23 @@ func ui_update():
 		if current_character:
 			if is_character==current_character:
 				selected_character=is_character
-				selected_ui.update(selected_character)
-				selected_ui.show()
-				targeted_ui.hide()
+				update_selected_ui.emit(selected_character)
+				show_selected_ui.emit()
+				hide_targeted_ui.emit()
 			
 			else:
 				targeted_character=is_character
-				targeted_ui.update(targeted_character)
-				targeted_ui.show()
+				update_targeted_ui.emit(targeted_character)
+				show_targeted_ui.emit()
 		else:
 			selected_character=is_character
-			selected_ui.update(selected_character)
-			selected_ui.show()
-			targeted_ui.hide()
+			update_selected_ui.emit(selected_character)
+			show_selected_ui.emit()
+			hide_targeted_ui.emit()
 	else:
-		targeted_ui.hide()
+		hide_targeted_ui.emit()
 		if Global.current_state and Global.current_state.name != 'movement_selection':
-			selected_ui.hide()
+			hide_selected_ui.emit()
 	if Global.current_state:
 		if Global.current_state.name == 'fight_selection':
 			clear_layer(2)
@@ -480,6 +478,11 @@ func spawn_test_characters():
 						'faction':'player',
 						'job':'ranger'
 						}
+	var test_character5={'character_name':'Knorki',
+						'default_position':Vector2i(1,0),
+						'faction':'player',
+						'job':'knight'
+						}
 	
 	
 	
@@ -488,6 +491,7 @@ func spawn_test_characters():
 	battle_lists.add_character(test_character2)
 	battle_lists.add_character(test_character3)
 	battle_lists.add_character(test_character4)
+	battle_lists.add_character(test_character5)
 
 
 func setup_level(level):

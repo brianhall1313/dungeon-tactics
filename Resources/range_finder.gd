@@ -15,7 +15,7 @@ func setup(nheight,nwidth):
 func targets_in_range_basic(board_state, character):
 	construct_astar()
 	var targets:Array=[]
-	var attack_range=character.equipment[character.current_weapon]['range']
+	var attack_range=Weapons.weapons_dictionary[character.equipment[character.current_weapon]]['range']
 	for row in range(len(board_state)):
 		for column in range(len(board_state[0])):
 			var range_to_tile=abs(row-character.grid_position.x)+abs(column-character.grid_position.y)
@@ -29,7 +29,7 @@ func targets_in_range_basic(board_state, character):
 func targets_in_full_range(board_state,character):
 	construct_astar()
 	var targets:Array=[]
-	var attack_range=character.equipment[character.current_weapon]['range']+character.move
+	var attack_range=Weapons.weapons_dictionary[character.equipment[character.current_weapon]]['range']+character.move
 	for row in range(len(board_state)):
 		for column in range(len(board_state[0])):
 			var range_to_tile=abs(row-character.grid_position.x)+abs(column-character.grid_position.y)
@@ -60,7 +60,7 @@ func targets_in_range_sa(board_state, character,sa):
 func targets_from_space(board_state,character,space):
 	construct_astar()
 	var targets:Array=[]
-	var attack_range=character.equipment[character.current_weapon]['range']
+	var attack_range=Weapons.weapons_dictionary[character.equipment[character.current_weapon]]['range']
 	for row in range(len(board_state)):
 		for column in range(len(board_state[0])):
 			var range_to_tile=abs(row-space.x)+abs(column-space.y)
@@ -106,7 +106,7 @@ func construct_astar():
 
 
 func tiles_in_attack_range(board_state,character):
-	var attack_range:int=character.equipment[character.current_weapon]['range']+1
+	var attack_range:int=Weapons.weapons_dictionary[character.equipment[character.current_weapon]]['range']+1
 	var tiles_in_range:Array=[]
 	var test_path
 	construct_astar()

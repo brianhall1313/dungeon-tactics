@@ -14,5 +14,8 @@
 "templar":{"class_name":"Templar","tags":["humanoid"],"move":6,"combat":4,"ranged_combat":0,"armor":10,"will":1,"health":12,"equipment":["great_weapon","heavy_armor"],"spells":[],"abilities":[],"experience":0,"cost":125},
 "ranger":{"class_name":"Ranger","tags":["humanoid"],"move":7,"combat":2,"ranged_combat":2,"armor":10,"will":2,"health":12,"equipment":["bow","hand_weapon","quiver","light_armor"],"spells":[],"abilities":[],"experience":0,"cost":125},
 "barbarian":{"class_name":"Barbarian","tags":["humanoid"],"move":6,"combat":4,"ranged_combat":0,"armor":10,"will":3,"health":14,"equipment":["great_weapon","dagger"],"spells":[],"abilities":[],"experience":0,"cost":125},
-"marksman":{"class_name":"Marksman","tags":["humanoid"],"move":6,"combat":2,"ranged_combat":2,"armor":10,"will":1,"health":12,"equipment":["crossbow","quiver","hand_weapon","heavy_armor"],"spells":[],"abilities":[],"experience":0,"cost":125}
+"marksman":{"class_name":"Marksman","tags":["humanoid"],"move":6,"combat":2,"ranged_combat":2,"armor":10,"will":1,"health":12,"equipment":["crossbow","quiver","hand_weapon","heavy_armor"],"spells":[],"abilities":[],"experience":0,"cost":125},
+"Bear":{"class_name":"Bear","tags":["animal","large","strong"],"move":6,"combat":4,"ranged_combat":0,"armor":12,"will":0,"health":14,"equipment":["bear claws"],"spells":[],"abilities":[],"experience":0,"cost":0},
+"Wolf":{"class_name":"Wolf","tags":["animal","group fighter"],"move":8,"combat":1,"ranged_combat":0,"armor":10,"will":0,"health":8,"equipment":["bite"],"spells":[],"abilities":[],"experience":0,"cost":0},
+
 }

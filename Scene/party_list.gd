@@ -43,7 +43,7 @@ func revive(character,pos):
 
 
 func add(character_data):
-	var new_character=Global.Character.instantiate()
+	var new_character=Global.character.instantiate()
 	add_child(new_character)
 	var children=get_children()
 	for x in children:

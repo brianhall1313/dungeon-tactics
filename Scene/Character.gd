@@ -1,3 +1,4 @@
+class_name Character
 extends AnimatedSprite2D
 
 @export var character_name:String="Default"
@@ -13,11 +14,12 @@ extends AnimatedSprite2D
 @export var health:int = 5
 @export var current_health:int=health
 @export var current_weapon:String="weapon"
-@export var equipment:Dictionary={'weapon':{'name':'dagger','range':1,'attack_bonus':1,'damage_bonus':-1},
-									'ranged_weapon':{'name':'Bow','range':5,'attack_bonus':1,'damage_bonus':0},
-									'armor':{'name':'shirt','bonus':0},
-									'accessory 1':{},
-									'accessory 2':{}
+@export var equipment:Dictionary={'weapon':'dagger',
+									'ranged_weapon':'Bow',
+									'off_hand':'',
+									'armor':'unarmored',
+									'accessory 1':'',
+									'accessory 2':''
 									}
 @export var spells:Array=[]
 @export var abilities:Array=[]
@@ -56,41 +58,24 @@ func character_setup(character_data):
 	if 'tags' in character_data:
 		self.tags=character_data['tags']
 	else:
-		if 'humanoid' in tags:
-			self.tags=ClassData.class_dictionary[self.job]['tags'].duplicate()
-		else:
-			self.tags=Bestiary[self.job]['tags'].duplicate()
+		self.tags=ClassData.class_dictionary[self.job]['tags'].duplicate()
 	if 'stats' in character_data:
 		stat_setup(character_data['stats'])
 	else:
-		if 'humanoid' in tags:
-			stat_setup(ClassData.class_dictionary[self.job])
-		else:
-			stat_setup(Bestiary[self.job])
+		stat_setup(ClassData.class_dictionary[self.job])
+
 	if 'equipment' in character_data:
-		if 'humanoid' in tags:
-			equipment_setup(character_data['equipment'])
-		else:
-			equipment['weapon']=BeastWeapons.beast_weapons[character_data['equipment'][0]].duplicate()
+		equipment_setup(character_data['equipment'])
 	else:
-		if 'humanoid' in tags:
-			equipment_setup(ClassData.class_dictionary[self.job]['equipment'])
-		else:
-			equipment['weapon']=BeastWeapons.beast_weapons[Bestiary[self.job]['equipment'][0]].duplicate()
+		equipment_setup(ClassData.class_dictionary[self.job]['equipment'])
 	if 'spells' in character_data:
 		spell_setup(character_data['spells'])
 	else:
-		if 'humanoid' in tags:
-			spell_setup(ClassData.class_dictionary[self.job]['spells'])
-		else:
-			spell_setup(Bestiary[self.job]['spells'])
+		spell_setup(ClassData.class_dictionary[self.job]['spells'])
 	if 'abilities' in character_data:
 		ability_setup(character_data['abilities'])
 	else:
-		if 'humanoid' in tags:
-			ability_setup(ClassData.class_dictionary[self.job]['abilities'])
-		else:
-			ability_setup(Bestiary[self.job]['abilities'])
+		ability_setup(ClassData.class_dictionary[self.job]['abilities'])
 	select_weapon(false)
 	turn_start()
 
@@ -108,20 +93,23 @@ func stat_setup(njob:Dictionary):
 func equipment_setup(new_equipment:Array):
 	equipment={}
 	for x in new_equipment:
-		print(x)
 		if Weapons.weapons_dictionary.has(x):
 			if Weapons.weapons_dictionary[x]['range']<2:
-				equipment['weapon']=Weapons.weapons_dictionary[x].duplicate()
+				equipment['weapon']=x
 			else:
-				equipment['ranged_weapon']=Weapons.weapons_dictionary[x].duplicate()
+				equipment['ranged_weapon']=x
 		elif Armor.armor_dictionary.has(x):
-			equipment[x]=Armor.armor_dictionary[x].duplicate()
+			if Armor.armor_dictionary[x]["type"]=='shield':
+				self.equipment['off_hand']=x
+			else:
+				equipment['armor']=x
 	print(equipment)
 	calculate_armor()
 	if equipment.has('weapon'):
 		current_weapon = 'weapon'
 	else:
-		equipment['weapon']=Weapons.weapons_dictionary['unarmed'].duplicate()
+		equipment['weapon']='unarmed'
+		current_weapon ='weapon'
 	if equipment.has('ranged_weapon'):
 		current_weapon = 'ranged_weapon'
 
@@ -147,14 +135,14 @@ func select_weapon(in_combat:bool):
 func get_attack():
 	var bonus:int
 	if current_weapon=='weapon':
-		bonus=equipment[current_weapon]['attack_bonus']+combat
+		bonus=Weapons.weapons_dictionary[equipment[current_weapon]]['attack_bonus']+combat
 	else:
-		bonus=equipment[current_weapon]['attack_bonus']+ranged_combat
+		bonus=Weapons.weapons_dictionary[equipment[current_weapon]]['attack_bonus']+ranged_combat
 	return bonus
 
 func get_damage_bonus():
 	var bonus:int
-	bonus=equipment[current_weapon]['damage_bonus']
+	bonus=Weapons.weapons_dictionary[equipment[current_weapon]]['damage_bonus']
 	return bonus
 
 func turn(turn_action):
@@ -214,11 +202,11 @@ func undo_movement():
 
 func calculate_armor():
 	for x in equipment:
-		if equipment[x].has("type"):
-			if equipment[x].has("bonus"):
-				self.armor+=equipment[x]["bonus"]
-			if equipment[x].has("move_modifier"):
-				self.move+=equipment[x]['move_modifier']
+		if equipment[x] in Armor.armor_dictionary:
+			self.armor += Armor.armor_dictionary[equipment[x]]['bonus']
+		elif equipment[x] == 'staff':
+			#Staff armor bonus
+			self.armor += 1
 
 
 func export_save_data():
@@ -226,7 +214,7 @@ func export_save_data():
 		"character_name":self.character_name,
 		"job":self.job,
 		"tags":self.tags.duplicate(),
-		"equipment":self.equipment.duplicate(true),
+		"equipment":self.equipment.duplicate(),
 		"spells":self.spells.duplicate(),
 		"abilities":self.abilities.duplicate(),
 		"experience":self.experience,

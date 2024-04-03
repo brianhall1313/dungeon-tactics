@@ -37,9 +37,9 @@ func summon_animal(character,target):
 						'job':job,
 						'spells':[],
 						'abilities':[],
-						'tags':Bestiary.bestiary[job]['tags'],
-						'equipment':Bestiary.bestiary[job]["equipment"],
-						'stats':Bestiary.bestiary[job]
+						'tags':ClassData.class_dictionary[job]['tags'],
+						'equipment':ClassData.class_dictionary[job]["equipment"],
+						'stats':ClassData.class_dictionary[job]
 						}
 	GlobalSignalBus.summoning.emit(summon)
 
