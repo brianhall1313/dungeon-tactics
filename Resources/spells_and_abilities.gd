@@ -1,8 +1,8 @@
 extends Node
 
 @onready var spells_and_abilities_directory:Dictionary={
-	'Bone Dart':{"type":'attack','cost':8,"range":5, "power":5,'bonus':0,'area':0,'effect':[]
-	,'description':'Fire a shard of bone at your opponent'},
+	'Bone Dart':{"type":'attack','cost':8,"range":5, "power":5,'bonus':0,'area':0,'effect':[],
+	'description':'Fire a shard of bone at your opponent'},
 	'Elemental Bolt': {"type":'attack','cost':10,"range":5, "power":8,'bonus':0,'area':0,'effect':[],
 	'description':'Fire a bolt of pure energy at your target'},
 	'Elemental Burst': {"type":'attack','cost':10,"range":5, "power":5,'bonus':0,'area':1,'effect':[],

@@ -1,5 +1,5 @@
 extends BattleLists
-var list:Array
+var list:Array=[]
 var alive_list:Array=[]
 var dead_list:Array=[]
 
@@ -7,8 +7,6 @@ signal ai_list_handover(list_pointer)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	list=get_children()
-	alive_list=list.duplicate()
 	GlobalSignalBus.connect('turn_start',_on_turn_start)
 
 

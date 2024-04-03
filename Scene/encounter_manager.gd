@@ -6,7 +6,7 @@ var turn:String
 @export var default_turn:String='player'
 @export var victory:Array=['Defeat all enemies']
 @onready var map=$Map
-var ai_skip_turn=true
+var ai_skip_turn=false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

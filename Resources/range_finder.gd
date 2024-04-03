@@ -34,7 +34,7 @@ func targets_in_full_range(board_state,character):
 		for column in range(len(board_state[0])):
 			var range_to_tile=abs(row-character.grid_position.x)+abs(column-character.grid_position.y)
 			var occupant=board_state[row][column]['occupant']
-			if occupant  and occupant!= character:
+			if occupant  and occupant!= character and occupant.faction!=character.faction:
 				var path = astar.get_id_path(character.grid_position,Vector2i(row,column))
 				if is_path_clear(board_state,path) and range_to_tile<=attack_range:
 					targets.append(occupant)
@@ -162,31 +162,19 @@ func get_surrounding(board_state,character_grid_position):
 
 func targets_in_range_AI(board_state,character):
 	construct_astar()
-	var targets:Array=[]
-	var attack_range=character.equipment[character.current_weapon]['range']
-	for row in range(len(board_state)):
-		for column in range(len(board_state[0])):
-			var range_to_tile=abs(row-character.grid_position.x)+abs(column-character.grid_position.y)
-			var occupant=board_state[row][column]['occupant']
-			if occupant  and occupant!= character and occupant.faction != character.faction:
-				var path = astar.get_id_path(character.grid_position,Vector2i(row,column))
-				if is_path_clear(board_state,path) and range_to_tile<=attack_range:
-					targets.append(occupant)
+	var targets:Array=targets_in_range_basic(board_state,character)
+	for target in targets:
+		if target.faction==character.faction:
+			targets.erase(target)
 	return targets
 
 
 func targets_from_space_AI(board_state,character,space):
 	construct_astar()
-	var targets:Array=[]
-	var attack_range=character.equipment[character.current_weapon]['range']
-	for row in range(len(board_state)):
-		for column in range(len(board_state[0])):
-			var range_to_tile=abs(row-space.x)+abs(column-space.y)
-			var occupant=board_state[row][column]['occupant']
-			if occupant  and occupant!= character and occupant.faction != character.faction:
-				var path = astar.get_id_path(character.grid_position,Vector2i(row,column))
-				if is_path_clear(board_state,path) and range_to_tile<=attack_range:
-					targets.append(occupant)
+	var targets:Array=targets_from_space(board_state,character,space)
+	for target in targets:
+		if target.faction==character.faction:
+			targets.erase(target)
 	return targets
 
 func sa_area_targets(board_state,space,action):
