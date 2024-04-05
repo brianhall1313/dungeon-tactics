@@ -92,7 +92,7 @@ offset = Vector2(0, -10)
 metadata/_edit_group_ = true
 
 [node name="Camera2D2" type="Camera2D" parent="Pointer"]
-zoom = Vector2(3, 3)
+zoom = Vector2(4, 4)
 limit_left = -100
 limit_top = -100
 

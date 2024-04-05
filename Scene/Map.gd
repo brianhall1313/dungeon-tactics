@@ -498,6 +498,8 @@ func setup_level(level):
 	var layout:Array=level['grid_layout'].split(':')
 	height=len(layout)
 	width=len(layout[0])
+	MovementTools.setup(height,width)
+	RangeFinder.setup(height,width)
 	var row:int = 0
 	var column:int = 0
 	clear_layer(0)
