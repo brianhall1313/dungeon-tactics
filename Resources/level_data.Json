@@ -1,5 +1,21 @@
 [
 	{
-		"grid_layout":"4445454444:4445444444:4445545444:5444445455:5455545454:4444444454:4545454454:4544454454:4545444444:4444555544"
+		"level":"test",
+		"name":"test_level",
+		"grid_layout":"4445454444:4445444444:4445545444:5444445455:5455545454:4444444454:4545454454:4544454454:4545444444:4444555544",
+		"enemies":[
+			{"default_position":[2,1],"faction":"enemy","job":"thief"},
+			{"default_position":[1,1],"faction":"enemy","job":"thug",},
+			],
+	},
+	{
+		"level":"road",
+		"name":"Road to the Dungeon",
+		"grid_layout":"4444444444:4444444444:4444444444:4444444444:4444444444:4444444444:4444444444:4444444444:4444444444:4444444444",
+		"enemies":[
+			{"default_position":[2,1],"faction":"enemy","job":"thief"},
+			{"default_position":[1,1],"faction":"enemy","job":"thug",},
+			{"character_name":"Briar the bastard","default_position":[9,9],"faction":"enemy","job":"knight"}
+			],
 	}
 ]

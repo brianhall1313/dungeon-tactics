@@ -5,8 +5,7 @@ extends TileMap
 @onready var battle_lists=$battle_lists
 @onready var players_list
 @onready var enemies_list
-@onready var action:String=''
-
+var action:String=''
 var dir:Dictionary={"Down":Vector2i(0,1),"Up":Vector2i(0,-1),"Left":Vector2i(-1,0),"Right":Vector2i(1,0)}
 var height:int=10
 var width:int=10
@@ -35,8 +34,6 @@ signal ai_list_handover(list)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	connected_to_signal_bus()
-	RangeFinder.setup(height,width)
-	MovementTools.setup(height,width)
 	Global.set_death_position(death_spot)
 	Pointer.movement(Vector2i(0,0),map_to_local(Vector2i(0,0)))
 	enemies_list=battle_lists.get_enemies()
@@ -448,7 +445,8 @@ func _on_sa_resolution_escape_pressed():
 #this is only for testing delete this later
 func _save():
 	var data: Dictionary ={}
-	data['metadata']={"wizard":"default","last save":Time.get_datetime_string_from_system()}
+	var wizard:String=battle_lists.get_wizard()
+	data['metadata']={"wizard":wizard,"last save":Time.get_datetime_string_from_system()}
 	data['party']= battle_lists.save_party('player')
 	data['inventory']= World.player_inventory.duplicate(true)
 	data['gold']=World.player_gold
@@ -457,17 +455,6 @@ func _save():
 	#SaveAndLoad.load_game(1)
 
 func spawn_test_characters():
-	var test_character={
-						'default_position':Vector2i(2,1),
-						'faction':'enemy',
-						'job':'thief'
-						}
-	
-	var test_character2={
-						'default_position':Vector2i(1,1),
-						'faction':'enemy',
-						'job':'thug',
-						}
 	var test_character3={
 						'default_position':Vector2i(0,1),
 						'faction':'player',
@@ -478,20 +465,14 @@ func spawn_test_characters():
 						'faction':'player',
 						'job':'ranger'
 						}
-	var test_character5={'character_name':'Knorki',
+	var wizard={'character_name':'Erasmus',
 						'default_position':Vector2i(1,0),
 						'faction':'player',
-						'job':'knight'
-						}
-	
-	
-	
-	
-	battle_lists.add_character(test_character)
-	battle_lists.add_character(test_character2)
+						'job':'wizard',
+						'spells':["Elemental Bolt","Summon Animal","Heal"]}
 	battle_lists.add_character(test_character3)
 	battle_lists.add_character(test_character4)
-	battle_lists.add_character(test_character5)
+	battle_lists.add_character(wizard)
 
 
 func setup_level(level):
@@ -500,17 +481,18 @@ func setup_level(level):
 	width=len(layout[0])
 	MovementTools.setup(height,width)
 	RangeFinder.setup(height,width)
-	var row:int = 0
-	var column:int = 0
 	clear_layer(0)
 	clear_layer(-1)
-	
+	var row:int = 0
+	var column:int = 0
 	for r in layout:
 		row = 0
 		for c in r.split(''):
 			set_cell(0,Vector2i(row,column),int(c),Vector2i(0,0)) 
 			row+=1
 		column +=1
+	for character in level['enemies']:
+		battle_lists.add_character(character)
 	get_board_state()
 	spawn_test_characters()
 	

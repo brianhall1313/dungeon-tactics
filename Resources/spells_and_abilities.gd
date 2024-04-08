@@ -32,14 +32,8 @@ func summon_animal(character,target):
 	var job=summonables.pick_random()
 	var summon={'character_name':Names.get_random_name(),#we will try random name gen later
 						'default_position':target,
-						'experience':0,
 						'faction':character.faction,
 						'job':job,
-						'spells':[],
-						'abilities':[],
-						'tags':ClassData.class_dictionary[job]['tags'],
-						'equipment':ClassData.class_dictionary[job]["equipment"],
-						'stats':ClassData.class_dictionary[job]
 						}
 	GlobalSignalBus.summoning.emit(summon)
 
@@ -49,14 +43,8 @@ func summon_undead(character,target):
 	var job=summonables.pick_random()
 	var summon={'character_name':Names.get_random_name(),#we will try random name gen later
 						'default_position':target,
-						'experience':0,
 						'faction':character.faction,
 						'job':job,
-						'spells':[],
-						'abilities':[],
-						'tags':ClassData.class_dictionary[job]['tags'],
-						'equipment':ClassData.class_dictionary[job]["equipment"],
-						'stats':ClassData.class_dictionary[job]
 						}
 	summon['tags'].append('undead')
 	GlobalSignalBus.summoning.emit(summon)

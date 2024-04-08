@@ -5,7 +5,7 @@ extends Node2D
 
 
 func _ready():
-	pass
+	print("Type vector 2i",typeof(Vector2i(1,1)))
 	
 func test_dice():
 	var results:Dictionary={'player':0,'enemy':0,'tie':0}

@@ -3,7 +3,9 @@ extends Node
 var player_party:Array=[]
 var player_inventory: Array=[]
 var player_gold: int=0
-var level_progress:Dictionary={}
+var level_progress:Dictionary={"test":false,
+								"road":false,
+								}
 
 
 func load_data(data:Dictionary):
@@ -26,7 +28,11 @@ func character_get(character:Dictionary):
 	
 func save():
 	var data: Dictionary ={}
-	data['metadata']={"wizard":"default","last save":Time.get_datetime_string_from_system()}
+	var wizard:String="default"
+	for character in player_party:
+		if character["job"]== 'wizard':
+			wizard=character.character_name
+	data['metadata']={"wizard":wizard,"last save":Time.get_datetime_string_from_system()}
 	data['party']= player_party.duplicate(true)
 	data['inventory']= World.player_inventory.duplicate(true)
 	data['gold']=World.player_gold

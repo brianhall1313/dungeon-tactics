@@ -8,7 +8,7 @@
 script = ExtResource("1_rroor")
 
 [node name="Character" parent="." instance=ExtResource("2_bdck3")]
-faction = "player"
 character_name = "Funke"
+faction = "player"
 
 [node name="menus" parent="." instance=ExtResource("2_qhvdi")]

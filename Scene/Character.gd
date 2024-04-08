@@ -50,7 +50,11 @@ func character_setup(character_data):
 		self.character_name=character_data['character_name']
 	else:
 		self.character_name=Names.get_random_name()
-	self.default_position=character_data.default_position
+	if typeof(character_data.default_position)==6:
+		self.default_position=character_data.default_position
+	else:
+		print(character_data["default_position"])
+		self.default_position=set_default_position(character_data["default_position"])
 	if 'experience' in character_data:
 		self.experience=character_data['experience']
 	self.faction=character_data['faction']
@@ -87,6 +91,10 @@ func stat_setup(njob:Dictionary):
 	self.will=njob['will']
 	self.health=njob['health']
 	self.current_health=njob['health']
+
+
+func set_default_position(pos):
+	return Vector2i(pos[0],pos[1])
 
 
 

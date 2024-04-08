@@ -63,3 +63,9 @@ func save_party(faction:String):
 			print(character.character_name)
 			party_data.append(data)
 	return party_data
+
+func get_wizard():
+	for character in player.list:
+		if character.job == 'wizard':
+			print(character.character_name)
+			return character.character_name

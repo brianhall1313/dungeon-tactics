@@ -38,16 +38,24 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -48.0
-offset_top = -20.0
-offset_right = 48.0
-offset_bottom = 20.0
+offset_left = -55.0
+offset_top = -42.5
+offset_right = 42.0
+offset_bottom = 143.5
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="start_demo_button" type="Button" parent="ColorRect/VBoxContainer"]
 layout_mode = 2
 text = "Start Demo"
+
+[node name="new_game" type="Button" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+text = "New Game"
+
+[node name="load_game" type="Button" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+text = "Load Game"
 
 [node name="quit_button" type="Button" parent="ColorRect/VBoxContainer"]
 layout_mode = 2
@@ -58,4 +66,6 @@ stream = ExtResource("2_0am64")
 autoplay = true
 
 [connection signal="button_up" from="ColorRect/VBoxContainer/start_demo_button" to="." method="_on_button_button_up"]
+[connection signal="button_up" from="ColorRect/VBoxContainer/new_game" to="." method="_on_new_game_button_up"]
+[connection signal="button_up" from="ColorRect/VBoxContainer/load_game" to="." method="_on_load_game_button_up"]
 [connection signal="button_up" from="ColorRect/VBoxContainer/quit_button" to="." method="_on_quit_button_button_up"]
