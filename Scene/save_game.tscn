@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://608h3wq5vquc"]
 
-[ext_resource type="Script" path="res://save_game.gd" id="1_v3dht"]
+[ext_resource type="Script" path="res://Scene/save_game.gd" id="1_v3dht"]
 [ext_resource type="PackedScene" uid="uid://dkbpxtnvjn4lb" path="res://Scene/save_interface.tscn" id="2_7xul0"]
 
 [node name="save_game" type="Node2D"]

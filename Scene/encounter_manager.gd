@@ -79,12 +79,16 @@ func turn_handover():
 
 
 func _on_party_wipe(faction:String):
+	var winner:bool
 	if faction == 'enemy':
 		print("Player Wins")
 		win()
+		winner = true
 	else:
 		print("player looses~")
+		winner = false
 	GlobalSignalBus.change_state.emit('game_over')
+	GlobalSignalBus.game_over.emit(winner)
 
 
 func load_level(level_data):

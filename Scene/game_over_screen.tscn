@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkgy7vvyia2pf"]
+
+[ext_resource type="Theme" uid="uid://5fu88ou1dk5" path="res://Resources/dungeon_theme.tres" id="1_x067t"]
+[ext_resource type="Script" path="res://Scene/game_over_screen.gd" id="2_22kw8"]
+
+[node name="game over screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_x067t")
+script = ExtResource("2_22kw8")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 0.588235)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 256.0
+offset_right = 704.0
+offset_bottom = 464.0
+
+[node name="PanelContainer" type="PanelContainer" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ColorRect/VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+text = "Default
+"
+
+[connection signal="button_up" from="ColorRect/VBoxContainer/Button" to="." method="_on_button_button_up"]

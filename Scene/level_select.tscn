@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8u2bc0wj114l"]
+[gd_scene load_steps=6 format=3 uid="uid://b8u2bc0wj114l"]
 
 [ext_resource type="Script" path="res://Scene/level_select.gd" id="1_nc14d"]
+[ext_resource type="Theme" uid="uid://5fu88ou1dk5" path="res://Resources/dungeon_theme.tres" id="2_cxn2f"]
+[ext_resource type="StyleBox" uid="uid://ds4wm71v8qjca" path="res://textures/gui_button.tres" id="3_o6msg"]
+[ext_resource type="Texture2D" uid="uid://dpm7jqu2uwb6k" path="res://Art/dungeon background 1.png" id="4_mmqg0"]
+[ext_resource type="Texture2D" uid="uid://cn7yvd7qwljm5" path="res://Art/1.jpg" id="5_kyt3t"]
 
 [node name="Level_select" type="Node2D"]
 script = ExtResource("1_nc14d")
@@ -10,3 +14,94 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="Background" type="PanelContainer" parent="level_select_ui"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+theme = ExtResource("2_cxn2f")
+theme_override_styles/panel = ExtResource("3_o6msg")
+
+[node name="MarginContainer" type="MarginContainer" parent="level_select_ui/Background"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 40
+
+[node name="Interface Frame" type="VBoxContainer" parent="level_select_ui/Background/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="level_select_ui/Background/MarginContainer/Interface Frame"]
+layout_mode = 2
+theme_override_constants/separation = 700
+
+[node name="Title" type="Label" parent="level_select_ui/Background/MarginContainer/Interface Frame/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.835294, 0.831373, 0.831373, 1)
+theme_override_font_sizes/font_size = 41
+text = "Chapter Select
+
+
+"
+horizontal_alignment = 1
+
+[node name="Save Button" type="Button" parent="level_select_ui/Background/MarginContainer/Interface Frame/HBoxContainer"]
+layout_mode = 2
+text = "Save Game"
+
+[node name="Save Access" type="HBoxContainer" parent="level_select_ui/Background/MarginContainer/Interface Frame"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Level 1" type="PanelContainer" parent="level_select_ui/Background/MarginContainer/Interface Frame/Save Access"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Frame" type="VBoxContainer" parent="level_select_ui/Background/MarginContainer/Interface Frame/Save Access/Level 1"]
+layout_mode = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="level_select_ui/Background/MarginContainer/Interface Frame/Save Access/Level 1/Frame"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 30
+text = "Test Level"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="level_select_ui/Background/MarginContainer/Interface Frame/Save Access/Level 1/Frame"]
+layout_mode = 2
+texture = ExtResource("4_mmqg0")
+expand_mode = 5
+
+[node name="Button" type="Button" parent="level_select_ui/Background/MarginContainer/Interface Frame/Save Access/Level 1/Frame"]
+layout_mode = 2
+text = "Select Chapter"
+
+[node name="Level 2" type="PanelContainer" parent="level_select_ui/Background/MarginContainer/Interface Frame/Save Access"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Frame" type="VBoxContainer" parent="level_select_ui/Background/MarginContainer/Interface Frame/Save Access/Level 2"]
+layout_mode = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="level_select_ui/Background/MarginContainer/Interface Frame/Save Access/Level 2/Frame"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 30
+text = "Road to the Dungeon"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="level_select_ui/Background/MarginContainer/Interface Frame/Save Access/Level 2/Frame"]
+layout_mode = 2
+texture = ExtResource("5_kyt3t")
+expand_mode = 5
+
+[node name="Button" type="Button" parent="level_select_ui/Background/MarginContainer/Interface Frame/Save Access/Level 2/Frame"]
+layout_mode = 2
+text = "Select Chapter"
+
+[connection signal="button_up" from="level_select_ui/Background/MarginContainer/Interface Frame/HBoxContainer/Save Button" to="." method="_on_save_button_button_up"]
+[connection signal="button_up" from="level_select_ui/Background/MarginContainer/Interface Frame/Save Access/Level 1/Frame/Button" to="." method="level_one"]
+[connection signal="button_up" from="level_select_ui/Background/MarginContainer/Interface Frame/Save Access/Level 2/Frame/Button" to="." method="level_two"]

@@ -17,3 +17,9 @@ func populate_slots():
 func _load_data(slot):
 	var data:Dictionary=SaveAndLoad.load_game(slot)
 	World.load_data(data)
+	get_tree().change_scene_to_file("res://Scene/level_select.tscn")
+
+func _unhandled_input(event):
+	if event is InputEventKey:
+		if event.pressed and event.keycode == KEY_ESCAPE:
+			get_tree().change_scene_to_file("res://Scene/level_select.tscn")

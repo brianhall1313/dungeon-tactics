@@ -21,3 +21,4 @@ signal combat_message(message:String)
 signal toggle_log
 signal save(slot)
 signal load_data(slot)
+signal game_over(victory)

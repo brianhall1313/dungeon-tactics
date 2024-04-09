@@ -29,3 +29,4 @@ func _on_map_update_selected_ui(character):
 
 func _on_map_update_targeted_ui(character):
 	targeted.update(character)
+

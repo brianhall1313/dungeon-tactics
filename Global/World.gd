@@ -1,6 +1,23 @@
 extends Node
 
-var player_party:Array=[]
+
+#defaults if load fails
+var player_party:Array=[{
+						'default_position':Vector2i(0,1),
+						'faction':'player',
+						'job':'templar'
+						},
+						{'character_name':'Daroupty',
+						'default_position':Vector2i(0,0),
+						'faction':'player',
+						'job':'ranger'
+						},
+						{'character_name':'Butterfield',
+						'default_position':Vector2i(1,0),
+						'faction':'player',
+						'job':'wizard',
+						'spells':["Elemental Bolt","Summon Animal","Heal"]},
+						]
 var player_inventory: Array=[]
 var player_gold: int=0
 var level_progress:Dictionary={"test":false,
@@ -9,10 +26,14 @@ var level_progress:Dictionary={"test":false,
 
 
 func load_data(data:Dictionary):
-	player_party = data['party'].duplicate(true)
-	player_inventory= data['inventory'].duplicate()
-	player_gold = data['gold']
-	level_progress = data['progress']
+	if data['party']:
+		player_party = data['party'].duplicate(true)
+	if data['inventory']:
+		player_inventory= data['inventory'].duplicate()
+	if data['gold']:
+		player_gold = data['gold']
+	if data['progress']:
+		level_progress = data['progress']
 
 func level_complete(level:String):
 	level_progress[level] = true

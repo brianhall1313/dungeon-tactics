@@ -45,10 +45,6 @@ offset_bottom = 143.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="start_demo_button" type="Button" parent="ColorRect/VBoxContainer"]
-layout_mode = 2
-text = "Start Demo"
-
 [node name="new_game" type="Button" parent="ColorRect/VBoxContainer"]
 layout_mode = 2
 text = "New Game"
@@ -65,7 +61,6 @@ text = "Quit"
 stream = ExtResource("2_0am64")
 autoplay = true
 
-[connection signal="button_up" from="ColorRect/VBoxContainer/start_demo_button" to="." method="_on_button_button_up"]
 [connection signal="button_up" from="ColorRect/VBoxContainer/new_game" to="." method="_on_new_game_button_up"]
 [connection signal="button_up" from="ColorRect/VBoxContainer/load_game" to="." method="_on_load_game_button_up"]
 [connection signal="button_up" from="ColorRect/VBoxContainer/quit_button" to="." method="_on_quit_button_button_up"]
