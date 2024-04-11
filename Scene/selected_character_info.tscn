@@ -28,11 +28,14 @@ size_flags_horizontal = 3
 
 [node name="character_name" type="Label" parent="PanelContainer/MarginContainer/FlowContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "default"
 
 [node name="character_job" type="Label" parent="PanelContainer/MarginContainer/FlowContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "default"
+horizontal_alignment = 2
 
 [node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer/FlowContainer"]
 layout_mode = 2
