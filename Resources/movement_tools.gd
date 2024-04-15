@@ -66,3 +66,10 @@ func tiles_in_movement_range(board_state,character):
 				if len(path) <= character.move+1 and possible_move:
 					possible_movement.append(pos)
 	return possible_movement
+
+
+func get_path_list(board_state,character,destination):
+	construct_astar(board_state,character)
+	var path = astar.get_id_path(character.grid_position,destination)
+	print(path)
+	return path

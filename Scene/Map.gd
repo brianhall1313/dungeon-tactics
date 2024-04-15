@@ -10,7 +10,7 @@ var dir:Dictionary={"Down":Vector2i(0,1),"Up":Vector2i(0,-1),"Left":Vector2i(-1,
 var height:int=10
 var width:int=10
 var board_state
-var current_character
+var current_character:Character
 var selected_character
 var targeted_character
 var astar:AStar2D
@@ -247,6 +247,13 @@ func _on_movement_selection_grid_interaction():
 	var possible_movement=MovementTools.tiles_in_movement_range(board_state,current_character)
 	if Vector2i(local_to_map(Pointer.position)) in possible_movement:
 		possible_movement=[]
+		var path = MovementTools.get_path_list(board_state,current_character,Pointer.grid_position)
+		var tween = create_tween()
+		var previous_spot = current_character.position
+		for spot in path:
+			if spot != current_character.grid_position:
+				tween.tween_property(current_character,"position",map_to_local(spot),.25).from(previous_spot)
+				previous_spot=map_to_local(spot)
 		current_character.movement(Pointer.position,Pointer.grid_position)
 		clear_layer(1)
 		GlobalSignalBus.change_state.emit('character_interaction')
@@ -309,7 +316,7 @@ func _on_update_board():
 
 func _on_turn_over(_character):
 	board_state=get_board_state()
-	current_character=false
+	current_character=null
 	ui_update()
 	
 	
