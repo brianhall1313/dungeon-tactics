@@ -10,6 +10,9 @@ var current_level:int = 0
 @onready var water_spaces:Array=[]
 @onready var flight_spaces:Array=[5]
 @onready var wall_spaces:Array=[9,10,11]
+@onready var effects:Dictionary={"fireball":preload("res://Animations/fireball.tscn"),
+						
+}
 
 func _ready():
 	randomize()

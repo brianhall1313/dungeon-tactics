@@ -5,6 +5,7 @@ extends TileMap
 @onready var battle_lists=$battle_lists
 @onready var players_list
 @onready var enemies_list
+
 var action:String=''
 var dir:Dictionary={"Down":Vector2i(0,1),"Up":Vector2i(0,-1),"Left":Vector2i(-1,0),"Right":Vector2i(1,0)}
 var height:int=10
@@ -136,7 +137,7 @@ func display_range_sa(character,sa):
 	tiles_in_range=RangeFinder.tiles_in_attack_range_of_sa(board_state,character,sa)
 	for t in tiles_in_range:
 		if t != character.grid_position:
-			if SpellsAndAbilities.spells_and_abilities_directory[sa]['type']=='attack':
+			if SpellsAndAbilities.spells_and_abilities_directory[sa]['type']=='attack' or SpellsAndAbilities.spells_and_abilities_directory[sa]['type']=='ranged_attack':
 				set_cell(1,t,1,Vector2i(0,0))
 			if SpellsAndAbilities.spells_and_abilities_directory[sa]['type']=='heal':
 				set_cell(1,t,0,Vector2i(0,0))
@@ -176,7 +177,22 @@ func ui_update():
 			clear_layer(2)
 			for cell in cells:
 				set_cell(2,cell,3,Vector2i(0,0))
-			
+
+
+func play_sa_animation(character,defender,act):
+	if SpellsAndAbilities.spells_and_abilities_directory[act]['type'] == 'ranged_attack':
+		GlobalSignalBus.change_state.emit('animation_state')
+		var animate: AnimatedSprite2D = Global.effects[SpellsAndAbilities.spells_and_abilities_directory[act]["animation"]].instantiate()
+		add_child(animate)
+		animate.position = character.position
+		animate.look_at(defender.position)
+		var tween = create_tween()
+		tween.tween_property(animate,"position",defender.position,.5).from(animate.position)
+		tween.tween_callback(animate.queue_free)
+		await tween.finished
+		GlobalSignalBus.change_state.emit(Global.current_state.name)
+
+
 
 func sa_attack():
 	var defenders:Array=[]
@@ -190,6 +206,7 @@ func sa_attack():
 			if cast >= SpellsAndAbilities.spells_and_abilities_directory[action]['cost']: 
 				for defender in defenders:
 					print(defender.character_name)
+					play_sa_animation(current_character,defender,action)
 					AttackTools.special_action(current_character,defender,action)
 			else:
 				GlobalSignalBus.combat_message.emit(current_character.character_name + ' has failed to cast: got a '+str(cast))
@@ -247,6 +264,7 @@ func _on_movement_selection_grid_interaction():
 	var possible_movement=MovementTools.tiles_in_movement_range(board_state,current_character)
 	if Vector2i(local_to_map(Pointer.position)) in possible_movement:
 		possible_movement=[]
+		GlobalSignalBus.change_state.emit('animation_state')
 		var path = MovementTools.get_path_list(board_state,current_character,Pointer.grid_position)
 		var tween = create_tween()
 		var previous_spot = current_character.position
@@ -254,6 +272,8 @@ func _on_movement_selection_grid_interaction():
 			if spot != current_character.grid_position:
 				tween.tween_property(current_character,"position",map_to_local(spot),.25).from(previous_spot)
 				previous_spot=map_to_local(spot)
+		await tween.finished
+		GlobalSignalBus.change_state.emit(Global.current_state.name)
 		current_character.movement(Pointer.position,Pointer.grid_position)
 		clear_layer(1)
 		GlobalSignalBus.change_state.emit('character_interaction')
@@ -411,9 +431,9 @@ func _on_sa_button_pressed(action_name):
 
 
 func _on_sa_resolution_grid_interaction():
-	var current_action=SpellsAndAbilities.spells_and_abilities_directory[action]
 	if action in SpellsAndAbilities.spells_and_abilities_directory:
-		if current_action['type']=='attack':
+		var current_action=SpellsAndAbilities.spells_and_abilities_directory[action]
+		if current_action['type']=='attack' or current_action['type'] == 'ranged_attack':
 			sa_attack()
 		elif current_action['type']=='heal':
 			sa_heal()
