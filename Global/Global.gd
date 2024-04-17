@@ -11,7 +11,7 @@ var current_level:int = 0
 @onready var flight_spaces:Array=[5]
 @onready var wall_spaces:Array=[9,10,11]
 @onready var effects:Dictionary={"fireball":preload("res://Animations/fireball.tscn"),
-						
+						"elemental_explosion":preload("res://Animations/elemental_explosion.tscn"),
 }
 
 func _ready():

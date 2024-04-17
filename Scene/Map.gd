@@ -180,17 +180,37 @@ func ui_update():
 
 
 func play_sa_animation(character,defender,act):
+	var sprite = SpellsAndAbilities.spells_and_abilities_directory[act]["animation"]
+	print(typeof(sprite),"type of identifier")
 	if SpellsAndAbilities.spells_and_abilities_directory[act]['type'] == 'ranged_attack':
-		GlobalSignalBus.change_state.emit('animation_state')
-		var animate: AnimatedSprite2D = Global.effects[SpellsAndAbilities.spells_and_abilities_directory[act]["animation"]].instantiate()
-		add_child(animate)
-		animate.position = character.position
-		animate.look_at(defender.position)
-		var tween = create_tween()
-		tween.tween_property(animate,"position",defender.position,.5).from(animate.position)
-		tween.tween_callback(animate.queue_free)
-		await tween.finished
-		GlobalSignalBus.change_state.emit(Global.current_state.name)
+		if typeof(sprite) == 4:
+			ranged_animation(character,defender,sprite)
+		elif typeof(sprite) == 28:
+			ranged_animation(character,defender,sprite[0],sprite[1])
+	
+	
+	
+func ranged_animation(character,defender,sprite,ending=false):
+	GlobalSignalBus.change_state.emit('animation_state')
+	var animate: AnimatedSprite2D = Global.effects[sprite].instantiate()
+	var ending_sprite: AnimatedSprite2D
+	if ending:
+		ending_sprite = Global.effects[ending].instantiate()
+	add_child(animate)
+	animate.position = character.position
+	animate.look_at(defender)
+	animate.play()
+	var tween = create_tween()
+	tween.tween_property(animate,"position",defender,.5).from(animate.position)
+	tween.tween_callback(animate.queue_free)
+	await tween.finished
+	if ending:
+		add_child(ending_sprite)
+		ending_sprite.position = defender
+		ending_sprite.play()
+		await ending_sprite.animation_looped
+		ending_sprite.queue_free()
+	GlobalSignalBus.change_state.emit(Global.current_state.name)
 
 
 
@@ -201,12 +221,18 @@ func sa_attack():
 	if Pointer.grid_position in tiles_in_range:
 		defenders=RangeFinder.sa_area_targets(board_state,Pointer.grid_position,action)
 		if defenders:
+			var count: int = len(defenders)
 			var cast = AttackTools._dice_roll()+current_character.will
 			print(cast)
 			if cast >= SpellsAndAbilities.spells_and_abilities_directory[action]['cost']: 
+				var animated:bool=false
 				for defender in defenders:
 					print(defender.character_name)
-					play_sa_animation(current_character,defender,action)
+					if count>1 and animated==false:
+						play_sa_animation(current_character,Pointer.position,action)
+						animated=true
+					elif count == 1:
+						play_sa_animation(current_character,defender.position,action)
 					AttackTools.special_action(current_character,defender,action)
 			else:
 				GlobalSignalBus.combat_message.emit(current_character.character_name + ' has failed to cast: got a '+str(cast))
@@ -496,7 +522,7 @@ func spawn_test_characters():
 						'default_position':Vector2i(1,0),
 						'faction':'player',
 						'job':'wizard',
-						'spells':["Elemental Bolt","Summon Animal","Heal"]}
+						'spells':["Elemental Bolt","Elemental Burst","Summon Animal","Heal"]}
 	battle_lists.add_character(test_character3)
 	battle_lists.add_character(test_character4)
 	battle_lists.add_character(wizard)
