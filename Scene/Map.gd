@@ -220,6 +220,7 @@ func ranged_animation(character,defender,sprite,ending=false):
 func heal_animation(_character,target,sprite,ending=false):
 	#including character for now because I might want to set off a character animation too
 	GlobalSignalBus.change_state.emit('animation_state')
+	print("the sprite is ",sprite)
 	var animate: AnimatedSprite2D = Global.effects[sprite].instantiate()
 	var ending_sprite: AnimatedSprite2D
 	if ending:
@@ -272,19 +273,11 @@ func sa_heal():
 	if Pointer.grid_position in tiles_in_range:
 		targets=RangeFinder.sa_area_targets(board_state,Pointer.grid_position,action)
 		if targets:
-			var count: int = len(targets)
 			var cast = AttackTools._dice_roll()+current_character.will
-			print(cast)
 			if cast >= SpellsAndAbilities.spells_and_abilities_directory[action]['cost']:
-				var animated:bool=false
 				for target in targets:
 					print(target.character_name)
-					if count>1 and animated==false:
-						play_sa_animation(current_character,Pointer.position,action)
-						animated=true
-					elif count == 1:
-						play_sa_animation(current_character,target.position,action)
-					
+					play_sa_animation(current_character,target.position,action)
 					target.heal(SpellsAndAbilities.spells_and_abilities_directory[action]["power"])
 			else:
 				GlobalSignalBus.combat_message.emit(current_character.character_name + ' has failed to cast: got a '+str(cast))
@@ -563,7 +556,7 @@ func spawn_test_characters():
 						'default_position':Vector2i(1,0),
 						'faction':'player',
 						'job':'wizard',
-						'spells':["Elemental Bolt","Elemental Burst","Summon Animal","Heal"]}
+						'spells':["Summon Undead","Heal Burst"]}
 	battle_lists.add_character(test_character3)
 	battle_lists.add_character(test_character4)
 	battle_lists.add_character(wizard)

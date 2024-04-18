@@ -8,7 +8,7 @@ extends Node
 	'Elemental Burst': {"type":'ranged_attack',"animation":["fireball","elemental_explosion"],'cost':10,"range":5, "power":5,'bonus':0,'area':1,'effect':[],
 	'description':'Fire an unstable elemental bolt, which explodes upon contact'},
 	'Heal':{"type":'heal',"animation":"heal",'cost':8,"range":5, "power":8,'bonus':0,'area':0,'effect':[]},
-	'Heal Burst':{"type":'heal',"animation":"",'cost':10,"range":5, "power":5,'bonus':0,'area':1,'effect':[]},
+	'Heal Burst':{"type":'heal',"animation":"heal",'cost':10,"range":5, "power":5,'bonus':0,'area':1,'effect':[]},
 	'Summon Animal':{"type":'summon',"animation":"summon_circle",'cost':10,"range":5, "power":0,'bonus':0,'area':0,'effect':['summon animal']},
 	'Summon Undead':{"type":'summon',"animation":"summon_circle",'cost':10,"range":5, "power":0,'bonus':0,'area':0,'effect':['summon undead']},
 	
@@ -45,6 +45,7 @@ func summon_undead(character,target):
 						'default_position':target,
 						'faction':character.faction,
 						'job':job,
+						'tags':ClassData.class_dictionary[job]['tags']
 						}
 	summon['tags'].append('undead')
 	GlobalSignalBus.summoning.emit(summon)
