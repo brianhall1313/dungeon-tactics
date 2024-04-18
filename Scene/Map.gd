@@ -181,12 +181,17 @@ func ui_update():
 
 func play_sa_animation(character,defender,act):
 	var sprite = SpellsAndAbilities.spells_and_abilities_directory[act]["animation"]
-	print(typeof(sprite),"type of identifier")
+	#sprite can be either a string or an array for type of 4=string,28=array
 	if SpellsAndAbilities.spells_and_abilities_directory[act]['type'] == 'ranged_attack':
 		if typeof(sprite) == 4:
 			ranged_animation(character,defender,sprite)
 		elif typeof(sprite) == 28:
 			ranged_animation(character,defender,sprite[0],sprite[1])
+	elif SpellsAndAbilities.spells_and_abilities_directory[act]['type'] == 'heal':
+		if typeof(sprite) == 4:
+			heal_animation(character,defender,sprite)
+		elif typeof(sprite) == 28:
+			heal_animation(character,defender,sprite[0],sprite[1])
 	
 	
 	
@@ -210,7 +215,26 @@ func ranged_animation(character,defender,sprite,ending=false):
 		ending_sprite.play()
 		await ending_sprite.animation_looped
 		ending_sprite.queue_free()
-	GlobalSignalBus.change_state.emit(Global.current_state.name)
+
+
+func heal_animation(_character,target,sprite,ending=false):
+	#including character for now because I might want to set off a character animation too
+	GlobalSignalBus.change_state.emit('animation_state')
+	var animate: AnimatedSprite2D = Global.effects[sprite].instantiate()
+	var ending_sprite: AnimatedSprite2D
+	if ending:
+		ending_sprite = Global.effects[ending].instantiate()
+	add_child(animate)
+	animate.position = target
+	animate.play()
+	await animate.animation_looped
+	animate.queue_free()
+	if ending:
+		add_child(ending_sprite)
+		ending_sprite.position = target
+		ending_sprite.play()
+		await ending_sprite.animation_looped
+		ending_sprite.queue_free()
 
 
 
@@ -221,17 +245,14 @@ func sa_attack():
 	if Pointer.grid_position in tiles_in_range:
 		defenders=RangeFinder.sa_area_targets(board_state,Pointer.grid_position,action)
 		if defenders:
-			var count: int = len(defenders)
 			var cast = AttackTools._dice_roll()+current_character.will
-			print(cast)
 			if cast >= SpellsAndAbilities.spells_and_abilities_directory[action]['cost']: 
 				var animated:bool=false
 				for defender in defenders:
-					print(defender.character_name)
-					if count>1 and animated==false:
+					if SpellsAndAbilities.spells_and_abilities_directory[action]["area"] >0 and animated == false:
 						play_sa_animation(current_character,Pointer.position,action)
 						animated=true
-					elif count == 1:
+					elif SpellsAndAbilities.spells_and_abilities_directory[action]["area"] == 0:
 						play_sa_animation(current_character,defender.position,action)
 					AttackTools.special_action(current_character,defender,action)
 			else:
@@ -251,11 +272,19 @@ func sa_heal():
 	if Pointer.grid_position in tiles_in_range:
 		targets=RangeFinder.sa_area_targets(board_state,Pointer.grid_position,action)
 		if targets:
+			var count: int = len(targets)
 			var cast = AttackTools._dice_roll()+current_character.will
 			print(cast)
 			if cast >= SpellsAndAbilities.spells_and_abilities_directory[action]['cost']:
+				var animated:bool=false
 				for target in targets:
 					print(target.character_name)
+					if count>1 and animated==false:
+						play_sa_animation(current_character,Pointer.position,action)
+						animated=true
+					elif count == 1:
+						play_sa_animation(current_character,target.position,action)
+					
 					target.heal(SpellsAndAbilities.spells_and_abilities_directory[action]["power"])
 			else:
 				GlobalSignalBus.combat_message.emit(current_character.character_name + ' has failed to cast: got a '+str(cast))
@@ -299,7 +328,6 @@ func _on_movement_selection_grid_interaction():
 				tween.tween_property(current_character,"position",map_to_local(spot),.25).from(previous_spot)
 				previous_spot=map_to_local(spot)
 		await tween.finished
-		GlobalSignalBus.change_state.emit(Global.current_state.name)
 		current_character.movement(Pointer.position,Pointer.grid_position)
 		clear_layer(1)
 		GlobalSignalBus.change_state.emit('character_interaction')
@@ -466,6 +494,18 @@ func _on_sa_resolution_grid_interaction():
 		elif current_action['type']=='summon':
 			SpellsAndAbilities.resolve_effect(current_action['effect'][0],current_character,Pointer.grid_position)
 
+
+func animate_summon(summon):
+	GlobalSignalBus.change_state.emit('animation_state')
+	var animate: AnimatedSprite2D = Global.effects["summon_circle"].instantiate()
+	add_child(animate)
+	animate.position = map_to_local(summon.default_position)
+	animate.play()
+	await animate.animation_looped
+	animate.queue_free()
+
+
+
 func _on_summoning(summon):
 	var ok_to_summon=MovementTools.can_move_to(board_state,summon,summon.default_position)
 	print('time to summon')
@@ -473,6 +513,7 @@ func _on_summoning(summon):
 		var cast = AttackTools._dice_roll()+current_character.will
 		if cast >= SpellsAndAbilities.spells_and_abilities_directory[action]['cost']: 
 			print(cast)
+			animate_summon(summon)
 			battle_lists.add_character(summon)
 		else:
 			GlobalSignalBus.combat_message.emit(current_character.character_name + ' has failed to cast: got a '+str(cast))

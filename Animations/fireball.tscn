@@ -40,4 +40,5 @@ animations = [{
 
 [node name="fireball" type="AnimatedSprite2D"]
 top_level = true
+z_index = 6
 sprite_frames = SubResource("SpriteFrames_tb0p7")

@@ -12,6 +12,8 @@ var current_level:int = 0
 @onready var wall_spaces:Array=[9,10,11]
 @onready var effects:Dictionary={"fireball":preload("res://Animations/fireball.tscn"),
 						"elemental_explosion":preload("res://Animations/elemental_explosion.tscn"),
+						"heal":preload("res://Animations/heal.tscn"),
+						"summon_circle":preload("res://Animations/summon_circle.tscn")
 }
 
 func _ready():

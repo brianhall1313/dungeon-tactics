@@ -1,0 +1,85 @@
+[gd_scene load_steps=13 format=3 uid="uid://b48288g3cfxd"]
+
+[ext_resource type="Texture2D" uid="uid://bwv1870nogrn5" path="res://textures/01summoning_effects.png" id="1_th8r1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ignm"]
+atlas = ExtResource("1_th8r1")
+region = Rect2(0, 240, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kx3yh"]
+atlas = ExtResource("1_th8r1")
+region = Rect2(48, 240, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lulmk"]
+atlas = ExtResource("1_th8r1")
+region = Rect2(96, 240, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7732"]
+atlas = ExtResource("1_th8r1")
+region = Rect2(144, 240, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qbhs"]
+atlas = ExtResource("1_th8r1")
+region = Rect2(192, 240, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_na3y2"]
+atlas = ExtResource("1_th8r1")
+region = Rect2(240, 240, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7x40"]
+atlas = ExtResource("1_th8r1")
+region = Rect2(192, 240, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iy3pb"]
+atlas = ExtResource("1_th8r1")
+region = Rect2(144, 240, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kdvry"]
+atlas = ExtResource("1_th8r1")
+region = Rect2(96, 240, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2mifu"]
+atlas = ExtResource("1_th8r1")
+region = Rect2(48, 240, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ncssl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ignm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kx3yh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lulmk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g7732")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7qbhs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_na3y2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c7x40")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iy3pb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kdvry")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2mifu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="SummonCircle" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_ncssl")
+frame_progress = 0.850525

@@ -39,6 +39,8 @@ animations = [{
 }]
 
 [node name="ElementalExplosion" type="AnimatedSprite2D"]
+top_level = true
+z_index = 6
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_e811j")
-frame_progress = 0.660535
+frame_progress = 0.678588

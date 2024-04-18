@@ -7,10 +7,10 @@ extends Node
 	'description':'Fire a bolt of pure energy at your target'},
 	'Elemental Burst': {"type":'ranged_attack',"animation":["fireball","elemental_explosion"],'cost':10,"range":5, "power":5,'bonus':0,'area':1,'effect':[],
 	'description':'Fire an unstable elemental bolt, which explodes upon contact'},
-	'Heal':{"type":'heal',"animation":"",'cost':8,"range":5, "power":8,'bonus':0,'area':0,'effect':[]},
+	'Heal':{"type":'heal',"animation":"heal",'cost':8,"range":5, "power":8,'bonus':0,'area':0,'effect':[]},
 	'Heal Burst':{"type":'heal',"animation":"",'cost':10,"range":5, "power":5,'bonus':0,'area':1,'effect':[]},
-	'Summon Animal':{"type":'summon',"animation":"",'cost':10,"range":5, "power":0,'bonus':0,'area':0,'effect':['summon animal']},
-	'Summon Undead':{"type":'summon',"animation":"",'cost':10,"range":5, "power":0,'bonus':0,'area':0,'effect':['summon undead']},
+	'Summon Animal':{"type":'summon',"animation":"summon_circle",'cost':10,"range":5, "power":0,'bonus':0,'area':0,'effect':['summon animal']},
+	'Summon Undead':{"type":'summon',"animation":"summon_circle",'cost':10,"range":5, "power":0,'bonus':0,'area':0,'effect':['summon undead']},
 	
 }
 
