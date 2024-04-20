@@ -321,7 +321,7 @@ func _on_movement_selection_grid_interaction():
 				tween.tween_property(current_character,"position",map_to_local(spot),.25).from(previous_spot)
 				previous_spot=map_to_local(spot)
 		await tween.finished
-		current_character.movement(Pointer.position,Pointer.grid_position)
+		current_character.tween_movement(current_character.previous_position,Pointer.grid_position)
 		clear_layer(1)
 		GlobalSignalBus.change_state.emit('character_interaction')
 		fight_menu.show_menu()
@@ -338,7 +338,10 @@ func _on_fight_menu_movement_selected():
 
 
 func _on_movement_selection_escape_pressed():
-	current_character.undo_movement()
+	Pointer.movement(current_character.grid_position,current_character.position)
+	fight_menu.show_menu()
+	fight_menus.move(Pointer.position)
+	GlobalSignalBus.update_board.emit()
 	clear_layer(1)
 	GlobalSignalBus.change_state.emit('character_interaction')
 
@@ -520,12 +523,10 @@ func _on_summoning(summon):
 
 
 func _on_sa_resolution_escape_pressed():
-	Pointer.position=current_character.position
-	
+	Pointer.movement(current_character.grid_position,current_character.position)
 	clear_layer(1)
 	clear_layer(2)
-	fight_menu.show()
-	fight_menu.fight_button.grab_focus()
+	fight_menus.sa_close()
 	GlobalSignalBus.change_state.emit("character_interaction")
 
 

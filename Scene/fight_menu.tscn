@@ -12,8 +12,15 @@
 [node name="menus" type="Control"]
 top_level = true
 layout_mode = 3
-anchors_preset = 0
-offset_right = 153.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(0.5, 0.5)
 theme = ExtResource("1_lc3y3")
 script = ExtResource("1_fp5t1")
@@ -22,9 +29,10 @@ metadata/_edit_group_ = true
 [node name="fight_menu" type="VBoxContainer" parent="."]
 z_index = 5
 layout_mode = 0
-offset_top = 35.0
-offset_right = 153.0
-offset_bottom = 171.0
+offset_top = -8.0
+offset_right = 161.0
+offset_bottom = 248.0
+scale = Vector2(0.75, 0.75)
 focus_mode = 2
 script = ExtResource("1_i3yku")
 
@@ -52,9 +60,9 @@ script = ExtResource("4_k6kbs")
 [node name="sa_menu" type="VBoxContainer" parent="."]
 layout_mode = 2
 offset_left = 4.0
-offset_top = 37.0
 offset_right = 153.0
-offset_bottom = 206.0
+offset_bottom = 235.0
+scale = Vector2(0.75, 0.75)
 script = ExtResource("6_cu1po")
 
 [node name="sa_menu_go_back" type="Button" parent="sa_menu"]

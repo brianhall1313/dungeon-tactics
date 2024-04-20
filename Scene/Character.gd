@@ -170,13 +170,16 @@ func turn(turn_action):
 
 func take_damage(damage:int):
 	damage=damage-armor
-	GlobalSignalBus.combat_message.emit("The damage dealt is "+str(damage))
 	if damage >=0:
+		GlobalSignalBus.combat_message.emit("The damage dealt is "+str(damage))
 		if current_health<=damage:
 			current_health=0
 			on_lethal_hit()
 		else:
 			current_health-=damage
+			take_damage_animation()
+	else:
+		GlobalSignalBus.combat_message.emit("Armor blocked the damage")
 
 
 func heal(amount:int):
@@ -193,6 +196,14 @@ func on_lethal_hit():
 	GlobalSignalBus.death.emit(self)
 	print('oh shit you got me!!')
 
+
+func tween_movement(new_previous_position:Vector2,new_grid_position:Vector2i):
+	self.previous_position=new_previous_position
+	self.previous_position_coor=self.grid_position
+	self.grid_position=new_grid_position
+	turn_tracker['moved']=true
+
+
 func movement(new_position:Vector2,new_grid_position:Vector2i):
 	self.previous_position=self.position
 	self.previous_position_coor=self.grid_position
@@ -203,7 +214,7 @@ func movement(new_position:Vector2,new_grid_position:Vector2i):
 
 func undo_movement():
 	if previous_position:
-		position=previous_position
+		self.position=previous_position
 		grid_position=previous_position_coor
 		turn_tracker['moved']=false
 
@@ -230,3 +241,19 @@ func export_save_data():
 		"inventory":self.inventory.duplicate(),
 	}
 	return data
+
+
+func take_damage_animation():
+	var tween = get_tree().create_tween()
+	var move_range:int = 5
+	var last_pos:Vector2=self.position
+	tween.tween_property(self, "modulate", Color.RED, .1)
+	var start_x := position.x
+	var end_x := position.x + move_range
+	tween.tween_property(self, "position:x", end_x, .01).from(start_x)
+	tween.tween_property(self, "position:x", start_x, .01).from(end_x)
+	tween.tween_property(self, "position:x", end_x, .01).from(start_x)
+	tween.tween_property(self, "position:x", start_x, .01).from(end_x)
+	tween.tween_property(self, "modulate", Color.WHITE, .2)
+	await tween.finished
+	self.position = last_pos
