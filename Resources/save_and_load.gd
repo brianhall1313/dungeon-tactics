@@ -14,7 +14,7 @@ func save_game(data, slot):
 func load_game(slot:int):
 	var data = load_json(slot)
 	if data:
-		print(data)
+		print('data loaded')
 		return data
 	else:
 		print("Data failed to load")
@@ -43,8 +43,23 @@ func load_metadata(slot:int):
 		var data_file=FileAccess.open(full_path,FileAccess.READ)
 		var parsed_data=JSON.parse_string(data_file.get_as_text())
 		if parsed_data is Dictionary:
-			print(parsed_data)
+			#print(parsed_data)
 			return parsed_data['metadata']
+		else:
+			return false
+	else:
+		return false
+
+
+
+func load_party_data(slot:int):
+	var full_path = data_path + str(slot) + '.save'
+	if FileAccess.file_exists(full_path):
+		var data_file=FileAccess.open(full_path,FileAccess.READ)
+		var parsed_data=JSON.parse_string(data_file.get_as_text())
+		if parsed_data is Dictionary:
+			#print(parsed_data)
+			return parsed_data['party']
 		else:
 			return false
 	else:

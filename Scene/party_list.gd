@@ -42,9 +42,11 @@ func revive(character,pos):
 		character.turn_start()
 
 
-func add(character_data):
+func add(character_data, return_copy = false):
 	var new_character=Global.character.instantiate()
 	add_child(new_character)
+	if return_copy:
+		return new_character
 	var children=get_children()
 	for x in children:
 		if !x in list:
@@ -54,7 +56,6 @@ func add(character_data):
 			x.turn_start()
 			GlobalSignalBus.place_character_default.emit(x)
 			print('character added')
-
 
 
 

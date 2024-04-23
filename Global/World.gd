@@ -2,22 +2,7 @@ extends Node
 
 
 #defaults if load fails
-var player_party:Array=[{
-						'default_position':Vector2i(0,1),
-						'faction':'player',
-						'job':'templar'
-						},
-						{'character_name':'Daroupty',
-						'default_position':Vector2i(0,0),
-						'faction':'player',
-						'job':'ranger'
-						},
-						{'character_name':'Butterfield',
-						'default_position':Vector2i(1,0),
-						'faction':'player',
-						'job':'wizard',
-						'spells':["Elemental Bolt","Summon Animal","Heal"]},
-						]
+var player_party:Array=SaveAndLoad.load_party_data(1)
 var player_inventory: Array=[]
 var player_gold: int=0
 var level_progress:Dictionary={"test":false,

@@ -4,8 +4,8 @@ extends CanvasLayer
 @onready var targeted=$targeted_character_info
 @onready var selected_portrait =$left_portrait
 @onready var targeted_portrait=$right_portrait
-
-
+signal continue_pressed
+signal end_turn_pressed
 
 
 
@@ -38,3 +38,11 @@ func _on_map_update_targeted_ui(character):
 	targeted.update(character)
 	targeted_portrait.update(character)
 
+
+
+func _on_field_menu_continue_pressed():
+	continue_pressed.emit()
+
+
+func _on_field_menu_end_turn_pressed():
+	end_turn_pressed.emit()

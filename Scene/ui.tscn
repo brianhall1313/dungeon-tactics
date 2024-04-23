@@ -79,3 +79,6 @@ size_flags_vertical = 8
 
 [node name="game over screen" parent="." instance=ExtResource("6_rxygo")]
 visible = false
+
+[connection signal="continue_pressed" from="field_menu" to="." method="_on_field_menu_continue_pressed"]
+[connection signal="end_turn_pressed" from="field_menu" to="." method="_on_field_menu_end_turn_pressed"]

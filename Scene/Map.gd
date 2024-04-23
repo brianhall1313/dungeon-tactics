@@ -546,7 +546,7 @@ func spawn_test_characters():
 	var test_character3={
 						'default_position':Vector2i(0,1),
 						'faction':'player',
-						'job':'templar'
+						'job':'knight'
 						}
 	var test_character4={'character_name':'Daroupty',
 						'default_position':Vector2i(0,0),

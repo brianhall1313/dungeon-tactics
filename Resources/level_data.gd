@@ -14,7 +14,7 @@ func load_json():
 		var data_file=FileAccess.open(data_path,FileAccess.READ)
 		var parsed_data=JSON.parse_string(data_file.get_as_text())
 		if parsed_data is Array:
-			print(parsed_data)
+			#print(parsed_data)
 			return parsed_data
 		else:
 			print('parsed data is not a dictionary')

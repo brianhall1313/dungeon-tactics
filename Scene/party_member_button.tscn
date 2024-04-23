@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://duo47r33ie2xj"]
+
+[ext_resource type="Script" path="res://party member button.gd" id="1_owtmf"]
+
+[node name="party member button" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+text = "default"
+script = ExtResource("1_owtmf")
+
+[connection signal="button_up" from="." to="." method="_on_button_up"]

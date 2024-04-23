@@ -40,7 +40,7 @@ text = "Party Management:"
 [node name="player magement stats" type="GridContainer" parent="management_ui/party management screen/party_management/title_stats"]
 layout_mode = 2
 size_flags_horizontal = 3
-columns = 6
+columns = 7
 
 [node name="spacer" type="Control" parent="management_ui/party management screen/party_management/title_stats/player magement stats"]
 layout_mode = 2
@@ -70,7 +70,12 @@ horizontal_alignment = 2
 [node name="member count" type="Label" parent="management_ui/party management screen/party_management/title_stats/player magement stats"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "0/30"
+text = "0"
+
+[node name="member count ceiling" type="Label" parent="management_ui/party management screen/party_management/title_stats/player magement stats"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "/30"
 
 [node name="party display" type="HBoxContainer" parent="management_ui/party management screen/party_management"]
 layout_mode = 2
@@ -85,13 +90,17 @@ size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 20
 text = "Party:"
 
-[node name="PanelContainer" type="PanelContainer" parent="management_ui/party management screen/party_management/party display/list display"]
+[node name="party list" type="PanelContainer" parent="management_ui/party management screen/party_management/party display/list display"]
 self_modulate = Color(0.823529, 0.705882, 0.54902, 1)
+clip_contents = true
 custom_minimum_size = Vector2(200, 400)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="buy button" type="Button" parent="management_ui/party management screen/party_management/party display/list display/PanelContainer"]
+[node name="party" type="VBoxContainer" parent="management_ui/party management screen/party_management/party display/list display/party list"]
+layout_mode = 2
+
+[node name="buy button" type="Button" parent="management_ui/party management screen/party_management/party display/list display/party list/party"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -101,9 +110,13 @@ text = "Hire a New Mercenary"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="GridContainer" type="GridContainer" parent="management_ui/party management screen/party_management/party display/member display"]
+[node name="spacer" type="Control" parent="management_ui/party management screen/party_management/party display/member display"]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="management_ui/party management screen/party_management/party display/member display"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
 columns = 4
 
 [node name="current character" type="Label" parent="management_ui/party management screen/party_management/party display/member display/GridContainer"]
@@ -195,8 +208,8 @@ layout_mode = 2
 text = "Equipment:"
 
 [node name="equipment window" type="GridContainer" parent="management_ui/party management screen/party_management/party display/member display"]
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
-size_flags_vertical = 3
 columns = 4
 
 [node name="inventory display" type="PanelContainer" parent="management_ui/party management screen/party_management/party display"]
@@ -266,10 +279,7 @@ text = "Save"
 
 [node name="back button" type="Button" parent="management_ui/party management screen/party_management/bottom row buttons"]
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 4
 text = "Back"
 
-[node name="spacer" type="Control" parent="management_ui/party management screen"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
+[connection signal="button_up" from="management_ui/party management screen/party_management/bottom row buttons/save button" to="." method="_on_save_button_button_up"]
+[connection signal="button_up" from="management_ui/party management screen/party_management/bottom row buttons/back button" to="." method="_on_back_button_button_up"]

@@ -220,6 +220,7 @@ func undo_movement():
 
 
 func calculate_armor():
+	self.armor = 10
 	for x in equipment:
 		if equipment[x] in Armor.armor_dictionary:
 			self.armor += Armor.armor_dictionary[equipment[x]]['bonus']
@@ -228,10 +229,23 @@ func calculate_armor():
 			self.armor += 1
 
 
+func package_stats():
+	var stats:Dictionary={
+		"move":self.move,
+		"combat":self.combat,
+		"ranged_combat":self.ranged_combat,
+		"armor":self.armor,
+		"will":self.will,
+		"health":self.health,
+	}
+	return stats
+
+
 func export_save_data():
 	var data:Dictionary={
 		"character_name":self.character_name,
 		"job":self.job,
+		"stats":package_stats(),
 		"tags":self.tags.duplicate(),
 		"equipment":self.equipment.duplicate(),
 		"spells":self.spells.duplicate(),

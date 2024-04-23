@@ -63,6 +63,8 @@ autoplay = true
 [connection signal="show_targeted_ui" from="Map" to="UI" method="_on_map_show_targeted_ui"]
 [connection signal="update_selected_ui" from="Map" to="UI" method="_on_map_update_selected_ui"]
 [connection signal="update_targeted_ui" from="Map" to="UI" method="_on_map_update_targeted_ui"]
+[connection signal="continue_pressed" from="UI" to="Map" method="_on_field_menu_continue_pressed"]
+[connection signal="end_turn_pressed" from="UI" to="Map" method="_on_field_menu_end_turn_pressed"]
 [connection signal="ready" from="FiniteStateMachine" to="." method="_on_finite_state_machine_ready"]
 [connection signal="escape_pressed" from="FiniteStateMachine/grid_interact" to="Map" method="_on_grid_interact_escape_pressed"]
 [connection signal="grid_interaction" from="FiniteStateMachine/grid_interact" to="Map" method="_on_grid_interact_grid_interaction"]

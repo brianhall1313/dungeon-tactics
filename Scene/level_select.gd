@@ -27,3 +27,7 @@ func level_one():
 
 func _on_save_button_button_up():
 	get_tree().change_scene_to_file("res://Scene/save_game.tscn")
+
+
+func _on_party_management_pressed():
+	get_tree().change_scene_to_file("res://Scene/party_management.tscn")
