@@ -1,9 +1,275 @@
-[gd_scene format=3 uid="uid://dg16qodcusd6v"]
+[gd_scene load_steps=3 format=3 uid="uid://dg16qodcusd6v"]
+
+[ext_resource type="Theme" uid="uid://5fu88ou1dk5" path="res://Resources/dungeon_theme.tres" id="1_djurt"]
+[ext_resource type="Script" path="res://Scene/party_management.gd" id="1_f3geq"]
 
 [node name="PartyManagement" type="Node2D"]
+script = ExtResource("1_f3geq")
 
 [node name="management_ui" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1152.0
+offset_bottom = 648.0
+theme = ExtResource("1_djurt")
+
+[node name="background" type="ColorRect" parent="management_ui"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 640.0
+color = Color(0, 0, 0, 1)
+
+[node name="party management screen" type="PanelContainer" parent="management_ui"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 640.0
+
+[node name="party_management" type="VBoxContainer" parent="management_ui/party management screen"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="title_stats" type="HBoxContainer" parent="management_ui/party management screen/party_management"]
+layout_mode = 2
+
+[node name="title" type="Label" parent="management_ui/party management screen/party_management/title_stats"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Party Management:"
+
+[node name="player magement stats" type="GridContainer" parent="management_ui/party management screen/party_management/title_stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 6
+
+[node name="spacer" type="Control" parent="management_ui/party management screen/party_management/title_stats/player magement stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="gold" type="Label" parent="management_ui/party management screen/party_management/title_stats/player magement stats"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Gold:"
+
+[node name="player gold" type="Label" parent="management_ui/party management screen/party_management/title_stats/player magement stats"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "0"
+horizontal_alignment = 2
+
+[node name="spacer2" type="Control" parent="management_ui/party management screen/party_management/title_stats/player magement stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="max members" type="Label" parent="management_ui/party management screen/party_management/title_stats/player magement stats"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Party:"
+horizontal_alignment = 2
+
+[node name="member count" type="Label" parent="management_ui/party management screen/party_management/title_stats/player magement stats"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "0/30"
+
+[node name="party display" type="HBoxContainer" parent="management_ui/party management screen/party_management"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="list display" type="VBoxContainer" parent="management_ui/party management screen/party_management/party display"]
+layout_mode = 2
+
+[node name="party title" type="Label" parent="management_ui/party management screen/party_management/party display/list display"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 20
+text = "Party:"
+
+[node name="PanelContainer" type="PanelContainer" parent="management_ui/party management screen/party_management/party display/list display"]
+self_modulate = Color(0.823529, 0.705882, 0.54902, 1)
+custom_minimum_size = Vector2(200, 400)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="buy button" type="Button" parent="management_ui/party management screen/party_management/party display/list display/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Hire a New Mercenary"
+
+[node name="member display" type="VBoxContainer" parent="management_ui/party management screen/party_management/party display"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GridContainer" type="GridContainer" parent="management_ui/party management screen/party_management/party display/member display"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 4
+
+[node name="current character" type="Label" parent="management_ui/party management screen/party_management/party display/member display/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Current Character:"
+
+[node name="name" type="Label" parent="management_ui/party management screen/party_management/party display/member display/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "None"
+
+[node name="character class" type="Label" parent="management_ui/party management screen/party_management/party display/member display/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Class:"
+
+[node name="class name" type="Label" parent="management_ui/party management screen/party_management/party display/member display/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Job"
+
+[node name="move" type="Label" parent="management_ui/party management screen/party_management/party display/member display/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Move"
+
+[node name="character move" type="Label" parent="management_ui/party management screen/party_management/party display/member display/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0
+"
+
+[node name="combat" type="Label" parent="management_ui/party management screen/party_management/party display/member display/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Combat"
+
+[node name="character combat" type="Label" parent="management_ui/party management screen/party_management/party display/member display/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0
+"
+
+[node name="ranged combat" type="Label" parent="management_ui/party management screen/party_management/party display/member display/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Ranged Combat"
+
+[node name="character ranged" type="Label" parent="management_ui/party management screen/party_management/party display/member display/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+
+[node name="armor" type="Label" parent="management_ui/party management screen/party_management/party display/member display/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Armor"
+
+[node name="character armor" type="Label" parent="management_ui/party management screen/party_management/party display/member display/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0
+"
+
+[node name="will" type="Label" parent="management_ui/party management screen/party_management/party display/member display/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Will"
+
+[node name="character will" type="Label" parent="management_ui/party management screen/party_management/party display/member display/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0
+"
+
+[node name="health" type="Label" parent="management_ui/party management screen/party_management/party display/member display/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Health"
+
+[node name="character health" type="Label" parent="management_ui/party management screen/party_management/party display/member display/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+
+[node name="character equipment" type="Label" parent="management_ui/party management screen/party_management/party display/member display"]
+layout_mode = 2
+text = "Equipment:"
+
+[node name="equipment window" type="GridContainer" parent="management_ui/party management screen/party_management/party display/member display"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 4
+
+[node name="inventory display" type="PanelContainer" parent="management_ui/party management screen/party_management/party display"]
+self_modulate = Color(0.745098, 0.745098, 0.745098, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="party inventory" type="VBoxContainer" parent="management_ui/party management screen/party_management/party display/inventory display"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="inventory label" type="Label" parent="management_ui/party management screen/party_management/party display/inventory display/party inventory"]
+layout_mode = 2
+text = "Inventory:"
+
+[node name="inventory display" type="GridContainer" parent="management_ui/party management screen/party_management/party display/inventory display/party inventory"]
+layout_mode = 2
+columns = 5
+
+[node name="Item description background" type="PanelContainer" parent="management_ui/party management screen/party_management/party display/inventory display/party inventory"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="item display" type="VBoxContainer" parent="management_ui/party management screen/party_management/party display/inventory display/party inventory/Item description background"]
+layout_mode = 2
+
+[node name="item title bar" type="HBoxContainer" parent="management_ui/party management screen/party_management/party display/inventory display/party inventory/Item description background/item display"]
+layout_mode = 2
+
+[node name="item name" type="Label" parent="management_ui/party management screen/party_management/party display/inventory display/party inventory/Item description background/item display/item title bar"]
+layout_mode = 2
+text = "Item:"
+
+[node name="current item name" type="Label" parent="management_ui/party management screen/party_management/party display/inventory display/party inventory/Item description background/item display/item title bar"]
+layout_mode = 2
+text = "none"
+
+[node name="item description" type="Label" parent="management_ui/party management screen/party_management/party display/inventory display/party inventory/Item description background/item display"]
+layout_mode = 2
+text = "No description"
+
+[node name="button options" type="HBoxContainer" parent="management_ui/party management screen/party_management/party display/inventory display/party inventory/Item description background/item display"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="equip button" type="Button" parent="management_ui/party management screen/party_management/party display/inventory display/party inventory/Item description background/item display/button options"]
+layout_mode = 2
+text = "Equip
+"
+
+[node name="drop button" type="Button" parent="management_ui/party management screen/party_management/party display/inventory display/party inventory/Item description background/item display/button options"]
+layout_mode = 2
+text = "Drop"
+
+[node name="spacer" type="Control" parent="management_ui/party management screen/party_management/party display"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="bottom row buttons" type="HBoxContainer" parent="management_ui/party management screen/party_management"]
+layout_mode = 2
+alignment = 2
+
+[node name="save button" type="Button" parent="management_ui/party management screen/party_management/bottom row buttons"]
+layout_mode = 2
+text = "Save"
+
+[node name="back button" type="Button" parent="management_ui/party management screen/party_management/bottom row buttons"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+text = "Back"
+
+[node name="spacer" type="Control" parent="management_ui/party management screen"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
