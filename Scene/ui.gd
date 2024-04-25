@@ -9,6 +9,11 @@ signal continue_pressed
 signal end_turn_pressed
 
 
+func _ready():
+	GlobalSignalBus.connect('player_team_exhausted',_show_turn_end)
+
+
+
 func turn_end_trigger():
 	turn_end_button.show()
 
@@ -56,3 +61,8 @@ func _on_field_menu_end_turn_pressed():
 func _on_turn_end_button_up():
 	end_turn_pressed.emit()
 	turn_end_button.hide()
+
+
+func _show_turn_end():
+	turn_end_button.show()
+	turn_end_button.grab_focus()

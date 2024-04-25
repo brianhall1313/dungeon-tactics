@@ -23,3 +23,4 @@ signal save(slot)
 signal load_data(slot)
 signal game_over(victory)
 signal character_selected(character_name)#This is for party management specifically
+signal player_team_exhausted()

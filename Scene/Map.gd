@@ -376,9 +376,12 @@ func _on_update_board():
 	fight_menus.position=Pointer.position
 	fight_menu.update_menu(current_character)
 
-func _on_turn_over(_character):
+func _on_turn_over(character):
 	board_state=get_board_state()
 	current_character=null
+	if character.faction == "player":
+		if players_list.is_turn_over():
+			GlobalSignalBus.player_team_exhausted.emit()
 	ui_update()
 	
 	

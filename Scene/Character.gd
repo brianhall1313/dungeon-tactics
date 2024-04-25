@@ -37,6 +37,7 @@ var possible_targets:Array=[]
 signal dead(character)	
 
 func turn_start():
+	$Sprite2D.modulate=Color('WHITE')
 	for point in self.turn_tracker:
 		self.turn_tracker[point] = false
 	previous_position=self.position
@@ -171,6 +172,8 @@ func turn(turn_action):
 		turn_tracker['turn_complete']=true
 		print("turn is over "+self.character_name)
 		GlobalSignalBus.turn_over.emit(self)
+	if turn_tracker['turn_complete']==true:
+		$Sprite2D.modulate=Color('WEB GRAY')
 
 
 func take_damage(damage:int):
