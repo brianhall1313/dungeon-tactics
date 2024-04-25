@@ -10,6 +10,7 @@ func _on_quit_button_button_up():
 
 
 func _on_new_game_button_up():
+	World.load_default_data()
 	get_tree().change_scene_to_file("res://Scene/level_select.tscn")
 
 

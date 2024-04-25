@@ -113,6 +113,12 @@ stretch_mode = 6
 layout_mode = 2
 text = "Select Chapter"
 
+[node name="quit_button" type="Button" parent="level_select_ui/Background/MarginContainer/Interface Frame"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Quit to menu"
+
 [connection signal="pressed" from="level_select_ui/Background/MarginContainer/Interface Frame/HBoxContainer/party management" to="." method="_on_party_management_pressed"]
 [connection signal="button_up" from="level_select_ui/Background/MarginContainer/Interface Frame/HBoxContainer/Save Button" to="." method="_on_save_button_button_up"]
 [connection signal="button_up" from="level_select_ui/Background/MarginContainer/Interface Frame/Save Access/Level 1/Frame/Button" to="." method="level_one"]

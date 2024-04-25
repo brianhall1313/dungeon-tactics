@@ -69,3 +69,10 @@ func get_wizard():
 		if character.job == 'wizard':
 			print(character.character_name)
 			return character.character_name
+
+func get_by_job_default(job):
+	#this is meant for debug testing, this probably shouldn't be called in the final implementation
+	for character in player.list:
+		if character.job == job:
+			print(character.character_name)
+			return character.character_name

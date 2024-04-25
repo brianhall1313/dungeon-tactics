@@ -56,6 +56,8 @@ func update_party_list():
 		for member in current_party:
 			print(member)
 			var new = party_button.instantiate()
+			if ('character_name' in member) == false:
+				member["character_name"]=Names.get_random_name()
 			new.text = member['character_name']
 			party_list.add_child(new)
 
@@ -83,6 +85,7 @@ func _character_selected(dude):
 	equipment_window.text = ''
 	for item in character['equipment']:
 		equipment_window.text+=character['equipment'][item] + ", "
+	equipment_window.text = equipment_window.text.erase(len(equipment_window.text)-2)
 
 
 func _on_back_button_button_up():

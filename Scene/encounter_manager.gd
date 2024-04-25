@@ -14,6 +14,7 @@ func _ready():
 	load_level(LevelData.level_data)
 	#Here we should handle cutscene stuff
 	#here we should handle party placement
+	match_start()
 
 
 func get_current_board_state():

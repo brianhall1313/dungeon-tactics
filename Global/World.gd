@@ -2,7 +2,7 @@ extends Node
 
 
 #defaults if load fails
-var player_party:Array=SaveAndLoad.load_party_data(1)
+var player_party:Array=[]
 var player_inventory: Array=[]
 var player_gold: int=0
 var level_progress:Dictionary={"test":false,
@@ -18,7 +18,7 @@ func load_data(data:Dictionary):
 	if data['gold']:
 		player_gold = data['gold']
 	if data['progress']:
-		level_progress = data['progress']
+		level_progress = data['progress'].duplicate()
 
 func level_complete(level:String):
 	level_progress[level] = true
@@ -45,3 +45,14 @@ func save():
 	data['progress']=World.level_progress.duplicate()
 	return data
 	#SaveAndLoad.load_game(1)
+
+func load_default_data():
+	var data : Dictionary = SaveAndLoad.load_default_data()
+	if data['party']:
+		player_party = data['party'].duplicate(true)
+	if data['inventory']:
+		player_inventory= data['inventory'].duplicate()
+	if data['gold']:
+		player_gold = data['gold']
+	if data['progress']:
+		level_progress = data['progress'].duplicate()

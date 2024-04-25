@@ -536,9 +536,10 @@ func _save():
 	SaveAndLoad.save_game(data,1)
 	#SaveAndLoad.load_game(1)
 
-func spawn_test_characters():
+func spawn_test_characters(data):
 	for character in World.player_party:
 		character["faction"]="player"
+		character["default_position"]=data[character["job"]]
 		battle_lists.add_character(character)
 
 
@@ -562,8 +563,9 @@ func setup_level(level):
 	for character in level['enemies']:
 		battle_lists.add_character(character)
 	get_board_state()
-	party_placement()
-	#spawn_test_characters()
+	#TODO we will do custom placement later
+	#party_placement()
+	spawn_test_characters(level["default_placements"])
 	
 
 
