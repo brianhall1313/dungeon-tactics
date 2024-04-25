@@ -4,9 +4,13 @@ extends CanvasLayer
 @onready var targeted=$targeted_character_info
 @onready var selected_portrait =$left_portrait
 @onready var targeted_portrait=$right_portrait
+@onready var turn_end_button=$"turn end"
 signal continue_pressed
 signal end_turn_pressed
 
+
+func turn_end_trigger():
+	turn_end_button.show()
 
 
 func _on_map_hide_selected_ui():
@@ -46,3 +50,9 @@ func _on_field_menu_continue_pressed():
 
 func _on_field_menu_end_turn_pressed():
 	end_turn_pressed.emit()
+	turn_end_button.hide()
+
+
+func _on_turn_end_button_up():
+	end_turn_pressed.emit()
+	turn_end_button.hide()

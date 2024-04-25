@@ -15,6 +15,6 @@ func movement(direction):
 func interact():
 	grid_interaction.emit()
 	
-func cancle():
+func cancel():
 	escape_pressed.emit()
 

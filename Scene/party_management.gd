@@ -80,12 +80,9 @@ func _character_selected(dude):
 	character_armor.text = str(character["stats"]["armor"])
 	character_will.text = str(character["stats"]["will"])
 	character_health.text = str(character["stats"]["health"])
+	equipment_window.text = ''
 	for item in character['equipment']:
-		pass
-
-
-func _on_save_button_button_up():
-	get_tree().change_scene_to_file("res://Scene/save_game.tscn")
+		equipment_window.text+=character['equipment'][item] + ", "
 
 
 func _on_back_button_button_up():

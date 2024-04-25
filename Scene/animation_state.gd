@@ -4,7 +4,6 @@ extends State
 signal show_pause_menu
 signal grid_interaction
 signal escape_pressed
-var previous_state
 
 # Called when the node enters the scene tree for the first time.
 
@@ -22,6 +21,6 @@ func interact():
 	#grid_interaction.emit()
 	pass
 	
-func cancle():
+func cancel():
 	#escape_pressed.emit()
 	pass

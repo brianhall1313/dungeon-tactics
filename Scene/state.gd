@@ -16,7 +16,7 @@ func movement(_direction):
 func interact():
 	pass
 	
-func cancle():
+func cancel():
 	pass
 
 

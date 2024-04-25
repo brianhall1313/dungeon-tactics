@@ -2,7 +2,7 @@ class_name Character
 extends AnimatedSprite2D
 
 @export var character_name:String="Default"
-@export var default_position:Vector2i=Vector2i(0,0)
+@export var default_position:Vector2i=Vector2i(-100,-100)
 @export var grid_position:Vector2i
 @export var job:String="classless"
 @export var tags:Array=['humanoid']
@@ -50,15 +50,20 @@ func character_setup(character_data):
 		self.character_name=character_data['character_name']
 	else:
 		self.character_name=Names.get_random_name()
-	if typeof(character_data.default_position)==6:
-		self.default_position=character_data.default_position
-	else:
-		print(character_data["default_position"])
-		self.default_position=set_default_position(character_data["default_position"])
+	if "default_position" in character_data:
+		if typeof(character_data['default_position'])==6:
+			self.default_position=character_data.default_position
+		else:
+			print(character_data["default_position"])
+			self.default_position=set_default_position(character_data["default_position"])
 	if 'experience' in character_data:
 		self.experience=character_data['experience']
 	self.faction=character_data['faction']
 	self.job=character_data['job']
+	if ClassData.class_dictionary[self.job]["sprite"] != '':
+		var texture_string="res://textures/"+ ClassData.class_dictionary[self.job]["sprite"]
+		$Sprite2D.texture = load(texture_string)
+		$Sprite2D.scale = Vector2(.75,.75)
 	if 'tags' in character_data:
 		self.tags=character_data['tags']
 	else:
@@ -98,7 +103,7 @@ func set_default_position(pos):
 
 
 
-func equipment_setup(new_equipment:Array):
+func equipment_setup(new_equipment):
 	equipment={}
 	for x in new_equipment:
 		if Weapons.weapons_dictionary.has(x):

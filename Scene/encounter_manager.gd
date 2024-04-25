@@ -14,7 +14,6 @@ func _ready():
 	load_level(LevelData.level_data)
 	#Here we should handle cutscene stuff
 	#here we should handle party placement
-	match_start()
 
 
 func get_current_board_state():
@@ -33,16 +32,18 @@ func connect_input():
 
 
 func interaction():
-	if turn == 'player':
+	if turn == 'player' or Global.current_state.name=="party_placement":
 		Global.current_state.interact()	
 	
 func move(direction):
-	if turn == 'player':
+	if turn == 'player' or Global.current_state.name=="party_placement":
 		Global.current_state.movement(direction)
 
 func cancel():
-	if turn == 'player':
-		Global.current_state.cancle()
+	if turn == 'player' or Global.current_state.name=="party_placement":
+		Global.current_state.cancel()
+
+
 
 func match_start():
 	turn_counter = 1
@@ -98,3 +99,11 @@ func load_level(level_data):
 
 func win():
 	World.level_complete(LevelData.level_data[Global.current_level]["level"])
+
+
+func _on_finite_state_machine_ready():
+	pass # Replace with function body.
+
+
+func _on_map_finished_placing():
+	match_start()

@@ -207,12 +207,12 @@ text = "0"
 layout_mode = 2
 text = "Equipment:"
 
-[node name="equipment window" type="GridContainer" parent="management_ui/party management screen/party_management/party display/member display"]
+[node name="equipment window" type="Label" parent="management_ui/party management screen/party_management/party display/member display"]
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
-columns = 4
 
 [node name="inventory display" type="PanelContainer" parent="management_ui/party management screen/party_management/party display"]
+visible = false
 self_modulate = Color(0.745098, 0.745098, 0.745098, 1)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -273,13 +273,8 @@ size_flags_vertical = 10
 layout_mode = 2
 alignment = 2
 
-[node name="save button" type="Button" parent="management_ui/party management screen/party_management/bottom row buttons"]
-layout_mode = 2
-text = "Save"
-
 [node name="back button" type="Button" parent="management_ui/party management screen/party_management/bottom row buttons"]
 layout_mode = 2
 text = "Back"
 
-[connection signal="button_up" from="management_ui/party management screen/party_management/bottom row buttons/save button" to="." method="_on_save_button_button_up"]
 [connection signal="button_up" from="management_ui/party management screen/party_management/bottom row buttons/back button" to="." method="_on_back_button_button_up"]

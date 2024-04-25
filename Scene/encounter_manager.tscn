@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://0j8kw0k5bi27"]
+[gd_scene load_steps=17 format=3 uid="uid://0j8kw0k5bi27"]
 
 [ext_resource type="Script" path="res://Scene/encounter_manager.gd" id="1_2augq"]
 [ext_resource type="PackedScene" uid="uid://b8o77r1wrb1e" path="res://Scene/Map.tscn" id="2_1j2if"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://Scene/game_over.gd" id="11_fia2i"]
 [ext_resource type="AudioStream" uid="uid://r77x1h1ek3k2" path="res://Sound/sonatina_letsadventure_3ToArms.wav" id="13_1ae6u"]
 [ext_resource type="Script" path="res://Scene/animation_state.gd" id="13_meps6"]
+[ext_resource type="Script" path="res://Scene/party_placement.gd" id="14_o7qt0"]
 
 [node name="encounter_manager" type="Node"]
 script = ExtResource("1_2augq")
@@ -48,6 +49,9 @@ script = ExtResource("11_fia2i")
 [node name="animation_state" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("13_meps6")
 
+[node name="party_placement" parent="FiniteStateMachine" instance=ExtResource("4_lav4m")]
+script = ExtResource("14_o7qt0")
+
 [node name="ai_manager" type="Node" parent="."]
 script = ExtResource("9_hwfkw")
 
@@ -56,6 +60,7 @@ stream = ExtResource("13_1ae6u")
 autoplay = true
 
 [connection signal="ai_list_handover" from="Map" to="ai_manager" method="_on_map_ai_list_handover"]
+[connection signal="finished_placing" from="Map" to="." method="_on_map_finished_placing"]
 [connection signal="hide_selected_ui" from="Map" to="UI" method="_on_map_hide_selected_ui"]
 [connection signal="hide_targeted_ui" from="Map" to="UI" method="_on_map_hide_targeted_ui"]
 [connection signal="pass_board_state" from="Map" to="ai_manager" method="_on_map_pass_board_state"]
@@ -77,4 +82,6 @@ autoplay = true
 [connection signal="escape_pressed" from="FiniteStateMachine/pause_menu" to="Map" method="_on_pause_menu_escape_pressed"]
 [connection signal="escape_pressed" from="FiniteStateMachine/sa_resolution" to="Map" method="_on_sa_resolution_escape_pressed"]
 [connection signal="grid_interaction" from="FiniteStateMachine/sa_resolution" to="Map" method="_on_sa_resolution_grid_interaction"]
+[connection signal="escape_pressed" from="FiniteStateMachine/party_placement" to="Map" method="_on_party_placement_escape_pressed"]
+[connection signal="grid_interaction" from="FiniteStateMachine/party_placement" to="Map" method="_on_party_placement_grid_interaction"]
 [connection signal="update_enemy_list" from="ai_manager" to="Map" method="_on_ai_manager_update_enemy_list"]

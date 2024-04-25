@@ -2,15 +2,17 @@
 	{
 		"level":"test",
 		"name":"test_level",
+		"placement_spaces":[[0,0],[1,0],[2,0],[0,1],[1,1],[2,1],[0,2],[1,2],[2,2]],
 		"grid_layout":"4445454444:4445444444:4445545444:5444445455:5455545454:4444444454:4545454454:4544454454:4545444444:4444555544",
 		"enemies":[
-			{"default_position":[2,1],"faction":"enemy","job":"thief"},
-			{"default_position":[1,1],"faction":"enemy","job":"thug",},
+			{"default_position":[3,3],"faction":"enemy","job":"thief"},
+			{"default_position":[1,4],"faction":"enemy","job":"thug",},
 			],
 	},
 	{
 		"level":"road",
 		"name":"Road to the Dungeon",
+		"placement_spaces":[[0,0],[1,0],[2,0]],
 		"grid_layout":"4444444444:4444444444:4444444444:4444444444:4444444444:4444444444:4444444444:4444444444:4444444444:4444444444",
 		"enemies":[
 			{"default_position":[2,1],"faction":"enemy","job":"thief"},

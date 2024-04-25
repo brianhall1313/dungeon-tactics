@@ -11,6 +11,7 @@ var dir:Dictionary={"Down":Vector2i(0,1),"Up":Vector2i(0,-1),"Left":Vector2i(-1,
 var height:int=10
 var width:int=10
 var board_state
+var current_level_data
 var current_character:Character
 var selected_character
 var targeted_character
@@ -32,6 +33,7 @@ signal show_targeted_ui
 signal hide_targeted_ui
 signal pass_board_state(board)
 signal ai_list_handover(list)
+signal finished_placing
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	connected_to_signal_bus()
@@ -82,14 +84,7 @@ func get_board_state():
 	#print(map_info)
 	pass_board_state.emit(map_info)
 	return map_info
-	
-	
-func track_mouse():
-	if (local_to_map(get_local_mouse_position()).x < width and local_to_map(get_local_mouse_position()).x>=0) and (local_to_map(get_local_mouse_position()).y < height and local_to_map(get_local_mouse_position()).y>=0):
-		if board_state[local_to_map(get_local_mouse_position()).x][local_to_map(get_local_mouse_position()).y]['id'] in astar.get_point_ids():
-			var path=astar.get_point_path(1,board_state[local_to_map(get_local_mouse_position()).x][local_to_map(get_local_mouse_position()).y]['id'])
-			for point in path:
-				set_cell(1,local_to_map(Vector2(point.x,point.y)),2,Vector2i(0,0))
+
 
 
 func draw_path(path):
@@ -108,19 +103,16 @@ func is_occupied(row,column):
 	return false
 
 
-func occupant_faction_same(row,column,character):
-	if board_state[row][column]['occupant']:
-		return board_state[row][column]['occupant'].faction==character.faction
-	return true
-
-
-
 func display_move_range(character):
 	var possible_movement = MovementTools.tiles_in_movement_range(board_state,character)
 	for space in possible_movement:
 		set_cell(1,space,2,Vector2i(0,0))
 	
 	
+func display_placement_range(spaces):
+	for space in spaces:
+		set_cell(1,space,2,Vector2i(0,0))
+
 
 
 func display_attack_range(character):
@@ -453,6 +445,8 @@ func _move_request_received(character,space:Vector2i):
 
 func _on_pause_menu_escape_pressed():
 	print('back to the game')
+	if $"../FiniteStateMachine".previous_state.name=='party_placement':
+		GlobalSignalBus.change_state.emit("party_placement")
 	GlobalSignalBus.change_state.emit("grid_interact")
 	get_viewport().set_input_as_handled()
 
@@ -543,27 +537,13 @@ func _save():
 	#SaveAndLoad.load_game(1)
 
 func spawn_test_characters():
-	var test_character3={
-						'default_position':Vector2i(0,1),
-						'faction':'player',
-						'job':'knight'
-						}
-	var test_character4={'character_name':'Daroupty',
-						'default_position':Vector2i(0,0),
-						'faction':'player',
-						'job':'ranger'
-						}
-	var wizard={'character_name':'Erasmus',
-						'default_position':Vector2i(1,0),
-						'faction':'player',
-						'job':'wizard',
-						'spells':["Summon Undead","Heal Burst"]}
-	battle_lists.add_character(test_character3)
-	battle_lists.add_character(test_character4)
-	battle_lists.add_character(wizard)
+	for character in World.player_party:
+		character["faction"]="player"
+		battle_lists.add_character(character)
 
 
 func setup_level(level):
+	current_level_data = level
 	var layout:Array=level['grid_layout'].split(':')
 	height=len(layout)
 	width=len(layout[0])
@@ -582,5 +562,33 @@ func setup_level(level):
 	for character in level['enemies']:
 		battle_lists.add_character(character)
 	get_board_state()
-	spawn_test_characters()
+	party_placement()
+	#spawn_test_characters()
 	
+
+
+func party_placement():
+	var area:Array=get_placement_area()
+	GlobalSignalBus.change_state.emit("party_placement")
+	display_placement_range(area)
+	
+
+
+func get_placement_area():
+	var spaces = current_level_data["placement_spaces"]
+	var area:Array=[]
+	for space in spaces:
+		area.append(Vector2i(space[0],space[1]))
+	return area
+
+
+
+func _on_party_placement_escape_pressed():
+	GlobalSignalBus.change_state.emit("pause_menu")
+
+
+func _on_party_placement_grid_interaction():
+	var area = get_placement_area()
+	if Pointer.grid_position in area:
+		pass
+		#place char
