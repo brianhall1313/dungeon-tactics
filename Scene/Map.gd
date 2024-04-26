@@ -449,8 +449,10 @@ func _move_request_received(character,space:Vector2i):
 func _push_request_received(character,space):
 	if MovementTools.can_move_to(board_state,character,space):
 		character.movement(map_to_local(space),space)
+	elif MovementTools.will_fall(board_state,character,space):
+		GlobalSignalBus.combat_message.emit(character.character_name + " has fallen down a hole!!")
+		character.take_damage(9999999)
 	GlobalSignalBus.update_board.emit()
-	print('moved')
 
 
 func _on_pause_menu_escape_pressed():

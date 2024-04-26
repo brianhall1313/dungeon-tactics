@@ -70,10 +70,10 @@ func load_default_data():
 	"inventory":[],
 	"metadata":{"last save":"2024-04-24T14:45:37","wizard":"Erasmus"},
 	"party":[
-		{"abilities":[],"character_name":"Capri","equipment":{"armor":"heavy_armor","off_hand":"shield","weapon":"sword"},"experience":0,"inventory":[],"job":"knight","level":0,"spells":[],"stats":{"armor":13,"combat":4,"health":12,"move":6,"ranged_combat":0,"will":1},"tags":["humanoid"]},
+		{"abilities":["Heavy Strike"],"character_name":"Capri","equipment":{"armor":"heavy_armor","off_hand":"shield","weapon":"sword"},"experience":0,"inventory":[],"job":"knight","level":0,"spells":[],"stats":{"armor":13,"combat":4,"health":12,"move":6,"ranged_combat":0,"will":1},"tags":["humanoid"]},
 		{"abilities":[],"character_name":"Darrell","equipment":{"armor":"light_armor","ranged_weapon":"bow","weapon":"sword"},"experience":0,"inventory":[],"job":"ranger","level":0,"spells":[],"stats":{"armor":11,"combat":2,"health":12,"move":7,"ranged_combat":2,"will":2},"tags":["humanoid"]},
 		{"job":"templar","tags":["humanoid"],"stats":{"move":6,"combat":4,"ranged_combat":0,"armor":10,"will":1,"health":12},"equipment":{"weapon":"great_weapon","armor":"heavy_armor"},"spells":[],"abilities":[]},
-		{"job":"infantryman","tags":["humanoid"],"stats":{"move":6,"combat":3,"ranged_combat":0,"armor":10,"will":0,"health":10},"equipment":{"weapon":"great_weapon","armor":"light_armor"},"spells":[],"abilities":[]},
+		{"job":"infantryman","tags":["humanoid"],"stats":{"move":6,"combat":3,"ranged_combat":0,"armor":10,"will":0,"health":10},"equipment":{"weapon":"great_weapon","armor":"light_armor"},"spells":[],"abilities":["Heavy Strike"]},
 		{"job":"thug","tags":["humanoid"],"stats":{"move":6,"combat":2,"ranged_combat":0,"armor":10,"will":-1,"health":10},"equipment":{"weapon":"hand_weapon"},"spells":[],"abilities":[]},
 		{"job":"archer","tags":["humanoid"],"stats":{"move":6,"combat":1,"ranged_combat":2,"armor":10,"will":0,"health":10},"equipment":{"ranged_weapon":"bow","weapon":"dagger","armor":"light_armor"},"spells":[],"abilities":[],},
 		{"abilities":[],"job":"treasure_hunter","tags":["humanoid"],"stats":{"move":7,"combat":3,"ranged_combat":0,"armor":10,"will":2,"health":12},"equipment":{"weapon":"hand_weapon","armor":"light_armor"}},

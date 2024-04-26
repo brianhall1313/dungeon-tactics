@@ -38,6 +38,17 @@ func is_movable(board_state,character,pos):
 		movable=false
 	return movable
 
+func will_fall(board_state,character,pos):
+	var space =board_state[pos.x][pos.y]['terrain']
+	var fly:bool = false
+	if 'fly' in character.tags:
+		fly = true
+	if space in Global.flight_spaces and fly == false:
+		return true
+	return false
+		
+
+
 
 func can_move_to(board_state,character,pos):
 	var space =board_state[pos.x][pos.y]['terrain']
