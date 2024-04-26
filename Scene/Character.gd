@@ -266,16 +266,17 @@ func export_save_data():
 
 
 func take_damage_animation():
+	var sprite = $Sprite2D
 	var tween = get_tree().create_tween()
 	var move_range:int = 5
-	var last_pos:Vector2=self.position
 	tween.tween_property(self, "modulate", Color.RED, .1)
-	var start_x := position.x
-	var end_x := position.x + move_range
-	tween.tween_property(self, "position:x", end_x, .01).from(start_x)
-	tween.tween_property(self, "position:x", start_x, .01).from(end_x)
-	tween.tween_property(self, "position:x", end_x, .01).from(start_x)
-	tween.tween_property(self, "position:x", start_x, .01).from(end_x)
+	var start_x = sprite.offset.x - move_range
+	var mid_x = sprite.offset.x 
+	var end_x = sprite.offset.x + move_range
+	tween.tween_property(sprite, "offset:x", end_x, .01).from(start_x)
+	tween.tween_property(sprite, "offset:x", start_x, .01).from(end_x)
+	tween.tween_property(sprite, "offset:x", end_x, .01).from(start_x)
+	tween.tween_property(sprite, "offset:x", start_x, .01).from(end_x)
 	tween.tween_property(self, "modulate", Color.WHITE, .2)
 	await tween.finished
-	self.position = last_pos
+	sprite.offset.x = mid_x

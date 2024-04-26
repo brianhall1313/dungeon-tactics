@@ -65,6 +65,7 @@ func connected_to_signal_bus():
 	GlobalSignalBus.connect("sa_button_pressed",_on_sa_button_pressed)
 	GlobalSignalBus.connect("summoning",_on_summoning)
 	GlobalSignalBus.connect('save',_save)
+	GlobalSignalBus.connect('push_request',_push_request_received)
 	
 
 func get_board_state():
@@ -445,6 +446,12 @@ func _move_request_received(character,space:Vector2i):
 	character.movement(map_to_local(space),space)
 	GlobalSignalBus.update_board.emit()
 
+func _push_request_received(character,space):
+	if MovementTools.can_move_to(board_state,character,space):
+		character.movement(map_to_local(space),space)
+	GlobalSignalBus.update_board.emit()
+	print('moved')
+
 
 func _on_pause_menu_escape_pressed():
 	print('back to the game')
@@ -540,6 +547,8 @@ func _save():
 	#SaveAndLoad.load_game(1)
 
 func spawn_test_characters(data):
+	if Global.debug:
+		World.load_default_data()
 	for character in World.player_party:
 		character["faction"]="player"
 		character["default_position"]=data[character["job"]]

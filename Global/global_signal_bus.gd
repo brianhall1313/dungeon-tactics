@@ -12,6 +12,7 @@ signal place_character_default(character)
 signal change_state(state:String)
 signal turn_start(next)
 signal move_request(character,space:Vector2i)
+signal push_request(character,new_pos)
 signal party_wipe(faction)
 signal hide_menu
 signal show_pause_menu
@@ -24,3 +25,4 @@ signal load_data(slot)
 signal game_over(victory)
 signal character_selected(character_name)#This is for party management specifically
 signal player_team_exhausted()
+signal animation_finished()

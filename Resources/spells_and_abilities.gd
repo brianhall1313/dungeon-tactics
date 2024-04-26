@@ -11,13 +11,15 @@ extends Node
 	'Heal Burst':{"type":'heal',"animation":"heal",'cost':10,"range":5, "power":5,'bonus':0,'area':1,'effect':[]},
 	'Summon Animal':{"type":'summon',"animation":"summon_circle",'cost':10,"range":5, "power":0,'bonus':0,'area':0,'effect':['summon animal']},
 	'Summon Undead':{"type":'summon',"animation":"summon_circle",'cost':10,"range":5, "power":0,'bonus':0,'area':0,'effect':['summon undead']},
+	'Heavy Strike':{"type":"attack","animation":"","cost":1,"range":1,"power":4,"bonus":0,"area":0,"effect":['push back']},
 	
 }
 
 
 @onready var effect_directory:Dictionary={
 	'summon animal':func (character,target): summon_animal(character,target),
-	'summon undead':func (character,target): summon_undead(character,target)
+	'summon undead':func (character,target): summon_undead(character,target),
+	'push back':func (character,target): push(character,target),
 }
 
 
@@ -49,3 +51,9 @@ func summon_undead(character,target):
 						}
 	summon['tags'].append('undead')
 	GlobalSignalBus.summoning.emit(summon)
+
+func push(character:Character,target:Character):
+	var new_pos=target.grid_position-(character.grid_position-target.grid_position)
+	print('step two')
+	GlobalSignalBus.push_request.emit(target,new_pos)
+	print('step three')

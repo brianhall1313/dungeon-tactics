@@ -83,5 +83,11 @@ func special_action(attacker,defender,action):
 		damage=attack+SpellsAndAbilities.spells_and_abilities_directory[action]['bonus']
 		GlobalSignalBus.combat_message.emit('attacker: '+attacker.character_name+ ' hits defender: '+defender.character_name+" with "+action)
 		defender.take_damage(damage)
+		if defender.current_health > 0:
+			print(defender.current_health)
+			if len(SpellsAndAbilities.spells_and_abilities_directory[action]['effect']) > 0:
+				for effect in SpellsAndAbilities.spells_and_abilities_directory[action]['effect']:
+					SpellsAndAbilities.resolve_effect(effect,attacker,defender)
 	else:
 		GlobalSignalBus.combat_message.emit("attack missed:" + str(attack)+ " vs "+str(defence))
+		

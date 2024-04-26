@@ -20,6 +20,7 @@ func _ready():
 	
 func connect_bus():
 	GlobalSignalBus.connect('change_state',_on_change_state)
+	GlobalSignalBus.connect("animation_finished",_on_animation_finished)
 
 func change_state(new_state:State):
 	if state != $game_over:
@@ -40,3 +41,6 @@ func revert_state():
 
 func _on_change_state(state_name):
 	change_state(states[state_name])
+
+func _on_animation_finished():
+	revert_state()

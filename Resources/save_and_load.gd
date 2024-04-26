@@ -77,7 +77,7 @@ func load_default_data():
 		{"job":"thug","tags":["humanoid"],"stats":{"move":6,"combat":2,"ranged_combat":0,"armor":10,"will":-1,"health":10},"equipment":{"weapon":"hand_weapon"},"spells":[],"abilities":[]},
 		{"job":"archer","tags":["humanoid"],"stats":{"move":6,"combat":1,"ranged_combat":2,"armor":10,"will":0,"health":10},"equipment":{"ranged_weapon":"bow","weapon":"dagger","armor":"light_armor"},"spells":[],"abilities":[],},
 		{"abilities":[],"job":"treasure_hunter","tags":["humanoid"],"stats":{"move":7,"combat":3,"ranged_combat":0,"armor":10,"will":2,"health":12},"equipment":{"weapon":"hand_weapon","armor":"light_armor"}},
-		{"abilities":[],"job":"barbarian",'stats':{"move":6,"combat":4,"ranged_combat":0,"armor":10,"will":3,"health":14},"equipment":{"weapon":"great_weapon"},"experience":0,"inventory":[],"level":0,"spells":[],"tags":["humanoid"]},
+		{"abilities":["Heavy Strike"],"job":"barbarian",'stats':{"move":6,"combat":4,"ranged_combat":0,"armor":10,"will":3,"health":14},"equipment":{"weapon":"great_weapon"},"experience":0,"inventory":[],"level":0,"spells":[],"tags":["humanoid"]},
 		{"abilities":[],"character_name":"Erasmus","equipment":{"weapon":"staff"},"experience":0,"inventory":[],"job":"wizard","level":0,"spells":["Elemental Bolt","Elemental Blast","Summon Undead","Heal"],"stats":{"armor":10,"combat":2,"health":14,"move":6,"ranged_combat":0,"will":4},"tags":["humanoid","wizard"]},
 		{"abilities":[],"character_name":"Eliza","equipment":{"weapon":"staff"},"experience":0,"inventory":[],"job":"apprentice","level":0,"spells":["Elemental Bolt","Elemental Blast","Summon Undead","Heal"],"stats":{"armor":10,"combat":1,"health":12,"move":6,"ranged_combat":0,"will":2},"tags":["humanoid","apprentice"]},
 		],
