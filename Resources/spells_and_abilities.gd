@@ -5,7 +5,7 @@ extends Node
 	'description':'Fire a shard of bone at your opponent'},
 	'Elemental Bolt': {"type":'ranged_attack',"animation":"fireball",'cost':10,"range":5, "power":8,'bonus':0,'area':0,'effect':[],
 	'description':'Fire a bolt of pure energy at your target'},
-	'Elemental Burst': {"type":'ranged_attack',"animation":["fireball","elemental_explosion"],'cost':10,"range":5, "power":5,'bonus':0,'area':1,'effect':[],
+	'Elemental Blast': {"type":'ranged_attack',"animation":["fireball","elemental_explosion"],'cost':10,"range":5, "power":5,'bonus':0,'area':1,'effect':[],
 	'description':'Fire an unstable elemental bolt, which explodes upon contact'},
 	'Heal':{"type":'heal',"animation":"heal",'cost':8,"range":5, "power":8,'bonus':0,'area':0,'effect':[]},
 	'Heal Burst':{"type":'heal',"animation":"heal",'cost':10,"range":5, "power":5,'bonus':0,'area':1,'effect':[]},

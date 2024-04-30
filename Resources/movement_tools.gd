@@ -20,67 +20,62 @@ func construct_astar(board_state,character):
 	for row in range(len(board_state)):
 		for column in range(len(board_state[0])):
 			var movable:bool=is_movable(board_state,character,Vector2i(row,column))
-			if !movable:
+			if movable == false:
 				astar.set_point_solid(Vector2i(row,column))
 
 
 func is_movable(board_state,character,pos):
 	var space =board_state[pos.x][pos.y]['terrain']
 	var occupant = board_state[pos.x][pos.y]['occupant']
-	var movable:bool=true
 	if Global.wall_spaces.has(space):
-		movable=false
+		return false
 	if occupant and occupant.faction != character.faction:
-		movable=false
-	if space in Global.water_spaces:
-		movable=false
-	if space in Global.flight_spaces:
-		movable=false
-	return movable
+		return false
+	if Global.water_spaces.has(space):
+		return false
+	if Global.flight_spaces.has(space):
+		return false
+	return true
 
-func will_fall(board_state,character,pos):
+func will_fall(board_state,_character,pos):
 	var space =board_state[pos.x][pos.y]['terrain']
-	var fly:bool = false
-	if 'fly' in character.tags:
-		fly = true
-	if space in Global.flight_spaces and fly == false:
+	if space in Global.flight_spaces:
 		return true
 	return false
 		
 
 
 
-func can_move_to(board_state,character,pos):
+func can_move_to(board_state,_character,pos):
 	var space =board_state[pos.x][pos.y]['terrain']
 	var occupant = board_state[pos.x][pos.y]['occupant']
-	var move_to:bool=true
 	if Global.wall_spaces.has(space):
-		move_to=false
+		return false
 	if occupant:
-		move_to=false
-	if space in Global.water_spaces and character:
-		move_to=false
-	if space in Global.flight_spaces and character:
-		move_to=false
-	return move_to
+		return false
+	if Global.water_spaces.has(space):
+		return false
+	if Global.flight_spaces.has(space):
+		return false
+	return true
 
 func tiles_in_movement_range(board_state,character):
 	construct_astar(board_state,character)
 	var possible_movement:Array=[]
-	for row in range(len(board_state)):
-		for column in range(len(board_state[0])):
+	for row in height:
+		for column in width:
 			var pos: Vector2i = Vector2i(row,column)
 			var range_to_tile=abs(row-character.grid_position.x)+abs(column-character.grid_position.y)
 			if character.grid_position != pos and range_to_tile<=character.move:
 				var path = astar.get_id_path(character.grid_position,pos)
 				var possible_move:bool=can_move_to(board_state,character,pos)
-				if len(path) <= character.move+1 and possible_move:
+				if len(path) <= character.move+1 and possible_move and len(path) != 0:
 					possible_movement.append(pos)
+	#print(possible_movement)
 	return possible_movement
 
 
 func get_path_list(board_state,character,destination):
 	construct_astar(board_state,character)
 	var path = astar.get_id_path(character.grid_position,destination)
-	print(path)
 	return path

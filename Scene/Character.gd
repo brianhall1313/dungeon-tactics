@@ -29,6 +29,9 @@ extends AnimatedSprite2D
 @export var status:Array=[]
 @export var faction:String
 @export var turn_tracker:Dictionary={'moved':false,'action':false,'turn_complete':false}
+
+@onready var sprite = $Sprite2D
+
 var previous_position:Vector2
 var previous_position_coor:Vector2i
 var possible_targets:Array=[]
@@ -37,7 +40,7 @@ var possible_targets:Array=[]
 signal dead(character)	
 
 func turn_start():
-	$Sprite2D.modulate=Color('WHITE')
+	sprite.modulate=Color('WHITE')
 	for point in self.turn_tracker:
 		self.turn_tracker[point] = false
 	previous_position=self.position
@@ -46,7 +49,7 @@ func turn_start():
 
 
 func character_setup(character_data):
-	$Sprite2D["scale"]=Vector2(.1,.1)
+	sprite["scale"]=Vector2(.1,.1)
 	if 'character_name' in character_data:
 		self.character_name=character_data['character_name']
 	else:
@@ -63,8 +66,8 @@ func character_setup(character_data):
 	self.job=character_data['job']
 	if ClassData.class_dictionary[self.job]["sprite"] != '':
 		var texture_string="res://textures/"+ ClassData.class_dictionary[self.job]["sprite"]
-		$Sprite2D.texture = load(texture_string)
-		$Sprite2D.scale = Vector2(.75,.75)
+		sprite.texture = load(texture_string)
+		sprite.scale = Vector2(.75,.75)
 	if 'tags' in character_data:
 		self.tags=character_data['tags']
 	else:
@@ -73,7 +76,6 @@ func character_setup(character_data):
 		stat_setup(character_data['stats'])
 	else:
 		stat_setup(ClassData.class_dictionary[self.job])
-
 	if 'equipment' in character_data:
 		equipment_setup(character_data['equipment'])
 	else:
@@ -173,7 +175,7 @@ func turn(turn_action):
 		print("turn is over "+self.character_name)
 		GlobalSignalBus.turn_over.emit(self)
 	if turn_tracker['turn_complete']==true:
-		$Sprite2D.modulate=Color('WEB GRAY')
+		sprite.modulate=Color('WEB GRAY')
 
 
 func take_damage(damage:int):
@@ -255,18 +257,20 @@ func export_save_data():
 		"job":self.job,
 		"stats":package_stats(),
 		"tags":self.tags.duplicate(),
-		"equipment":self.equipment.duplicate(),
 		"spells":self.spells.duplicate(),
 		"abilities":self.abilities.duplicate(),
 		"experience":self.experience,
 		"level":self.level,
 		"inventory":self.inventory.duplicate(),
 	}
+	#it's easier to set up if equipment is an array
+	data["equipment"] = []
+	for x in equipment:
+		data["equipment"].append(x)
 	return data
 
 
 func take_damage_animation():
-	var sprite = $Sprite2D
 	var tween = get_tree().create_tween()
 	var move_range:int = 5
 	tween.tween_property(self, "modulate", Color.RED, .1)

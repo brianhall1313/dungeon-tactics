@@ -16,14 +16,18 @@ func fight(attacker,defender):
 		defence=_dice_roll(2)+defender.get_attack()
 	else:
 		defence=_dice_roll()+defender.get_attack()
-	if Global.debug:
-		GlobalSignalBus.combat_message.emit('Attack: '+ str(attack)+', Defence: '+ str(defence)) 
+	GlobalSignalBus.combat_message.emit('Attack: '+ str(attack)+', Defence: '+ str(defence)) 
 	if attack>=defence:
 		damage=attack+attacker.get_damage_bonus()
 		GlobalSignalBus.combat_message.emit('attacker: '+attacker.character_name+ ' hits defender: '+defender.character_name)
+		if attacker.current_weapon=='weapon':
+			GlobalSignalBus.play_animation.emit(Weapons.weapons_dictionary[attacker["equipment"][attacker.current_weapon]]["animation"],defender,false)
+		else:
+			GlobalSignalBus.play_animation.emit(Weapons.weapons_dictionary[attacker["equipment"][attacker.current_weapon]]["animation"],defender,attacker)
 		defender.take_damage(damage)
 	elif attacker.current_weapon=='weapon':
 		damage=defence+defender.get_damage_bonus()
+		GlobalSignalBus.play_animation.emit(Weapons.weapons_dictionary[defender["equipment"][defender.current_weapon]]["animation"],attacker,false)
 		GlobalSignalBus.combat_message.emit('defender: '+defender.character_name+ ' hits attacker: '+attacker.character_name)
 		attacker.take_damage(damage)
 	else:

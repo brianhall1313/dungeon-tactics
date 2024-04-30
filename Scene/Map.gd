@@ -15,9 +15,6 @@ var current_level_data
 var current_character:Character
 var selected_character
 var targeted_character
-var astar:AStar2D
-var fightstar:AStar2D
-var rangedfightstar:AStarGrid2D
 var tile: String
 var current_cell_id:int
 var highlighted_cells:Array
@@ -47,10 +44,6 @@ func _ready():
 	for x in players_list.alive_list:
 		GlobalSignalBus.place_character_default.emit(x)
 		x.select_weapon(false)
-	
-	astar=AStar2D.new()
-	fightstar=AStar2D.new()
-	rangedfightstar=AStarGrid2D.new()
 	
 	GlobalSignalBus.update_board.emit()
 
@@ -177,9 +170,9 @@ func play_sa_animation(character,defender,act):
 	#sprite can be either a string or an array for type of 4=string,28=array
 	if SpellsAndAbilities.spells_and_abilities_directory[act]['type'] == 'ranged_attack':
 		if typeof(sprite) == 4:
-			ranged_animation(character,defender,sprite)
+			Animator.ranged_animation(character,defender,sprite)
 		elif typeof(sprite) == 28:
-			ranged_animation(character,defender,sprite[0],sprite[1])
+			Animator.ranged_animation(character,defender,sprite[0],sprite[1])
 	elif SpellsAndAbilities.spells_and_abilities_directory[act]['type'] == 'heal':
 		if typeof(sprite) == 4:
 			heal_animation(character,defender,sprite)
@@ -188,36 +181,17 @@ func play_sa_animation(character,defender,act):
 	
 	
 	
-func ranged_animation(character,defender,sprite,ending=false):
-	GlobalSignalBus.change_state.emit('animation_state')
-	var animate: AnimatedSprite2D = Global.effects[sprite].instantiate()
-	var ending_sprite: AnimatedSprite2D
-	if ending:
-		ending_sprite = Global.effects[ending].instantiate()
-	add_child(animate)
-	animate.position = character.position
-	animate.look_at(defender)
-	animate.play()
-	var tween = create_tween()
-	tween.tween_property(animate,"position",defender,.5).from(animate.position)
-	tween.tween_callback(animate.queue_free)
-	await tween.finished
-	if ending:
-		add_child(ending_sprite)
-		ending_sprite.position = defender
-		ending_sprite.play()
-		await ending_sprite.animation_looped
-		ending_sprite.queue_free()
+
 
 
 func heal_animation(_character,target,sprite,ending=false):
 	#including character for now because I might want to set off a character animation too
 	GlobalSignalBus.change_state.emit('animation_state')
 	print("the sprite is ",sprite)
-	var animate: AnimatedSprite2D = Global.effects[sprite].instantiate()
+	var animate: AnimatedSprite2D = Animator.effects[sprite].instantiate()
 	var ending_sprite: AnimatedSprite2D
 	if ending:
-		ending_sprite = Global.effects[ending].instantiate()
+		ending_sprite = Animator.effects[ending].instantiate()
 	add_child(animate)
 	animate.position = target
 	animate.play()
@@ -287,6 +261,7 @@ func _on_grid_interact_grid_interaction():#I don't know if this should go here
 	for x in players_list.alive_list:
 		if local_to_map(x.position)==local_to_map(Pointer.position):
 			current_character=x
+			print(current_character.equipment)
 			if Global.debug == true:#we only have this like this so that we can test stuff effectively for now
 				current_character.turn_start()
 			GlobalSignalBus.change_state.emit('character_interaction')
@@ -304,10 +279,9 @@ func _on_grid_interact_grid_interaction():#I don't know if this should go here
 func _on_movement_selection_grid_interaction():
 	var possible_movement=MovementTools.tiles_in_movement_range(board_state,current_character)
 	if Vector2i(local_to_map(Pointer.position)) in possible_movement:
-		possible_movement=[]
 		GlobalSignalBus.change_state.emit('animation_state')
 		var path = MovementTools.get_path_list(board_state,current_character,Pointer.grid_position)
-		var tween = create_tween()
+		var tween = get_tree().create_tween()
 		var previous_spot = current_character.position
 		for spot in path:
 			if spot != current_character.grid_position:
@@ -499,7 +473,7 @@ func _on_sa_resolution_grid_interaction():
 
 func animate_summon(summon):
 	GlobalSignalBus.change_state.emit('animation_state')
-	var animate: AnimatedSprite2D = Global.effects["summon_circle"].instantiate()
+	var animate: AnimatedSprite2D = Animator.effects["summon_circle"].instantiate()
 	add_child(animate)
 	animate.position = map_to_local(summon.default_position)
 	animate.play()

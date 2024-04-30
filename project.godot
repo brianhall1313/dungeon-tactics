@@ -33,6 +33,7 @@ Names="*res://Resources/names.gd"
 LevelData="*res://Resources/level_data.gd"
 SaveAndLoad="*res://Resources/save_and_load.gd"
 World="*res://Global/World.gd"
+Animator="*res://Resources/animator.gd"
 
 [display]
 
