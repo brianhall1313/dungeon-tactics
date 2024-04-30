@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b8o77r1wrb1e"]
+[gd_scene load_steps=25 format=3 uid="uid://b8o77r1wrb1e"]
 
 [ext_resource type="Texture2D" uid="uid://dh08b4qup0itx" path="res://textures/green_indicator_panel.png" id="1_13gvn"]
 [ext_resource type="Texture2D" uid="uid://oruggxc88fk1" path="res://textures/wall_edge_bottom_left.png" id="1_dldbh"]
@@ -13,7 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://dgc22y5uorvtp" path="res://Scene/BattleLists.tscn" id="6_qg3yy"]
 [ext_resource type="Texture2D" uid="uid://c4y56ad41nemf" path="res://textures/reticle.png" id="6_tgq7n"]
 [ext_resource type="Texture2D" uid="uid://brqy3ufkygnll" path="res://textures/purple_indicator_panel.png" id="9_olphb"]
-[ext_resource type="PackedScene" uid="uid://ccnqpbi2cakl6" path="res://Scene/fight_menu.tscn" id="14_l63jg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y8y1k"]
 texture = ExtResource("1_13gvn")
@@ -88,18 +87,9 @@ script = ExtResource("2_xpoqu")
 
 [node name="Pointer" parent="." instance=ExtResource("3_bibh5")]
 z_index = 5
+position = Vector2(600, 328)
 offset = Vector2(0, -10)
 metadata/_edit_group_ = true
 
 [node name="Camera2D2" type="Camera2D" parent="Pointer"]
 zoom = Vector2(3, 3)
-limit_left = -50
-limit_top = -50
-limit_right = 10000
-limit_bottom = 10000
-
-[node name="fight_menus" parent="." instance=ExtResource("14_l63jg")]
-
-[connection signal="fight_selected" from="fight_menus" to="." method="_on_fight_menu_fight_selected"]
-[connection signal="movement_selected" from="fight_menus" to="." method="_on_fight_menu_movement_selected"]
-[connection signal="turn_end_selected" from="fight_menus" to="." method="_on_fight_menu_turn_end_selected"]

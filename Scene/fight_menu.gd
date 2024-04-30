@@ -15,8 +15,6 @@ func _ready():
 	hide()
 
 
-
-
 func update_menu(character):
 	if character:
 		if len(character.abilities)>0 or len(character.spells)>0:

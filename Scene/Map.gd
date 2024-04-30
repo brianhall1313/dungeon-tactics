@@ -1,7 +1,5 @@
 extends TileMap
 @onready var Pointer=$Pointer
-@onready var fight_menus=$fight_menus
-@onready var fight_menu=$fight_menus/fight_menu
 @onready var battle_lists=$battle_lists
 @onready var players_list
 @onready var enemies_list
@@ -47,7 +45,7 @@ func _ready():
 		x.select_weapon(false)
 	
 	GlobalSignalBus.update_board.emit()
-	setup_camera()
+	
 
 
 func connected_to_signal_bus():
@@ -61,7 +59,9 @@ func connected_to_signal_bus():
 	GlobalSignalBus.connect("summoning",_on_summoning)
 	GlobalSignalBus.connect('save',_save)
 	GlobalSignalBus.connect('push_request',_push_request_received)
-	
+	GlobalSignalBus.connect("move_selected",_on_fight_menu_movement_selected)
+	GlobalSignalBus.connect("fight_selected",_on_fight_menu_fight_selected)
+	GlobalSignalBus.connect("turn_end_selected",_on_fight_menu_turn_end_selected)
 
 func setup_camera():
 	camera.limit_right=len(board_state)*rendering_quadrant_size+50
@@ -273,8 +273,7 @@ func _on_grid_interact_grid_interaction():#I don't know if this should go here
 			if Global.debug == true:#we only have this like this so that we can test stuff effectively for now
 				current_character.turn_start()
 			GlobalSignalBus.change_state.emit('character_interaction')
-			fight_menu.show_menu()
-			fight_menus.move(Pointer.position)
+			GlobalSignalBus.show_fight_menu.emit()
 			GlobalSignalBus.update_board.emit()
 			var possible_targets=RangeFinder.targets_from_space(board_state,current_character,current_character.grid_position)
 			if len(possible_targets)>0:
@@ -299,7 +298,7 @@ func _on_movement_selection_grid_interaction():
 		current_character.tween_movement(current_character.previous_position,Pointer.grid_position)
 		clear_layer(1)
 		GlobalSignalBus.change_state.emit('character_interaction')
-		fight_menu.show_menu()
+		GlobalSignalBus.show_fight_menu.emit()
 		#TODO:Remember, when we change the final state of the turn this needs to move to that one
 		GlobalSignalBus.update_board.emit()
 		
@@ -314,8 +313,7 @@ func _on_fight_menu_movement_selected():
 
 func _on_movement_selection_escape_pressed():
 	Pointer.movement(current_character.grid_position,current_character.position)
-	fight_menu.show_menu()
-	fight_menus.move(Pointer.position)
+	GlobalSignalBus.show_fight_menu.emit()
 	GlobalSignalBus.update_board.emit()
 	clear_layer(1)
 	GlobalSignalBus.change_state.emit('character_interaction')
@@ -356,8 +354,7 @@ func _on_fight_selection_grid_interaction():
 func _on_update_board():
 	print('updating')
 	board_state=get_board_state()
-	fight_menus.position=Pointer.position
-	fight_menu.update_menu(current_character)
+	GlobalSignalBus.update_menu.emit(current_character)
 
 func _on_turn_over(character):
 	board_state=get_board_state()
@@ -371,11 +368,9 @@ func _on_turn_over(character):
 
 
 func _on_character_interaction_escape_pressed():
-	if fight_menus.sa_open==false:
 		GlobalSignalBus.change_state.emit("grid_interact")
-		fight_menu.hide()
-	else:
-		fight_menus.sa_close()
+		GlobalSignalBus.hide_fight_menu.emit()
+		GlobalSignalBus.hide_sa_menu.emit()
 
 
 func _on_fight_selection_escape_pressed():
@@ -383,8 +378,7 @@ func _on_fight_selection_escape_pressed():
 	
 	clear_layer(1)
 	clear_layer(2)
-	fight_menu.show()
-	fight_menu.fight_button.grab_focus()
+	GlobalSignalBus.show_fight_menu.emit()
 	GlobalSignalBus.change_state.emit("character_interaction")
 
 
@@ -413,8 +407,7 @@ func _on_grid_interact_escape_pressed():
 			if current_character.turn_tracker['moved'] and current_character.turn_tracker['turn_complete']==false:
 				current_character.undo_movement()
 				Pointer.movement(local_to_map(current_character.position),current_character.position)
-				fight_menus.move(Pointer.position)
-				fight_menu.update_menu(current_character)
+				GlobalSignalBus.update_menu.emit(current_character)
 				return
 	GlobalSignalBus.change_state.emit("pause_menu")
 
@@ -424,16 +417,25 @@ func _on_fight_menu_turn_end_selected():
 	GlobalSignalBus.change_state.emit("grid_interact")
 
 
+func space_in_bounds(space:Vector2i):
+	if space.x <= width and space.x >=0:
+		if space.y <= height and space.y >=0:
+			return true
+	return false
+
+
 func _move_request_received(character,space:Vector2i):
-	character.movement(map_to_local(space),space)
+	if space_in_bounds(space):
+		character.movement(map_to_local(space),space)
 	GlobalSignalBus.update_board.emit()
 
 func _push_request_received(character,space):
-	if MovementTools.can_move_to(board_state,character,space):
-		character.movement(map_to_local(space),space)
-	elif MovementTools.will_fall(board_state,character,space):
-		GlobalSignalBus.combat_message.emit(character.character_name + " has fallen down a hole!!")
-		character.take_damage(9999999)
+	if space_in_bounds(space):
+		if MovementTools.can_move_to(board_state,character,space):
+			character.movement(map_to_local(space),space)
+		elif MovementTools.will_fall(board_state,character,space):
+			GlobalSignalBus.combat_message.emit(character.character_name + " has fallen down a hole!!")
+			character.take_damage(9999999)
 	GlobalSignalBus.update_board.emit()
 
 
@@ -514,7 +516,7 @@ func _on_sa_resolution_escape_pressed():
 	Pointer.movement(current_character.grid_position,current_character.position)
 	clear_layer(1)
 	clear_layer(2)
-	fight_menus.sa_close()
+	GlobalSignalBus.hide_sa_menu.emit()
 	GlobalSignalBus.change_state.emit("character_interaction")
 
 
@@ -544,8 +546,11 @@ func setup_level(level):
 	var layout:Array=level['grid_layout'].split(':')
 	height=len(layout)
 	width=len(layout[0])
+	#this information is relevant to their function
 	MovementTools.setup(height,width)
 	RangeFinder.setup(height,width)
+	#we need to tell the camera how far it can go
+	setup_camera()
 	clear_layer(0)
 	clear_layer(-1)
 	var row:int = 0

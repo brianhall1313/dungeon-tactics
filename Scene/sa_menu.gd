@@ -10,6 +10,7 @@ signal activate(name:String)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GlobalSignalBus.connect("sa_button_pressed",_on_sa_button_pressed)
+	GlobalSignalBus.connect("show_sa_menu",show_menu)
 	hide()
 
 func show_menu():

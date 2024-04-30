@@ -157,6 +157,7 @@ func setup_health_bar():
 		style.bg_color = Color("RED")
 	if self.faction == "player":
 		style.bg_color = Color("BLUE")
+	style.set_corner_radius_all(5)
 
 
 
