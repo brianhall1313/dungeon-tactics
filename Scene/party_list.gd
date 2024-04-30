@@ -39,7 +39,7 @@ func revive(character,pos):
 		alive_list.append(character)
 		dead_list.erase(character)
 		character.position=pos
-		character.turn_start()
+		character.revive()
 
 
 func add(character_data, return_copy = false):

@@ -92,9 +92,11 @@ offset = Vector2(0, -10)
 metadata/_edit_group_ = true
 
 [node name="Camera2D2" type="Camera2D" parent="Pointer"]
-zoom = Vector2(4, 4)
-limit_left = -100
-limit_top = -100
+zoom = Vector2(3, 3)
+limit_left = -50
+limit_top = -50
+limit_right = 10000
+limit_bottom = 10000
 
 [node name="fight_menus" parent="." instance=ExtResource("14_l63jg")]
 

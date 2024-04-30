@@ -8,6 +8,8 @@ func fight(attacker,defender):
 	var attack:int
 	var defence:int
 	var damage:int
+	#This next line makes sure that the defender doesn't fight back with a bow
+	defender.select_weapon(true) 
 	if attacker.faction=='player':
 		attack=_dice_roll(2)+attacker.get_attack()
 	else:
@@ -32,6 +34,7 @@ func fight(attacker,defender):
 		attacker.take_damage(damage)
 	else:
 		GlobalSignalBus.combat_message.emit("attack missed:" + str(attack)+ " vs "+str(defence))
+		GlobalSignalBus.play_animation.emit(Weapons.weapons_dictionary[attacker["equipment"][attacker.current_weapon]]["animation"],defender,attacker)
 
 
 func _dice_roll(num_rolls:int=1,advantage:bool=true):

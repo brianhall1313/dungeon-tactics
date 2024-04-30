@@ -15,9 +15,22 @@ func _ready():
 
 func _on_play_animation(animation,target,origin):
 	if origin:
-		ranged_animation(origin,target,animation)
+		play_basic_ranged(animation,target,origin)
 	else:
 		play_basic(animation,target)
+
+
+func play_basic_ranged(animation, target, origin):
+	#target is a character
+	var sprite = effects[animation].instantiate()
+	sprite.position = origin.position
+	get_tree().current_scene.add_child(sprite)
+	sprite.look_at(target.position)
+	var tween = get_tree().create_tween()
+	tween.tween_property(sprite,"position",target.position,.5).from(sprite.position)
+	tween.tween_callback(sprite.queue_free)
+
+
 
 func play_basic(animation,target):
 	var sprite = effects[animation].instantiate()
@@ -28,6 +41,7 @@ func play_basic(animation,target):
 	sprite.queue_free()
 
 func ranged_animation(character,defender,sprite,ending=false):
+	#the defender in this case is just a vector2
 	GlobalSignalBus.change_state.emit('animation_state')
 	var animate: AnimatedSprite2D = effects[sprite].instantiate()
 	var ending_sprite: AnimatedSprite2D
@@ -35,7 +49,7 @@ func ranged_animation(character,defender,sprite,ending=false):
 		ending_sprite = effects[ending].instantiate()
 	get_tree().current_scene.add_child(animate)
 	animate.position = character.position
-	animate.look_at(defender.position)
+	animate.look_at(defender)
 	animate.play()
 	var tween = get_tree().create_tween()
 	tween.tween_property(animate,"position",defender,.5).from(animate.position)

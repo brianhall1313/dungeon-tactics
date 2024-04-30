@@ -31,6 +31,8 @@ extends AnimatedSprite2D
 @export var turn_tracker:Dictionary={'moved':false,'action':false,'turn_complete':false}
 
 @onready var sprite = $Sprite2D
+@onready var health_bar = $health_bar
+
 
 var previous_position:Vector2
 var previous_position_coor:Vector2i
@@ -40,6 +42,7 @@ var possible_targets:Array=[]
 signal dead(character)	
 
 func turn_start():
+	set_health_bar_value(current_health)
 	sprite.modulate=Color('WHITE')
 	for point in self.turn_tracker:
 		self.turn_tracker[point] = false
@@ -89,6 +92,7 @@ func character_setup(character_data):
 	else:
 		ability_setup(ClassData.class_dictionary[self.job]['abilities'])
 	select_weapon(false)
+	setup_health_bar()
 	turn_start()
 
 
@@ -103,6 +107,10 @@ func stat_setup(njob:Dictionary):
 
 func set_default_position(pos):
 	return Vector2i(pos[0],pos[1])
+
+
+func set_health_bar_value(i:int):
+	health_bar.value = i
 
 
 
@@ -137,6 +145,19 @@ func spell_setup(spell_list:Array):
 func ability_setup(new_abilities:Array):
 	for ability in new_abilities:
 		self.spells.append(ability)
+
+
+func setup_health_bar():
+	health_bar.max_value = self.health
+	health_bar.value = self.health
+	
+	var style = StyleBoxFlat.new()
+	health_bar.add_theme_stylebox_override('fill',style)
+	if self.faction == "enemy":
+		style.bg_color = Color("RED")
+	if self.faction == "player":
+		style.bg_color = Color("BLUE")
+
 
 
 func select_weapon(in_combat:bool):
@@ -184,9 +205,11 @@ func take_damage(damage:int):
 		GlobalSignalBus.combat_message.emit("The damage dealt is "+str(damage))
 		if current_health<=damage:
 			current_health=0
+			set_health_bar_value(current_health)
 			on_lethal_hit()
 		else:
 			current_health-=damage
+			set_health_bar_value(current_health)
 			take_damage_animation()
 	else:
 		GlobalSignalBus.combat_message.emit("Armor blocked the damage")
@@ -198,7 +221,14 @@ func heal(amount:int):
 			current_health=health
 		else:
 			current_health+=amount
-	print(character_name,"healed for",amount)
+	set_health_bar_value(current_health)
+	GlobalSignalBus.combat_message.emit(character_name + "healed for" + str(amount))
+
+
+func revive():
+	self.current_health = self.health
+	set_health_bar_value(self.health)
+	turn_start()
 
 
 

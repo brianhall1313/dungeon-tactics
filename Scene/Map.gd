@@ -5,6 +5,7 @@ extends TileMap
 @onready var battle_lists=$battle_lists
 @onready var players_list
 @onready var enemies_list
+@onready var camera = $Pointer/Camera2D2
 
 var action:String=''
 var dir:Dictionary={"Down":Vector2i(0,1),"Up":Vector2i(0,-1),"Left":Vector2i(-1,0),"Right":Vector2i(1,0)}
@@ -46,6 +47,7 @@ func _ready():
 		x.select_weapon(false)
 	
 	GlobalSignalBus.update_board.emit()
+	setup_camera()
 
 
 func connected_to_signal_bus():
@@ -60,6 +62,12 @@ func connected_to_signal_bus():
 	GlobalSignalBus.connect('save',_save)
 	GlobalSignalBus.connect('push_request',_push_request_received)
 	
+
+func setup_camera():
+	camera.limit_right=len(board_state)*rendering_quadrant_size+50
+	camera.limit_bottom=len(board_state[0])*rendering_quadrant_size+50
+
+
 
 func get_board_state():
 	var map_info=[]

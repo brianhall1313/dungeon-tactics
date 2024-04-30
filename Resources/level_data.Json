@@ -3,7 +3,7 @@
 		"level":"test",
 		"name":"test_level",
 		"placement_spaces":[[0,0],[1,0],[2,0],[0,1],[1,1],[2,1],[0,2],[1,2],[2,2]],
-		"default_placements":{"wizard":[1,0],"apprentice":[0,0],"ranger":[2,0],"archer":[0,1],"treasure_hunter":[1,1],"templar":[2,1],"thug":[0,2],"knight":[1,2],"infantryman":[2,2],"barbarian":[3,1]},
+		"default_placements":{"wizard":[1,0],"apprentice":[0,0],"ranger":[2,0],"archer":[0,1],"treasure_hunter":[1,1],"templar":[2,1],"thug":[0,2],"knight":[1,2],"infantryman":[2,2],"barbarian":[1,3]},
 		"grid_layout":"4445454444:4445444444:4445545444:5444445455:5455545454:4444444454:4545454454:4544454454:4545444444:4444555544",
 		"enemies":[
 			{"default_position":[3,3],"faction":"enemy","job":"thief"},

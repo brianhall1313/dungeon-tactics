@@ -1,21 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://b6xf531vg6wbn"]
+[gd_scene load_steps=2 format=3 uid="uid://b6xf531vg6wbn"]
 
 [ext_resource type="Texture2D" uid="uid://lxwp8bsy1sat" path="res://textures/weapon_arrow.png" id="1_jlg1q"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_06387"]
-atlas = ExtResource("1_jlg1q")
-region = Rect2(0, 0, 7, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_b36vc"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_06387")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
 [node name="Node2D" type="AnimatedSprite2D"]
-sprite_frames = SubResource("SpriteFrames_b36vc")
+top_level = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("1_jlg1q")
