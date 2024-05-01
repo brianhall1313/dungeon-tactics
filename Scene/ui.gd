@@ -66,3 +66,4 @@ func _on_turn_end_button_up():
 func _show_turn_end():
 	turn_end_button.show()
 	turn_end_button.grab_focus()
+

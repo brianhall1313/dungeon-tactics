@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://8n4nwj6mh27g"]
+
+[ext_resource type="Theme" uid="uid://5fu88ou1dk5" path="res://Resources/dungeon_theme.tres" id="1_v1c1v"]
+[ext_resource type="Script" path="res://Scene/tutorial_button.gd" id="2_fa15s"]
+
+[node name="tutorial_button" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+theme = ExtResource("1_v1c1v")
+toggle_mode = true
+text = "How to Play"
+script = ExtResource("2_fa15s")
+
+[node name="tutorial_window" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(353, 0)
+layout_mode = 0
+offset_left = 8.0
+offset_top = 40.0
+offset_right = 86.0
+offset_bottom = 130.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="tutorial_window"]
+layout_mode = 2
+
+[node name="tutorial_page_title" type="Label" parent="tutorial_window/VBoxContainer"]
+layout_mode = 2
+
+[node name="tutorial_text" type="Label" parent="tutorial_window/VBoxContainer"]
+layout_mode = 2
+
+[node name="tutorial_button_box" type="HBoxContainer" parent="tutorial_window/VBoxContainer"]
+layout_mode = 2
+
+[node name="back_button" type="Button" parent="tutorial_window/VBoxContainer/tutorial_button_box"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Back"
+
+[node name="page_count" type="Label" parent="tutorial_window/VBoxContainer/tutorial_button_box"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0/0"
+horizontal_alignment = 1
+
+[node name="forward_button" type="Button" parent="tutorial_window/VBoxContainer/tutorial_button_box"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Forward"
+
+[connection signal="toggled" from="." to="." method="_on_toggled"]
+[connection signal="button_up" from="tutorial_window/VBoxContainer/tutorial_button_box/back_button" to="." method="_on_back_button_button_up"]
+[connection signal="button_up" from="tutorial_window/VBoxContainer/tutorial_button_box/forward_button" to="." method="_on_forward_button_button_up"]
