@@ -13,6 +13,7 @@ extends Control
 
 func _ready():
 	hide()
+	print($PanelContainer.size)
 
 
 func update(character):
@@ -21,9 +22,9 @@ func update(character):
 		character_job_label.text='Undead '+character.job
 	else:
 		character_job_label.text=character.job
-	move_label.text='move: '+str(character.move)
-	combat_label.text='combat: '+str(character.combat)
-	ranged_combat_label.text='ranged combat: '+str(character.ranged_combat)
-	will_label.text='will: '+str(character.will)
-	armor_label.text='armor: '+str(character.armor)
-	health_label.text='health: '+str(character.current_health)+"/"+str(character.health)
+	move_label.text=str(character.move)
+	combat_label.text=str(character.combat)
+	ranged_combat_label.text=str(character.ranged_combat)
+	will_label.text=str(character.will)
+	armor_label.text=str(character.armor)
+	health_label.text=str(character.current_health)+"/"+str(character.health)

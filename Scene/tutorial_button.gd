@@ -10,6 +10,7 @@ extends Button
 var current_page:int=0
 var titles:Array[String]=[
 	'Intro',
+	"Controls",
 	'Stats I',
 	'Stats II',
 	'Combat Introduction',
@@ -28,6 +29,10 @@ var tutorial:Array[String]=[
 	to stop. You must defeat all the enemies
 	before you so none may strike you from 
 	behind''',
+	'''Arrow keys or WASD to move the pointer 
+	around the map
+	Spacebar to interact and confirm.
+	ESC to exit menus and cancel selections''',
 	'''Each character in Dungeon Tactics
 	 has six stats. 
 	Move is how many tiles the character 
@@ -46,12 +51,12 @@ var tutorial:Array[String]=[
 	Health Is how much stamina the character
 	has. if this gets to zero the character 
 	dies''',
-	'''Combat takes place in rounds,  with each side
-	 taking their turn before going on the next round.
-	Each character can take a move action and another 
-	non move action per turn.(they can also pass at 
-	any time). Currently the only goal is to defeat 
-	all enemies
+	'''Combat takes place in rounds,  with each 
+	side taking their turn before going on the next 
+	round. Each character can take a move action and 
+	another non move action per turn.(they can also 
+	pass at any time). Currently the only goal is to 
+	defeat all enemies.
 	''',
 	'''Combat can be a very dangerous 
 	proposition. When engaging in melee combat
@@ -98,8 +103,7 @@ func show_page(new):
 		title.text=titles[current_page]
 		tutorial_text.text=tutorial[current_page]
 		page_count.text=str(current_page+1)+" / "+str(page_max)
-		if Global.debug:
-			print(window.size)
+
 
 
 

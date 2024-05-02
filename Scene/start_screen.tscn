@@ -7,7 +7,7 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_juqqs"]
 font_size = 64
-font_color = Color(1, 0.733333, 0, 1)
+font_color = Color(1, 0.690196, 0, 1)
 
 [node name="start_screen" type="Node2D"]
 script = ExtResource("1_va7rj")
@@ -25,12 +25,12 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -244.5
-offset_top = 200.0
-offset_right = 244.5
-offset_bottom = 263.0
+offset_left = -202.667
+offset_top = 197.333
+offset_right = 212.333
+offset_bottom = 260.333
 grow_horizontal = 2
-text = "Tactics Game Demo"
+text = "Dungeon Tactics"
 label_settings = SubResource("LabelSettings_juqqs")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]

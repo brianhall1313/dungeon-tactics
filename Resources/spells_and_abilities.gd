@@ -1,17 +1,22 @@
 extends Node
 
 @onready var spells_and_abilities_directory:Dictionary={
-	'Bone Dart':{"type":'ranged_attack',"animation":"",'cost':8,"range":5, "power":5,'bonus':0,'area':0,'effect':[],
+	'Bone Dart':{"spell":true,"type":'ranged_attack',"animation":"",'cost':8,"range":5, "power":5,'bonus':0,'area':0,'effect':[],
 	'description':'Fire a shard of bone at your opponent'},
-	'Elemental Bolt': {"type":'ranged_attack',"animation":"fireball",'cost':10,"range":5, "power":8,'bonus':0,'area':0,'effect':[],
+	'Elemental Bolt': {"spell":true,"type":'ranged_attack',"animation":"fireball",'cost':10,"range":5, "power":8,'bonus':0,'area':0,'effect':[],
 	'description':'Fire a bolt of pure energy at your target'},
-	'Elemental Blast': {"type":'ranged_attack',"animation":["fireball","elemental_explosion"],'cost':10,"range":5, "power":5,'bonus':0,'area':1,'effect':[],
+	'Elemental Blast': {"spell":true,"type":'ranged_attack',"animation":["fireball","elemental_explosion"],'cost':10,"range":5, "power":5,'bonus':0,'area':1,'effect':[],
 	'description':'Fire an unstable elemental bolt, which explodes upon contact'},
-	'Heal':{"type":'heal',"animation":"heal",'cost':8,"range":5, "power":8,'bonus':0,'area':0,'effect':[]},
-	'Heal Burst':{"type":'heal',"animation":"heal",'cost':10,"range":5, "power":5,'bonus':0,'area':1,'effect':[]},
-	'Summon Animal':{"type":'summon',"animation":"summon_circle",'cost':10,"range":5, "power":0,'bonus':0,'area':0,'effect':['summon animal']},
-	'Summon Undead':{"type":'summon',"animation":"summon_circle",'cost':10,"range":5, "power":0,'bonus':0,'area':0,'effect':['summon undead']},
-	'Heavy Strike':{"type":"attack","animation":"","cost":1,"range":1,"power":4,"bonus":0,"area":0,"effect":['push back']},
+	'Heal':{"spell":true,"type":'heal',"animation":"heal",'cost':8,"range":5, "power":8,'bonus':0,'area':0,'effect':[],
+	'description':'Fill the target with magical vigor, healing them'},
+	'Heal Burst':{"spell":true,"type":'heal',"animation":"heal",'cost':10,"range":5, "power":5,'bonus':0,'area':1,'effect':[],
+	'description':'Fill a region with magical vigor, healing them'},
+	'Summon Animal':{"spell":true,"type":'summon',"animation":"summon_circle",'cost':10,"range":5, "power":0,'bonus':0,'area':0,'effect':['summon animal'],
+	'description':'Summon an animal constructed from magic to fight by your side'},
+	'Summon Undead':{"spell":true,"type":'summon',"animation":"summon_circle",'cost':10,"range":5, "power":0,'bonus':0,'area':0,'effect':['summon undead'],
+	'description':'FIll a corpse with magic and use it as a puppet to fight for you'},
+	'Heavy Strike':{"spell":false,"type":"attack","animation":"","cost":1,"range":1,"power":4,"bonus":0,"area":0,"effect":['push back'],
+	'description':'Strike your opponent with all your might, knocking them back'},
 	
 }
 

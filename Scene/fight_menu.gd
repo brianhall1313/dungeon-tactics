@@ -33,10 +33,8 @@ func update_menu(character):
 			fight_button.set_disabled(false)
 			sa_button.set_disabled(false)
 
-func move(pos:Vector2):
-	position=pos
-
 func show_menu():
+	print("inner menu called")
 	show()
 	$fight_menu_move.grab_focus()
 

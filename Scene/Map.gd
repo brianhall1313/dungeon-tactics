@@ -369,8 +369,9 @@ func _on_turn_over(character):
 
 func _on_character_interaction_escape_pressed():
 		GlobalSignalBus.change_state.emit("grid_interact")
-		GlobalSignalBus.hide_fight_menu.emit()
 		GlobalSignalBus.hide_sa_menu.emit()
+		GlobalSignalBus.hide_fight_menu.emit()
+
 
 
 func _on_fight_selection_escape_pressed():

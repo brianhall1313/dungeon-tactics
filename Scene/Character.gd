@@ -304,6 +304,7 @@ func export_save_data():
 func take_damage_animation():
 	var tween = get_tree().create_tween()
 	var move_range:int = 5
+	GlobalSignalBus.play_effect.emit("basic_hit")
 	tween.tween_property(self, "modulate", Color.RED, .1)
 	var start_x = sprite.offset.x - move_range
 	var mid_x = sprite.offset.x 

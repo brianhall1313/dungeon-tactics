@@ -15,16 +15,16 @@ layer = 3
 script = ExtResource("1_l51oo")
 
 [node name="left_portrait" parent="." instance=ExtResource("2_ipuaa")]
-offset_left = 250.0
-offset_top = 572.0
-offset_right = -838.0
-offset_bottom = -12.0
+offset_left = 304.0
+offset_top = 568.0
+offset_right = -784.0
+offset_bottom = -16.0
 
 [node name="right_portrait" parent="." instance=ExtResource("2_ipuaa")]
-offset_left = 840.0
-offset_top = 572.0
-offset_right = -248.0
-offset_bottom = -12.0
+offset_left = 784.0
+offset_top = 568.0
+offset_right = -304.0
+offset_bottom = -16.0
 
 [node name="field_menu" parent="." instance=ExtResource("1_p5vc8")]
 visible = false
@@ -70,9 +70,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -224.0
+offset_left = -304.0
 offset_top = -88.0
-offset_right = -72.0
+offset_right = -152.0
 offset_bottom = -35.0
 grow_horizontal = 0
 grow_vertical = 0

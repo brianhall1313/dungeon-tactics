@@ -47,6 +47,7 @@ func _on_fight_menu_sa_setup(character):
 			if character.turn_tracker['action']:
 				button.disabled=true
 			add_child(button)
+			button.populate_description()
 
 	if len(character.spells)>0:
 		for i in character.spells:
@@ -56,6 +57,7 @@ func _on_fight_menu_sa_setup(character):
 			if character.turn_tracker['action']:
 				button.disabled=true
 			add_child(button)
+			button.populate_description()
 
 
 func _on_sa_button_pressed(text):

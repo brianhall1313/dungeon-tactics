@@ -3,7 +3,6 @@ signal movement_selected
 signal fight_selected
 signal turn_end_selected
 
-@onready var sa_open:bool=false
 
 func _ready():
 	GlobalSignalBus.connect("show_fight_menu",show_menu)
@@ -14,11 +13,15 @@ func _ready():
 
 
 func show_menu():
+	print("show menu")
+	print(position)
 	$fight_menu.show_menu()
 	$fight_menu/fight_menu_move.grab_focus()
 	
 func hide_menu():
-	hide()
+	print("hide menu")
+	print(position)
+	$fight_menu.hide()
 
 
 func sa_close():
@@ -40,10 +43,3 @@ func _on_fight_menu_movement_selected():
 func _on_fight_menu_turn_end_selected():
 	GlobalSignalBus.turn_end_selected.emit()
 
-
-func _on_sa_menu_open():
-	sa_open = true
-
-
-func _on_sa_menu_go_back_pressed():
-	sa_open = false

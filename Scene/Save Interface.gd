@@ -31,7 +31,8 @@ func populate_data(title,saves):
 	for slot in range(4):
 		buttons[slot].text=title+append_title
 		if saves[slot]:
-			slots[slot].text = "Wizard: " + saves[slot]['wizard'] +'\nLast Save: ' + saves[slot]['last save']
+			var raw_time = saves[slot]['last save'].replace('T','\n')
+			slots[slot].text = "Wizard: " + saves[slot]['wizard'] +'\nLast Save: ' + raw_time
 		else:
 			slots[slot].text ="Wizard: None \nLast Save: None"
 			if interface_type == "Load":
