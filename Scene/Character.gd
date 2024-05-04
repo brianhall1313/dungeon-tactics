@@ -223,7 +223,7 @@ func heal(amount:int):
 		else:
 			current_health+=amount
 	set_health_bar_value(current_health)
-	GlobalSignalBus.combat_message.emit(character_name + "healed for" + str(amount))
+	GlobalSignalBus.combat_message.emit(character_name + " is healed for " + str(amount))
 
 
 func revive():
@@ -268,6 +268,34 @@ func calculate_armor():
 		elif equipment[x] == 'staff':
 			#Staff armor bonus
 			self.armor += 1
+
+
+func cast(action:String):
+	if SpellsAndAbilities.spells_and_abilities_directory[action]:
+		if SpellsAndAbilities.spells_and_abilities_directory[action]["spell"]:
+			var cast = AttackTools._dice_roll()+will
+			if cast >= SpellsAndAbilities.spells_and_abilities_directory[action]['cost']: 
+				return true
+			else:
+				GlobalSignalBus.combat_message.emit(character_name + ' has failed to cast: got a '+str(cast))
+				return false
+		else:
+			take_raw_damage(SpellsAndAbilities.spells_and_abilities_directory[action]["cost"])
+			return true
+	return false
+
+
+func take_raw_damage(damage:int):
+	GlobalSignalBus.combat_message.emit(self.character_name+" pays the price: "+str(damage))
+	if current_health<=damage:
+		current_health=0
+		set_health_bar_value(current_health)
+		on_lethal_hit()
+	else:
+		current_health-=damage
+		set_health_bar_value(current_health)
+
+
 
 
 func package_stats():

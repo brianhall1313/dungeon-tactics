@@ -234,8 +234,7 @@ func sa_attack():
 	if Pointer.grid_position in tiles_in_range:
 		defenders=RangeFinder.sa_area_targets(board_state,Pointer.grid_position,action)
 		if defenders:
-			var cast = AttackTools._dice_roll()+current_character.will
-			if cast >= SpellsAndAbilities.spells_and_abilities_directory[action]['cost']: 
+			if current_character.cast(action): 
 				var animated:bool=false
 				for defender in defenders:
 					if SpellsAndAbilities.spells_and_abilities_directory[action]["area"] >0 and animated == false:
@@ -244,8 +243,6 @@ func sa_attack():
 					elif SpellsAndAbilities.spells_and_abilities_directory[action]["area"] == 0:
 						play_sa_animation(current_character,defender.position,action)
 					AttackTools.special_action(current_character,defender,action)
-			else:
-				GlobalSignalBus.combat_message.emit(current_character.character_name + ' has failed to cast: got a '+str(cast))
 			GlobalSignalBus.change_state.emit('grid_interact')
 			current_character.turn('action')
 			action=''
@@ -261,14 +258,11 @@ func sa_heal():
 	if Pointer.grid_position in tiles_in_range:
 		targets=RangeFinder.sa_area_targets(board_state,Pointer.grid_position,action)
 		if targets:
-			var cast = AttackTools._dice_roll()+current_character.will
-			if cast >= SpellsAndAbilities.spells_and_abilities_directory[action]['cost']:
+			if current_character.cast(action):
 				for target in targets:
 					print(target.character_name)
 					play_sa_animation(current_character,target.position,action)
 					target.heal(SpellsAndAbilities.spells_and_abilities_directory[action]["power"])
-			else:
-				GlobalSignalBus.combat_message.emit(current_character.character_name + ' has failed to cast: got a '+str(cast))
 			GlobalSignalBus.change_state.emit('grid_interact')
 			current_character.turn('action')
 			action=''
@@ -510,13 +504,9 @@ func _on_summoning(summon):
 	var ok_to_summon=MovementTools.can_move_to(board_state,summon,summon.default_position)
 	print('time to summon')
 	if ok_to_summon:
-		var cast = AttackTools._dice_roll()+current_character.will
-		if cast >= SpellsAndAbilities.spells_and_abilities_directory[action]['cost']: 
-			print(cast)
+		if current_character.cast(action): 
 			animate_summon(summon)
 			battle_lists.add_character(summon)
-		else:
-			GlobalSignalBus.combat_message.emit(current_character.character_name + ' has failed to cast: got a '+str(cast))
 		GlobalSignalBus.change_state.emit('grid_interact')
 		current_character.turn('action')
 		action=''
