@@ -22,6 +22,9 @@
 script = ExtResource("1_2augq")
 
 [node name="Map" parent="." instance=ExtResource("2_1j2if")]
+layer_4/name = "characters"
+layer_4/z_index = 4
+layer_4/tile_data = PackedInt32Array()
 
 [node name="UI" parent="." instance=ExtResource("3_u86am")]
 

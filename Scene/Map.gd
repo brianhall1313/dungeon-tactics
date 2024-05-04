@@ -23,8 +23,14 @@ var in_attack_range:Array=[]
 
 
 var terrain:int = 0
-var highlights:int = 1
-
+var decorations:int = 1
+var highlights:int = 2
+var reticle:int = 3
+var summon_highlight: int = 6
+var reticle_sprite: int =3
+var move_highlight: int=2
+var attack_highlight: int=1
+var heal_highlight: int=0
 
 
 
@@ -98,7 +104,7 @@ func get_board_state():
 
 func draw_path(path):
 	for point in path:
-		set_cell(highlights,local_to_map(Vector2(point.x,point.y)),2,Vector2i(0,0))
+		set_cell(highlights,local_to_map(Vector2(point.x,point.y)),move_highlight,Vector2i(0,0))
 
 
 
@@ -115,12 +121,12 @@ func is_occupied(row,column):
 func display_move_range(character):
 	var possible_movement = MovementTools.tiles_in_movement_range(board_state,character)
 	for space in possible_movement:
-		set_cell(highlights,space,2,Vector2i(0,0))
+		set_cell(highlights,space,move_highlight,Vector2i(0,0))
 	
 	
 func display_placement_range(spaces):
 	for space in spaces:
-		set_cell(highlights,space,2,Vector2i(0,0))
+		set_cell(highlights,space,move_highlight,Vector2i(0,0))
 
 
 
@@ -130,7 +136,7 @@ func display_attack_range(character):
 	tiles_in_range=RangeFinder.tiles_in_attack_range(board_state,character)
 	for t in tiles_in_range:
 		if t != character.grid_position:
-			set_cell(highlights,t,1,Vector2i(0,0))#this displays he attack range to the player
+			set_cell(highlights,t,attack_highlight,Vector2i(0,0))#this displays he attack range to the player
 
 func display_range_sa(character,sa):
 	var tiles_in_range:Array
@@ -139,11 +145,11 @@ func display_range_sa(character,sa):
 	for t in tiles_in_range:
 		if t != character.grid_position:
 			if SpellsAndAbilities.spells_and_abilities_directory[sa]['type']=='attack' or SpellsAndAbilities.spells_and_abilities_directory[sa]['type']=='ranged_attack':
-				set_cell(highlights,t,1,Vector2i(0,0))
+				set_cell(highlights,t,attack_highlight,Vector2i(0,0))
 			if SpellsAndAbilities.spells_and_abilities_directory[sa]['type']=='heal':
-				set_cell(highlights,t,0,Vector2i(0,0))
+				set_cell(highlights,t,heal_highlight,Vector2i(0,0))
 			if SpellsAndAbilities.spells_and_abilities_directory[sa]['type']=='summon':
-				set_cell(highlights,t,6,Vector2i(0,0)) 
+				set_cell(highlights,t,summon_highlight,Vector2i(0,0)) 
 
 
 func ui_update():
@@ -171,13 +177,13 @@ func ui_update():
 			hide_selected_ui.emit()
 	if Global.current_state:
 		if Global.current_state.name == 'fight_selection':
-			clear_layer(2)
-			set_cell(2,Pointer.grid_position,3,Vector2i(0,0))
+			clear_layer(reticle)
+			set_cell(reticle,Pointer.grid_position,reticle_sprite,Vector2i(0,0))
 		elif Global.current_state.name =='sa_resolution':
 			var cells:Array=RangeFinder.cells_in_sa_area(board_state,Pointer.grid_position,action)
-			clear_layer(2)
+			clear_layer(reticle)
 			for cell in cells:
-				set_cell(2,cell,3,Vector2i(0,0))
+				set_cell(reticle,cell,reticle_sprite,Vector2i(0,0))
 
 
 func play_sa_animation(character,defender,act):
@@ -244,8 +250,8 @@ func sa_attack():
 			current_character.turn('action')
 			action=''
 			GlobalSignalBus.update_board.emit()
-			clear_layer(1)
-			clear_layer(2)
+			clear_layer(highlights)
+			clear_layer(reticle)
 
 
 func sa_heal():
@@ -267,8 +273,8 @@ func sa_heal():
 			current_character.turn('action')
 			action=''
 			GlobalSignalBus.update_board.emit()
-			clear_layer(1)
-			clear_layer(2)
+			clear_layer(highlights)
+			clear_layer(reticle)
 
 
 
@@ -303,7 +309,7 @@ func _on_movement_selection_grid_interaction():
 				previous_spot=map_to_local(spot)
 		await tween.finished
 		current_character.tween_movement(current_character.previous_position,Pointer.grid_position)
-		clear_layer(1)
+		clear_layer(highlights)
 		GlobalSignalBus.change_state.emit('character_interaction')
 		GlobalSignalBus.show_fight_menu.emit()
 		#TODO:Remember, when we change the final state of the turn this needs to move to that one
@@ -322,7 +328,7 @@ func _on_movement_selection_escape_pressed():
 	Pointer.movement(current_character.grid_position,current_character.position)
 	GlobalSignalBus.show_fight_menu.emit()
 	GlobalSignalBus.update_board.emit()
-	clear_layer(1)
+	clear_layer(highlights)
 	GlobalSignalBus.change_state.emit('character_interaction')
 
 
@@ -354,8 +360,8 @@ func _on_fight_selection_grid_interaction():
 		GlobalSignalBus.change_state.emit('grid_interact')
 		current_character.turn('action')
 		GlobalSignalBus.update_board.emit()
-		clear_layer(1)
-		clear_layer(2)
+		clear_layer(highlights)
+		clear_layer(reticle)
 	
 	
 func _on_update_board():
@@ -384,8 +390,8 @@ func _on_character_interaction_escape_pressed():
 func _on_fight_selection_escape_pressed():
 	Pointer.position=current_character.position
 	
-	clear_layer(1)
-	clear_layer(2)
+	clear_layer(highlights)
+	clear_layer(reticle)
 	GlobalSignalBus.show_fight_menu.emit()
 	GlobalSignalBus.change_state.emit("character_interaction")
 
@@ -515,15 +521,15 @@ func _on_summoning(summon):
 		current_character.turn('action')
 		action=''
 		GlobalSignalBus.update_board.emit()
-		clear_layer(1)
-		clear_layer(2)
+		clear_layer(highlights)
+		clear_layer(reticle)
 	
 
 
 func _on_sa_resolution_escape_pressed():
 	Pointer.movement(current_character.grid_position,current_character.position)
-	clear_layer(1)
-	clear_layer(2)
+	clear_layer(highlights)
+	clear_layer(reticle)
 	GlobalSignalBus.hide_sa_menu.emit()
 	GlobalSignalBus.change_state.emit("character_interaction")
 
@@ -559,7 +565,7 @@ func setup_level(level):
 	RangeFinder.setup(height,width)
 	#we need to tell the camera how far it can go
 	setup_camera()
-	clear_layer(0)
+	clear_layer(terrain)
 	clear_layer(-1)
 	var row:int = 0
 	var column:int = 0
