@@ -21,6 +21,13 @@ var death_spot:Vector2=map_to_local(Vector2i(-100,-100))
 
 var in_attack_range:Array=[]
 
+
+var terrain:int = 0
+var highlights:int = 1
+
+
+
+
 signal update_selected_ui(character)
 signal show_selected_ui
 signal hide_selected_ui
@@ -76,7 +83,7 @@ func get_board_state():
 		map_info.append([])
 		for column in range(height):
 			map_info[row].append([])
-			map_info[row][column]={"terrain"=get_cell_source_id(0,Vector2i(row,column))#returns a vector2I
+			map_info[row][column]={"terrain"=get_cell_source_id(terrain,Vector2i(row,column))#returns a vector2I
 			,'occupant'=is_occupied(row,column),
 			'center'=map_to_local(Vector2i(row,column)),
 			'id'=count}
@@ -91,7 +98,7 @@ func get_board_state():
 
 func draw_path(path):
 	for point in path:
-		set_cell(1,local_to_map(Vector2(point.x,point.y)),2,Vector2i(0,0))
+		set_cell(highlights,local_to_map(Vector2(point.x,point.y)),2,Vector2i(0,0))
 
 
 
@@ -108,12 +115,12 @@ func is_occupied(row,column):
 func display_move_range(character):
 	var possible_movement = MovementTools.tiles_in_movement_range(board_state,character)
 	for space in possible_movement:
-		set_cell(1,space,2,Vector2i(0,0))
+		set_cell(highlights,space,2,Vector2i(0,0))
 	
 	
 func display_placement_range(spaces):
 	for space in spaces:
-		set_cell(1,space,2,Vector2i(0,0))
+		set_cell(highlights,space,2,Vector2i(0,0))
 
 
 
@@ -123,7 +130,7 @@ func display_attack_range(character):
 	tiles_in_range=RangeFinder.tiles_in_attack_range(board_state,character)
 	for t in tiles_in_range:
 		if t != character.grid_position:
-			set_cell(1,t,1,Vector2i(0,0))#this displays he attack range to the player
+			set_cell(highlights,t,1,Vector2i(0,0))#this displays he attack range to the player
 
 func display_range_sa(character,sa):
 	var tiles_in_range:Array
@@ -132,11 +139,11 @@ func display_range_sa(character,sa):
 	for t in tiles_in_range:
 		if t != character.grid_position:
 			if SpellsAndAbilities.spells_and_abilities_directory[sa]['type']=='attack' or SpellsAndAbilities.spells_and_abilities_directory[sa]['type']=='ranged_attack':
-				set_cell(1,t,1,Vector2i(0,0))
+				set_cell(highlights,t,1,Vector2i(0,0))
 			if SpellsAndAbilities.spells_and_abilities_directory[sa]['type']=='heal':
-				set_cell(1,t,0,Vector2i(0,0))
+				set_cell(highlights,t,0,Vector2i(0,0))
 			if SpellsAndAbilities.spells_and_abilities_directory[sa]['type']=='summon':
-				set_cell(1,t,6,Vector2i(0,0)) 
+				set_cell(highlights,t,6,Vector2i(0,0)) 
 
 
 func ui_update():
@@ -559,7 +566,16 @@ func setup_level(level):
 	for r in layout:
 		row = 0
 		for c in r.split(''):
-			set_cell(0,Vector2i(row,column),int(c),Vector2i(0,0)) 
+			if c == 'c':
+				set_cell(terrain,Vector2i(row,column),Global.cap_stone,Vector2i(0,0))
+			elif c == '4':
+				set_cell(terrain,Vector2i(row,column),Global.free_spaces.pick_random(),Vector2i(0,0))
+			elif c == 't':
+				set_cell(terrain,Vector2i(row,column),Global.free_spaces.pick_random(),Vector2i(0,0))
+			elif c == 'w':
+				set_cell(terrain,Vector2i(row,column),Global.wall_spaces.pick_random(),Vector2i(0,0))
+			else:
+				set_cell(terrain,Vector2i(row,column),int(c),Vector2i(0,0)) 
 			row+=1
 		column +=1
 	for character in level['enemies']:

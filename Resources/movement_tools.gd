@@ -27,7 +27,7 @@ func construct_astar(board_state,character):
 func is_movable(board_state,character,pos):
 	var space =board_state[pos.x][pos.y]['terrain']
 	var occupant = board_state[pos.x][pos.y]['occupant']
-	if Global.wall_spaces.has(space):
+	if Global.wall_spaces.has(space) or space == Global.cap_stone:
 		return false
 	if occupant and occupant.faction != character.faction:
 		return false
@@ -49,7 +49,7 @@ func will_fall(board_state,_character,pos):
 func can_move_to(board_state,_character,pos):
 	var space =board_state[pos.x][pos.y]['terrain']
 	var occupant = board_state[pos.x][pos.y]['occupant']
-	if Global.wall_spaces.has(space):
+	if Global.wall_spaces.has(space) or space == Global.cap_stone:
 		return false
 	if occupant:
 		return false
