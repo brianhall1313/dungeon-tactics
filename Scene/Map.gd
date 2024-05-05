@@ -21,7 +21,7 @@ var death_spot:Vector2=map_to_local(Vector2i(-100,-100))
 
 var in_attack_range:Array=[]
 
-
+var background:int = -1
 var terrain:int = 0
 var decorations:int = 1
 var highlights:int = 2
@@ -566,8 +566,9 @@ func setup_level(level):
 				set_cell(terrain,Vector2i(row,column),Global.cap_stone,Vector2i(0,0))
 			elif c == '4':
 				set_cell(terrain,Vector2i(row,column),Global.free_spaces.pick_random(),Vector2i(0,0))
-			elif c == 't':
-				set_cell(terrain,Vector2i(row,column),Global.free_spaces.pick_random(),Vector2i(0,0))
+			elif c == 'd':
+				set_cell(terrain,Vector2i(row,column),Global.decorations.pick_random(),Vector2i(0,0))
+				set_cell(background,Vector2i(row,column),Global.free_spaces.pick_random(),Vector2i(0,0))
 			elif c == 'w':
 				set_cell(terrain,Vector2i(row,column),Global.wall_spaces.pick_random(),Vector2i(0,0))
 			else:
