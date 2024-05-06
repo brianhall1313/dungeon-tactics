@@ -56,6 +56,9 @@ text = "New Game"
 layout_mode = 2
 text = "Load Game"
 
+[node name="credits" type="Button" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+
 [node name="quit_button" type="Button" parent="ColorRect/VBoxContainer"]
 layout_mode = 2
 text = "Quit"
@@ -66,4 +69,5 @@ autoplay = true
 
 [connection signal="button_up" from="ColorRect/VBoxContainer/new_game" to="." method="_on_new_game_button_up"]
 [connection signal="button_up" from="ColorRect/VBoxContainer/load_game" to="." method="_on_load_game_button_up"]
+[connection signal="button_up" from="ColorRect/VBoxContainer/credits" to="." method="_on_credits_button_up"]
 [connection signal="button_up" from="ColorRect/VBoxContainer/quit_button" to="." method="_on_quit_button_button_up"]

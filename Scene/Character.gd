@@ -234,6 +234,7 @@ func revive():
 
 
 func on_lethal_hit():
+	take_damage_animation()
 	GlobalSignalBus.death.emit(self)
 	print('oh shit you got me!!')
 

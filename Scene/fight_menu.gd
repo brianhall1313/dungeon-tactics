@@ -17,8 +17,8 @@ func _ready():
 
 func update_menu(character):
 	if character:
+		populate_submenu(character)
 		if len(character.abilities)>0 or len(character.spells)>0:
-			populate_submenu(character)
 			sa_button.set_disabled(false)
 		else:
 			sa_button.set_disabled(true)

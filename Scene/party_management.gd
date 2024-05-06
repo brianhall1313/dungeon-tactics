@@ -84,7 +84,7 @@ func _character_selected(dude):
 	character_health.text = str(character["stats"]["health"])
 	equipment_window.text = ''
 	for item in character['equipment']:
-		equipment_window.text+=character['equipment'][item] + ", "
+		equipment_window.text+=item + ", "
 	equipment_window.text = equipment_window.text.erase(len(equipment_window.text)-2)
 
 

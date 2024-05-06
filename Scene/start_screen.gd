@@ -16,3 +16,7 @@ func _on_new_game_button_up():
 
 func _on_load_game_button_up():
 	get_tree().change_scene_to_file("res://Scene/load_game.tscn")
+
+
+func _on_credits_button_up():
+	get_tree().change_scene_to_file("res://Scene/credits.tscn")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://duo47r33ie2xj"]
 
-[ext_resource type="Script" path="res://party member button.gd" id="1_owtmf"]
+[ext_resource type="Script" path="res://Scene/party member button.gd" id="1_owtmf"]
 
 [node name="party member button" type="Button"]
 offset_right = 8.0

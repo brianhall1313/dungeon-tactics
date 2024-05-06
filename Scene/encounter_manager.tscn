@@ -59,6 +59,9 @@ script = ExtResource("14_o7qt0")
 [node name="ai_manager" type="Node" parent="."]
 script = ExtResource("9_hwfkw")
 
+[node name="Timer" type="Timer" parent="ai_manager"]
+one_shot = true
+
 [node name="BGM" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_1ae6u")
 autoplay = true

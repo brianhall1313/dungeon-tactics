@@ -21,12 +21,11 @@ var tutorial:Array[String]=[
 	'''Oh no!  The evil wizard Galdabog has
 	 risen from the dead. He is in the bottom
 	 of the dungeon that was his tomb. Erasmus
-	 the wizard,his apprentice, and as many 
+	 the wizard, his apprentice, and as many 
 	adventurers as they could find have formed
-	a party to stop Galdabog, but they have to
-	hurry. Galdabog has started to regain 
-	power will soon be too powerful for them 
-	to stop. You must defeat all the enemies
+	a party to stop Galdabog. Galdabog has started 
+	to regain power and will soon be too powerful 
+	for them to stop. You must defeat all the enemies
 	before you so none may strike you from 
 	behind''',
 	'''Arrow keys or WASD to move the pointer 

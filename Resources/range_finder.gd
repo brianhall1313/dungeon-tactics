@@ -161,21 +161,32 @@ func get_surrounding(board_state,character_grid_position):
 
 
 func targets_in_range_AI(board_state,character):
-	construct_astar()
+	#construct_astar()
 	var targets:Array=targets_in_range_basic(board_state,character)
+	var post:Array=[]
 	for target in targets:
-		if target.faction==character.faction:
-			targets.erase(target)
-	return targets
+		if target.faction!=character.faction:
+			post.append(target)
+	return post
 
 
 func targets_from_space_AI(board_state,character,space):
-	construct_astar()
+	#construct_astar()
 	var targets:Array=targets_from_space(board_state,character,space)
+	var post:Array=[]
 	for target in targets:
-		if target.faction==character.faction:
-			targets.erase(target)
-	return targets
+		if target.faction!=character.faction:
+			post.append(target)
+	return post
+
+func targets_in_full_range_AI(board_state,character):
+	var targets = targets_in_full_range(board_state,character)
+	var post:Array=[]
+	for target in targets:
+		if target.faction!=character.faction:
+			post.append(target)
+	return post
+
 
 func sa_area_targets(board_state,space,action):
 	construct_astar()

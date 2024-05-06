@@ -13,13 +13,11 @@ func _ready():
 
 
 func show_menu():
-	print("show menu")
 	print(position)
 	$fight_menu.show_menu()
 	$fight_menu/fight_menu_move.grab_focus()
 	
 func hide_menu():
-	print("hide menu")
 	print(position)
 	$fight_menu.hide()
 

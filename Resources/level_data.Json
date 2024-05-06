@@ -57,7 +57,7 @@
 			{"default_position":[7,10],"faction":"enemy","job":"infantryman"},
 			{"default_position":[7,12],"faction":"enemy","job":"archer"},
 			{"default_position":[9,3],"faction":"enemy","job":"infantryman"},
-			{"default_position":[9,4],"faction":"enemy","job":"man_at_arms"},
+			{"default_position":[9,14],"faction":"enemy","job":"man_at_arms"},
 			{"default_position":[11,11],"faction":"enemy","job":"archer"},
 			{"default_position":[13,10],"faction":"enemy","job":"thug"},
 			{"default_position":[14,2],"faction":"enemy","job":"thief"},

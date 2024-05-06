@@ -47,7 +47,6 @@ func will_fall(board_state,_character,pos):
 
 
 func can_move_to(board_state,_character,pos):
-	print("checking ", pos)
 	var space =board_state[pos.x][pos.y]['terrain']
 	var occupant = board_state[pos.x][pos.y]['occupant']
 	if Global.wall_spaces.has(space) or space == Global.cap_stone or Global.decorations.has(space):

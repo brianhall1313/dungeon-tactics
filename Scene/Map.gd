@@ -235,9 +235,10 @@ func sa_attack():
 					elif SpellsAndAbilities.spells_and_abilities_directory[action]["area"] == 0:
 						play_sa_animation(current_character,defender.position,action)
 					AttackTools.special_action(current_character,defender,action)
-			GlobalSignalBus.change_state.emit('grid_interact')
 			current_character.turn('action')
+			current_character=null
 			action=''
+			GlobalSignalBus.change_state.emit('grid_interact')
 			GlobalSignalBus.update_board.emit()
 			clear_layer(highlights)
 			clear_layer(reticle)
@@ -255,9 +256,9 @@ func sa_heal():
 					print(target.character_name)
 					play_sa_animation(current_character,target.position,action)
 					target.heal(SpellsAndAbilities.spells_and_abilities_directory[action]["power"])
-			GlobalSignalBus.change_state.emit('grid_interact')
 			current_character.turn('action')
 			action=''
+			current_character=null
 			GlobalSignalBus.update_board.emit()
 			clear_layer(highlights)
 			clear_layer(reticle)
@@ -268,6 +269,7 @@ func _on_grid_interact_grid_interaction():#I don't know if this should go here
 	for x in players_list.alive_list:
 		if local_to_map(x.position)==local_to_map(Pointer.position):
 			current_character=x
+			GlobalSignalBus.update_menu.emit(current_character)
 			print(current_character.grid_position, "current grid pos")
 			for row in range(len(board_state)):
 				for column in range(len(board_state[0])):
@@ -349,6 +351,7 @@ func _on_fight_selection_grid_interaction():
 		AttackTools.fight(current_character,defender)
 		GlobalSignalBus.change_state.emit('grid_interact')
 		current_character.turn('action')
+		current_character=null
 		GlobalSignalBus.update_board.emit()
 		clear_layer(highlights)
 		clear_layer(reticle)
@@ -373,6 +376,7 @@ func _on_turn_over(character):
 
 func _on_character_interaction_escape_pressed():
 		GlobalSignalBus.change_state.emit("grid_interact")
+		current_character=null
 		GlobalSignalBus.hide_sa_menu.emit()
 		GlobalSignalBus.hide_fight_menu.emit()
 
@@ -420,6 +424,7 @@ func _on_grid_interact_escape_pressed():
 func _on_fight_menu_turn_end_selected():
 	current_character.turn('turn_complete')
 	GlobalSignalBus.change_state.emit("grid_interact")
+	current_character=null
 
 
 func space_in_bounds(space:Vector2i):
@@ -504,9 +509,10 @@ func _on_summoning(summon):
 		if current_character.cast(action): 
 			animate_summon(summon)
 			battle_lists.add_character(summon)
-		GlobalSignalBus.change_state.emit('grid_interact')
 		current_character.turn('action')
 		action=''
+		GlobalSignalBus.change_state.emit('grid_interact')
+		current_character=null
 		GlobalSignalBus.update_board.emit()
 		clear_layer(highlights)
 		clear_layer(reticle)

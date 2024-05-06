@@ -1,6 +1,8 @@
 extends Node
 var board_state
 var list_manager
+@onready var timer = $Timer
+
 
 signal update_enemy_list
 
@@ -11,6 +13,8 @@ func begin_turn():
 	for character in list_manager.alive_list:
 		GlobalSignalBus.update_board.emit()
 		ai_character_turn(character)
+		timer.start()
+		await timer.timeout
 	GlobalSignalBus.all_units_activated.emit()
 
 
@@ -36,7 +40,7 @@ func ai_character_turn(character):
 				AttackTools.fight(character,dude)
 				#TODO maybe do move stuff?
 				return
-		#no valid initial targets
+	# if you get here no valid initial targets
 	#print('poke from After initial target finder')
 	var full_range_target_list=[]
 	#print(possible_movement)
@@ -44,7 +48,6 @@ func ai_character_turn(character):
 		var targets= RangeFinder.targets_from_space_AI(board_state,character,space)
 		if len(targets)>0:
 			full_range_target_list.append([space,targets])
-	print(full_range_target_list, character.character_name)
 	if len(full_range_target_list)>=1:
 		if character.combat>character.ranged_combat:
 			#if an enemy isn't within one move stand still, otherwise rush
@@ -56,7 +59,7 @@ func ai_character_turn(character):
 			if len(acceptable_ranged_targets)>0:
 				print(acceptable_ranged_targets)
 				target=acceptable_ranged_targets.pick_random()
-				print(target,"this is who I want to hit ")
+				print(target," this is who I want to hit ")
 				GlobalSignalBus.move_request.emit(character,target[0])
 				AttackTools.fight(character,target[1][0])
 				return
@@ -65,11 +68,11 @@ func ai_character_turn(character):
 			#for now ranged attacks will be against a random target that will not put you in combat
 			var acceptable_ranged_targets=[]
 			for maybe_space in full_range_target_list:
-				if !RangeFinder.would_put_in_combat(board_state,character.faction,maybe_space[0]):
+				if RangeFinder.would_put_in_combat(board_state,character.faction,maybe_space[0])==false:
 					acceptable_ranged_targets.append(maybe_space)
 			if len(acceptable_ranged_targets)>=1:
 				target=acceptable_ranged_targets.pick_random()
-				print(target,"this is who I want to hit ")
+				print(target[1][0]," this is who I want to hit ")
 				GlobalSignalBus.move_request.emit(character,target[0])
 				AttackTools.fight(character,target[1][0])
 				return
