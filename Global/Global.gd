@@ -2,7 +2,7 @@ extends Node
 
 var current_state:State
 var dead_position:Vector2
-var debug:bool = true
+var debug:bool = false
 var character=preload("res://Scene/Character.tscn")
 var cell_size:int = 16
 var current_level:int = 0

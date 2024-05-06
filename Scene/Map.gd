@@ -80,16 +80,12 @@ func connected_to_signal_bus():
 
 func get_board_state():
 	var map_info=[]
-	var count:int=1
 	for row in range(width):
 		map_info.append([])
 		for column in range(height):
 			map_info[row].append([])
 			map_info[row][column]={"terrain"=get_cell_source_id(terrain,Vector2i(row,column))#returns a vector2I
-			,'occupant'=is_occupied(row,column),
-			'center'=map_to_local(Vector2i(row,column)),
-			'id'=count}
-			count+=1
+			,'occupant'=is_occupied(row,column)}
 			
 			#We still need to add if the occupant makes this passable, or not
 	#print(map_info)
@@ -272,7 +268,11 @@ func _on_grid_interact_grid_interaction():#I don't know if this should go here
 	for x in players_list.alive_list:
 		if local_to_map(x.position)==local_to_map(Pointer.position):
 			current_character=x
-			print(current_character.equipment)
+			print(current_character.grid_position, "current grid pos")
+			for row in range(len(board_state)):
+				for column in range(len(board_state[0])):
+					if board_state[row][column]["occupant"]:
+						print(board_state[row][column]["occupant"].character_name," is at ",row,", ",column)
 			if Global.debug == true:#we only have this like this so that we can test stuff effectively for now
 				current_character.turn_start()
 			GlobalSignalBus.change_state.emit('character_interaction')
@@ -357,7 +357,8 @@ func _on_fight_selection_grid_interaction():
 func _on_update_board():
 	print('updating')
 	board_state=get_board_state()
-	GlobalSignalBus.update_menu.emit(current_character)
+	if current_character:
+		GlobalSignalBus.update_menu.emit(current_character)
 
 func _on_turn_over(character):
 	board_state=get_board_state()
@@ -549,6 +550,7 @@ func setup_level(level):
 	var layout:Array=level['grid_layout'].split(':')
 	height=len(layout)
 	width=len(layout[0])
+	print("height(y) = "+str(height)+",width(x) = "+str(width))
 	#this information is relevant to their function
 	MovementTools.setup(height,width)
 	RangeFinder.setup(height,width)
@@ -581,10 +583,10 @@ func setup_level(level):
 		column +=1
 	for character in level['enemies']:
 		battle_lists.add_character(character)
-	get_board_state()
 	#TODO we will do custom placement later
 	#party_placement()
 	spawn_characters(level["default_placements"])
+	GlobalSignalBus.update_board.emit()
 	
 
 

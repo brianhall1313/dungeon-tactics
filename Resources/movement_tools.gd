@@ -47,6 +47,7 @@ func will_fall(board_state,_character,pos):
 
 
 func can_move_to(board_state,_character,pos):
+	print("checking ", pos)
 	var space =board_state[pos.x][pos.y]['terrain']
 	var occupant = board_state[pos.x][pos.y]['occupant']
 	if Global.wall_spaces.has(space) or space == Global.cap_stone or Global.decorations.has(space):
@@ -62,8 +63,8 @@ func can_move_to(board_state,_character,pos):
 func tiles_in_movement_range(board_state,character):
 	construct_astar(board_state,character)
 	var possible_movement:Array=[]
-	for row in height:
-		for column in width:
+	for row in width:
+		for column in height:
 			var pos: Vector2i = Vector2i(row,column)
 			var range_to_tile=abs(row-character.grid_position.x)+abs(column-character.grid_position.y)
 			if character.grid_position != pos and range_to_tile<=character.move:

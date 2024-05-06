@@ -52,7 +52,9 @@ func ai_character_turn(character):
 			for maybe_space in full_range_target_list:
 				if RangeFinder.would_put_in_combat(board_state,character.faction,maybe_space[0]):
 					acceptable_ranged_targets.append(maybe_space)
-			if len(acceptable_ranged_targets)>=0:
+			print(acceptable_ranged_targets)
+			if len(acceptable_ranged_targets)>0:
+				print(acceptable_ranged_targets)
 				target=acceptable_ranged_targets.pick_random()
 				print(target,"this is who I want to hit ")
 				GlobalSignalBus.move_request.emit(character,target[0])

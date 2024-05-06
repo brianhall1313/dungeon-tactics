@@ -154,7 +154,13 @@ autowrap_mode = 2
 layout_mode = 2
 text = "Load Game"
 
+[node name="Button" type="Button" parent="Background/MarginContainer/Interface Frame"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Go Back"
+
 [connection signal="button_up" from="Background/MarginContainer/Interface Frame/Save Access/Save Slot 1/Save Slot Frame/Button" to="." method="_on_button_one"]
 [connection signal="button_up" from="Background/MarginContainer/Interface Frame/Save Access/Save Slot 2/Save Slot Frame/Button" to="." method="_on_button_two"]
 [connection signal="button_up" from="Background/MarginContainer/Interface Frame/Save Access/Save Slot 3/Save Slot Frame/Button" to="." method="_on_button_three"]
 [connection signal="button_up" from="Background/MarginContainer/Interface Frame/Save Access/Save Slot 4/Save Slot Frame/Button" to="." method="_on_button_four"]
+[connection signal="button_up" from="Background/MarginContainer/Interface Frame/Button" to="." method="_on_button_button_up"]

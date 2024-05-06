@@ -38,6 +38,7 @@ layout_mode = 2
 text = "End Turn"
 
 [node name="save_party" type="Button" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Save Party"
 

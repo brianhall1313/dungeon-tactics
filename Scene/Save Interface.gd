@@ -65,4 +65,8 @@ func _on_button_four():
 		GlobalSignalBus.save.emit(4)
 
 
-
+func _on_button_button_up():
+	if interface_type == 'Load':
+		get_tree().change_scene_to_file("res://Scene/start_screen.tscn")
+	elif interface_type == 'Save':
+		get_tree().change_scene_to_file("res://Scene/level_select.tscn")
