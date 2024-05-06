@@ -5,14 +5,18 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if World.level_progress["test"]:
+	if World.level_progress["entrance"]:
 		button1.disabled=true
-	if World.level_progress["road"]:
+	if World.level_progress["guard"]:
+		button2.disabled=true
+	if World.level_progress["descent"]:
 		button2.disabled=true
 
 
 
-
+func level_three():
+	Global.current_level=2
+	get_tree().change_scene_to_file("res://Scene/encounter_manager.tscn")
 
 
 func level_two():

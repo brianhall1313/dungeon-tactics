@@ -5,8 +5,9 @@ extends Node
 var player_party:Array=[]
 var player_inventory: Array=[]
 var player_gold: int=0
-var level_progress:Dictionary={"test":false,
-								"road":false,
+var level_progress:Dictionary={"entrance":false,
+								"guard":false,
+								"descent":false,
 								}
 
 

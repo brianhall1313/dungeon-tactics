@@ -6,3 +6,6 @@
 [node name="Pointer" type="Sprite2D"]
 texture = ExtResource("1_64cka")
 script = ExtResource("2_c5l2w")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)

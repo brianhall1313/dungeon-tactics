@@ -3,7 +3,6 @@ extends TileMap
 @onready var battle_lists=$battle_lists
 @onready var players_list
 @onready var enemies_list
-@onready var camera = $Pointer/Camera2D2
 
 var action:String=''
 var dir:Dictionary={"Down":Vector2i(0,1),"Up":Vector2i(0,-1),"Left":Vector2i(-1,0),"Right":Vector2i(1,0)}
@@ -76,9 +75,6 @@ func connected_to_signal_bus():
 	GlobalSignalBus.connect("fight_selected",_on_fight_menu_fight_selected)
 	GlobalSignalBus.connect("turn_end_selected",_on_fight_menu_turn_end_selected)
 
-func setup_camera():
-	camera.limit_right=len(board_state)*rendering_quadrant_size+50
-	camera.limit_bottom=len(board_state[0])*rendering_quadrant_size+50
 
 
 
@@ -536,13 +532,16 @@ func _save():
 	SaveAndLoad.save_game(data,1)
 	#SaveAndLoad.load_game(1)
 
-func spawn_test_characters(data):
+func spawn_characters(data):
 	if Global.debug:
 		World.load_default_data()
 	for character in World.player_party:
 		character["faction"]="player"
 		character["default_position"]=data[character["job"]]
 		battle_lists.add_character(character)
+		if character["job"] == "wizard":
+			var temp_pos = Vector2i(character["default_position"][0],character["default_position"][1])
+			Pointer.movement(temp_pos,map_to_local(temp_pos))
 
 
 func setup_level(level):
@@ -554,7 +553,6 @@ func setup_level(level):
 	MovementTools.setup(height,width)
 	RangeFinder.setup(height,width)
 	#we need to tell the camera how far it can go
-	setup_camera()
 	clear_layer(terrain)
 	clear_layer(-1)
 	var row:int = 0
@@ -567,10 +565,16 @@ func setup_level(level):
 			elif c == '4':
 				set_cell(terrain,Vector2i(row,column),Global.free_spaces.pick_random(),Vector2i(0,0))
 			elif c == 'd':
-				set_cell(terrain,Vector2i(row,column),Global.decorations.pick_random(),Vector2i(0,0))
-				set_cell(background,Vector2i(row,column),Global.free_spaces.pick_random(),Vector2i(0,0))
+				var x = Global.decorations.pick_random()
+				if x == 24:
+					set_cell(decorations,Vector2i(row,column-1),x,Vector2i(0,0))
+					set_cell(terrain,Vector2i(row,column),x,Vector2i(0,1))
+				else:
+					set_cell(terrain,Vector2i(row,column),x,Vector2i(0,0))
 			elif c == 'w':
 				set_cell(terrain,Vector2i(row,column),Global.wall_spaces.pick_random(),Vector2i(0,0))
+			elif c == 's':
+				set_cell(terrain,Vector2i(row,column),Global.stairs,Vector2i(0,0))
 			else:
 				set_cell(terrain,Vector2i(row,column),int(c),Vector2i(0,0)) 
 			row+=1
@@ -580,7 +584,7 @@ func setup_level(level):
 	get_board_state()
 	#TODO we will do custom placement later
 	#party_placement()
-	spawn_test_characters(level["default_placements"])
+	spawn_characters(level["default_placements"])
 	
 
 

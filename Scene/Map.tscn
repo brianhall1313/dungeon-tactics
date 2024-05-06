@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://b8o77r1wrb1e"]
+[gd_scene load_steps=57 format=3 uid="uid://b8o77r1wrb1e"]
 
 [ext_resource type="Texture2D" uid="uid://dh08b4qup0itx" path="res://textures/green_indicator_panel.png" id="1_13gvn"]
 [ext_resource type="Texture2D" uid="uid://djcfnjsb24rgj" path="res://textures/red_indicator_panel.png" id="2_tehw5"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://c5vowgx7ngi60" path="res://textures/floor_1.png" id="3_jqgdf"]
 [ext_resource type="Texture2D" uid="uid://dfllpk6r1olxd" path="res://textures/blue_indicator_panel.png" id="3_ow06f"]
 [ext_resource type="Texture2D" uid="uid://c6kil4vj8i806" path="res://textures/floor_5.png" id="4_pyebp"]
+[ext_resource type="Texture2D" uid="uid://c87u71ip37arj" path="res://textures/floor_stairs.png" id="4_se65l"]
 [ext_resource type="Texture2D" uid="uid://c1jwyix2jfjbb" path="res://textures/hole.png" id="4_yg56k"]
 [ext_resource type="Texture2D" uid="uid://d1eli2rjywvan" path="res://textures/floor_6.png" id="5_6iuyq"]
 [ext_resource type="Texture2D" uid="uid://c0835biqhyg7o" path="res://textures/floor_7.png" id="6_7rf5f"]
@@ -40,6 +41,10 @@ texture = ExtResource("2_tehw5")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qi3lv"]
 texture = ExtResource("3_eugh7")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gq62u"]
+texture = ExtResource("4_se65l")
 0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t3g32"]
@@ -95,7 +100,7 @@ texture = ExtResource("15_mfsl3")
 texture = ExtResource("16_scf8o")
 0:0/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ta2dp"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gxn1k"]
 texture = ExtResource("17_6g5nh")
 0:0/0 = 0
 0:1/0 = 0
@@ -157,8 +162,9 @@ sources/10 = SubResource("TileSetAtlasSource_qi3lv")
 sources/21 = SubResource("TileSetAtlasSource_hpqa3")
 sources/22 = SubResource("TileSetAtlasSource_tanua")
 sources/23 = SubResource("TileSetAtlasSource_sbu38")
-sources/24 = SubResource("TileSetAtlasSource_ta2dp")
 sources/25 = SubResource("TileSetAtlasSource_07q7t")
+sources/11 = SubResource("TileSetAtlasSource_gq62u")
+sources/24 = SubResource("TileSetAtlasSource_gxn1k")
 
 [node name="Map" type="TileMap"]
 tile_set = SubResource("TileSet_mu355")
@@ -182,6 +188,3 @@ z_index = 5
 position = Vector2(600, 328)
 offset = Vector2(0, -10)
 metadata/_edit_group_ = true
-
-[node name="Camera2D2" type="Camera2D" parent="Pointer"]
-zoom = Vector2(3, 3)

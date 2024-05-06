@@ -92,7 +92,7 @@ func would_put_in_combat(board_state,faction,grid_position):
 
 func is_path_clear(board_state,path):
 	for point in path:
-		if Global.wall_spaces.has(board_state[point.x][point.y]['terrain']) or board_state[point.x][point.y]['terrain'] == Global.cap_stone:
+		if Global.wall_spaces.has(board_state[point.x][point.y]['terrain']) or board_state[point.x][point.y]['terrain'] == Global.cap_stone or Global.decorations.has(board_state[point.x][point.y]['terrain']):
 			return false
 	return true
 

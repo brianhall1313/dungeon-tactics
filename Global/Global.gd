@@ -8,6 +8,7 @@ var cell_size:int = 16
 var current_level:int = 0
 #cheap way to make 4 more likelyb
 @onready var free_spaces:Array[int] =[4,4,4,4,4,4,4,4,7,8,12,13,14,15,16]
+@onready var stairs:int = 11
 @onready var water_spaces:Array[int] =[]
 @onready var flight_spaces:Array[int] =[5]
 @onready var wall_spaces:Array[int] =[18,19,20]

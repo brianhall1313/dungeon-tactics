@@ -273,11 +273,11 @@ func calculate_armor():
 func cast(action:String):
 	if SpellsAndAbilities.spells_and_abilities_directory[action]:
 		if SpellsAndAbilities.spells_and_abilities_directory[action]["spell"]:
-			var cast = AttackTools._dice_roll()+will
-			if cast >= SpellsAndAbilities.spells_and_abilities_directory[action]['cost']: 
+			var cast_roll = AttackTools._dice_roll()+will
+			if cast_roll >= SpellsAndAbilities.spells_and_abilities_directory[action]['cost']: 
 				return true
 			else:
-				GlobalSignalBus.combat_message.emit(character_name + ' has failed to cast: got a '+str(cast))
+				GlobalSignalBus.combat_message.emit(character_name + ' has failed to cast: got a '+str(cast_roll))
 				return false
 		else:
 			take_raw_damage(SpellsAndAbilities.spells_and_abilities_directory[action]["cost"])

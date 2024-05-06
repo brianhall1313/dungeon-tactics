@@ -81,5 +81,5 @@ func load_default_data():
 		{"abilities":[],"character_name":"Erasmus","equipment":["staff"],"experience":0,"inventory":[],"job":"wizard","level":0,"spells":["Elemental Bolt","Elemental Blast","Summon Undead","Heal"],"stats":{"armor":10,"combat":2,"health":14,"move":6,"ranged_combat":0,"will":4},"tags":["humanoid","wizard"]},
 		{"abilities":[],"character_name":"Eliza","equipment":["staff"],"experience":0,"inventory":[],"job":"apprentice","level":0,"spells":["Elemental Bolt","Elemental Blast","Summon Undead","Heal"],"stats":{"armor":10,"combat":1,"health":12,"move":6,"ranged_combat":0,"will":2},"tags":["humanoid","apprentice"]},
 		],
-		"progress":{"road":false,"test":false}}
+		"progress":{"entrance":false,"guard":false,"descent":false}}
 	return party
