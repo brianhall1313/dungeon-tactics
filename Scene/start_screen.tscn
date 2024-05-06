@@ -58,6 +58,7 @@ text = "Load Game"
 
 [node name="credits" type="Button" parent="ColorRect/VBoxContainer"]
 layout_mode = 2
+text = "Credits"
 
 [node name="quit_button" type="Button" parent="ColorRect/VBoxContainer"]
 layout_mode = 2
