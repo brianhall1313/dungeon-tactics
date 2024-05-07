@@ -1,11 +1,3 @@
-[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://bcoqgx8in6e51"]
-
-[ext_resource type="Texture2D" uid="uid://dqstvmck6hbrv" path="res://textures/00_General_Pack.png" id="1_4m4gv"]
-
-[resource]
-texture = ExtResource("1_4m4gv")
-texture_margin_left = 10.0
-texture_margin_top = 10.0
-texture_margin_right = 10.0
-texture_margin_bottom = 10.0
-region_rect = Rect2(0, 64, 48, 16)
+version https://git-lfs.github.com/spec/v1
+oid sha256:db8bd3bf0b20b5aecaa724905e677a98390dd427117b9994323f47abde3cd2ff
+size 389

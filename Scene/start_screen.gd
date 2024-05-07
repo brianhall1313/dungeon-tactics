@@ -1,22 +1,3 @@
-extends Node2D
-
-
-
-
-
-
-func _on_quit_button_button_up():
-	get_tree().quit()
-
-
-func _on_new_game_button_up():
-	World.load_default_data()
-	get_tree().change_scene_to_file("res://Scene/level_select.tscn")
-
-
-func _on_load_game_button_up():
-	get_tree().change_scene_to_file("res://Scene/load_game.tscn")
-
-
-func _on_credits_button_up():
-	get_tree().change_scene_to_file("res://Scene/credits.tscn")
+version https://git-lfs.github.com/spec/v1
+oid sha256:7e7531e0d47aaacf8ef58afa921cad2bc064577c3ebe6ec10c3cd54e23965bf9
+size 390

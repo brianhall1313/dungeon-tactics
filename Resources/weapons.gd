@@ -1,24 +1,3 @@
-extends Node
-@export var weapons_dictionary:Dictionary={}
-@export var data_path="res://Resources/weapons.json"
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	weapons_dictionary=load_json()
-	if weapons_dictionary:
-		print('weapons loaded')
-	else:
-		print('failed to load weapons')
-
-func load_json():
-	if FileAccess.file_exists(data_path):
-		var data_file=FileAccess.open(data_path,FileAccess.READ)
-		var parsed_data=JSON.parse_string(data_file.get_as_text())
-		if parsed_data is Dictionary:
-			#print(parsed_data)
-			return parsed_data
-		else:
-			print('parsed data is not a dictionary')
-			return false
-	else:
-		print('Json parse error:file does not exist')
-		return false
+version https://git-lfs.github.com/spec/v1
+oid sha256:c45c5862e1a62064fdb3b8e75d07a104c8c4f258067b7bb108c79502f73f5530
+size 707

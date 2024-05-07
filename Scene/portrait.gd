@@ -1,14 +1,3 @@
-extends Control
-
-#I may or may not need these, I should be able to modulate the portrait. 
-@onready var frame=$PanelContainer/portrait_frame
-@onready var picture=$PanelContainer/MarginContainer/portrait_picture
-
-var color_tints: Dictionary = {'player':Color("blue"),
-								'enemy':Color('red')}
-func _ready():
-	hide()
-
-
-func update(character: Character):
-	modulate=color_tints[character.faction]
+version https://git-lfs.github.com/spec/v1
+oid sha256:dbfd167c2a5a0717099ee60a4c642f4ce97f584136b9095597d78af128ced11f
+size 398

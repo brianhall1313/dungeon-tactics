@@ -1,19 +1,3 @@
-extends State
-signal grid_interaction
-signal escape_pressed
-signal moved
-
-
-
-func _enter_state():
-	print('entered sa selection')
-
-
-func movement(direction):
-	GlobalSignalBus.movement.emit(direction)
-	
-func interact():
-	grid_interaction.emit()
-	
-func cancel():
-	escape_pressed.emit()
+version https://git-lfs.github.com/spec/v1
+oid sha256:36604307e355e1261c874d6f1055e2fc9960ff011491187dfa0fc0732b0d8af2
+size 282

@@ -1,34 +1,3 @@
-[remap]
-
-importer="texture"
-type="CompressedTexture2D"
-uid="uid://c5rnuucuq41ey"
-path="res://.godot/imported/npc_dwarf.png-d898a05e7686fb27af9058ad1148682e.ctex"
-metadata={
-"vram_texture": false
-}
-
-[deps]
-
-source_file="res://textures/npc_dwarf.png"
-dest_files=["res://.godot/imported/npc_dwarf.png-d898a05e7686fb27af9058ad1148682e.ctex"]
-
-[params]
-
-compress/mode=0
-compress/high_quality=false
-compress/lossy_quality=0.7
-compress/hdr_compression=1
-compress/normal_map=0
-compress/channel_pack=0
-mipmaps/generate=false
-mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
-process/fix_alpha_border=true
-process/premult_alpha=false
-process/normal_map_invert_y=false
-process/hdr_as_srgb=false
-process/hdr_clamp_exposure=false
-process/size_limit=0
-detect_3d/compress_to=1
+version https://git-lfs.github.com/spec/v1
+oid sha256:d28414982de7257b8bc0cdc11d303ce25caa4401589aa36111487e7c1d4c618c
+size 770

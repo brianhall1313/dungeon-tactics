@@ -1,11 +1,3 @@
-extends AudioStreamPlayer
-
-var effect_dict:Dictionary = {"basic_hit":preload("res://Sound/mixkit-fast-blow-2144.wav"),
-}
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	GlobalSignalBus.connect('play_effect',_on_play_effect)
-
-func _on_play_effect(effect):
-	stream=effect_dict[effect]
-	play()
+version https://git-lfs.github.com/spec/v1
+oid sha256:1af3fdd7730e7929fda660b227ef03fa318cbf022087b61c99080b53a530aea3
+size 324

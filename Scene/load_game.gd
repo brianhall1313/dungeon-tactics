@@ -1,25 +1,3 @@
-extends Node2D
-var saves :Array=[]
-@onready var save_interface=$"Save Interface"
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	populate_slots()
-	save_interface.populate_data("Load",saves)
-	GlobalSignalBus.connect('load_data',_load_data)
-
-func populate_slots():
-	saves = []
-	for slot in range(1,5):
-		var save_metadata = SaveAndLoad.load_metadata(slot)
-		saves.append(save_metadata)
-
-
-func _load_data(slot):
-	var data:Dictionary=SaveAndLoad.load_game(slot)
-	World.load_data(data)
-	get_tree().change_scene_to_file("res://Scene/level_select.tscn")
-
-func _unhandled_input(event):
-	if event is InputEventKey:
-		if event.pressed and event.keycode == KEY_ESCAPE:
-			get_tree().change_scene_to_file("res://Scene/start_screen.tscn")
+version https://git-lfs.github.com/spec/v1
+oid sha256:23bad984d0861a88738ebd0c0588f2eaa54b9ba1d38ec63aa227eb5fa1bed8c6
+size 759

@@ -1,33 +1,3 @@
-[remap]
-
-importer="font_data_dynamic"
-type="FontFile"
-uid="uid://befl6pi67ecye"
-path="res://.godot/imported/FreePixel.ttf-3c591f76e6bcd705fc44b98618ac6247.fontdata"
-
-[deps]
-
-source_file="res://Resources/FreePixel.ttf"
-dest_files=["res://.godot/imported/FreePixel.ttf-3c591f76e6bcd705fc44b98618ac6247.fontdata"]
-
-[params]
-
-Rendering=null
-antialiasing=1
-generate_mipmaps=false
-multichannel_signed_distance_field=false
-msdf_pixel_range=8
-msdf_size=48
-allow_system_fallback=true
-force_autohinter=false
-hinting=1
-subpixel_positioning=1
-oversampling=0.0
-Fallbacks=null
-fallbacks=[]
-Compress=null
-compress=true
-preload=[]
-language_support={}
-script_support={}
-opentype_features={}
+version https://git-lfs.github.com/spec/v1
+oid sha256:738a0889997bdf782467eaffe4adf05e8ef467ad9b4169e78486bba507d24839
+size 674

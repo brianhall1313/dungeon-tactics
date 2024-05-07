@@ -1,23 +1,3 @@
-extends Node
-
-var current_state:State
-var dead_position:Vector2
-var debug:bool = false
-var character=preload("res://Scene/Character.tscn")
-var cell_size:int = 16
-var current_level:int = 0
-#cheap way to make 4 more likelyb
-@onready var free_spaces:Array[int] =[4,4,4,4,4,4,4,4,7,8,12,13,14,15,16]
-@onready var stairs:int = 11
-@onready var water_spaces:Array[int] =[]
-@onready var flight_spaces:Array[int] =[5]
-@onready var wall_spaces:Array[int] =[18,19,20]
-@onready var cap_stone: int = 17
-@onready var torch = preload("res://Animations/torch.tscn")
-@onready var decorations:Array[int] = [22,24]
-
-func _ready():
-	randomize()
-
-func set_death_position(new_position:Vector2):
-	dead_position=new_position
+version https://git-lfs.github.com/spec/v1
+oid sha256:029c32d2725e0dc3aad37324b334e87a1e9ec70c5013e9e709d3764ed65f3e0b
+size 701

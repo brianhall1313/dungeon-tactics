@@ -1,10 +1,3 @@
-[gd_scene load_steps=2 format=3 uid="uid://b6xf531vg6wbn"]
-
-[ext_resource type="Texture2D" uid="uid://lxwp8bsy1sat" path="res://textures/weapon_arrow.png" id="1_jlg1q"]
-
-[node name="Node2D" type="AnimatedSprite2D"]
-top_level = true
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-rotation = 1.5708
-texture = ExtResource("1_jlg1q")
+version https://git-lfs.github.com/spec/v1
+oid sha256:6ebce2d5a867cacfbbc6cf19fe69458ab1c8aba120b06320c592438f95e4012f
+size 334

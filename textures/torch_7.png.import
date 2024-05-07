@@ -1,34 +1,3 @@
-[remap]
-
-importer="texture"
-type="CompressedTexture2D"
-uid="uid://hobwjirltmi7"
-path="res://.godot/imported/torch_7.png-684a161c2d70353f46f81add9fdf59d6.ctex"
-metadata={
-"vram_texture": false
-}
-
-[deps]
-
-source_file="res://textures/torch_7.png"
-dest_files=["res://.godot/imported/torch_7.png-684a161c2d70353f46f81add9fdf59d6.ctex"]
-
-[params]
-
-compress/mode=0
-compress/high_quality=false
-compress/lossy_quality=0.7
-compress/hdr_compression=1
-compress/normal_map=0
-compress/channel_pack=0
-mipmaps/generate=false
-mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
-process/fix_alpha_border=true
-process/premult_alpha=false
-process/normal_map_invert_y=false
-process/hdr_as_srgb=false
-process/hdr_clamp_exposure=false
-process/size_limit=0
-detect_3d/compress_to=1
+version https://git-lfs.github.com/spec/v1
+oid sha256:15bee8a8200a6935ffbb61868060bbaba541d849b37ddc35fd1e211ebc528ae8
+size 763

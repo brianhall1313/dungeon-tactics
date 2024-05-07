@@ -1,11 +1,3 @@
-{"dagger":{"name":"Dagger","hands":1,"range":1,"attack_bonus":0,"damage_bonus":-1,"add_effects":[],"animation":"slash"},
-"unarmed":{"name":"Unarmed","hands":2,"range":1,"attack_bonus":-2,"damage_bonus":-2,"add_effects":[],"animation":"blunt"},
-"sword":{"name":"Sword","hands":1,"range":1,"attack_bonus":0,"damage_bonus":0,"add_effects":[],"animation":"slash"},
-"axe":{"name":"Axe","hands":1,"range":1,"attack_bonus":-1,"damage_bonus":2,"add_effects":[],"animation":"slash"},
-"great_weapon":{"name":"Greatsword","hands":2,"range":1,"attack_bonus":0,"damage_bonus":2,"add_effects":[],"animation":"slash"},
-"staff":{"name":"Staff","hands":2,"range":1,"attack_bonus":0,"damage_bonus":-1,"add_effects":[],"animation":"blunt"},
-"bow":{"name":"Bow","hands":2,"range":5,"attack_bonus":0,"damage_bonus":0,"add_effects":[],"animation":"arrow"},
-"crossbow":{"name":"Crossbow","hands":2,"range":5,"attack_bonus":0,"damage_bonus":2,"add_effects":[],"animation":"arrow"},
-"bear claws":{"name":"Bear Claws","hands":2,"range":1,"attack_bonus":0,"damage_bonus":2,"add_effects":[],"animation":"slash"},
-"bite":{"name":"Bite","hands":2,"range":1,"attack_bonus":0,"damage_bonus":1,"add_effects":[],"animation":"slash"},
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:57cef0b244652484fe1c264e6f735972eba4563d671c58f689c1744b35596fc8
+size 1202

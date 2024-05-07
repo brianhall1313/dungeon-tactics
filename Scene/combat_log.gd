@@ -1,11 +1,3 @@
-extends RichTextLabel
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	GlobalSignalBus.connect('combat_message',_print_combat_message)
-
-
-func _print_combat_message(message:String):
-	self.append_text('\n')
-	self.append_text(message)
+version https://git-lfs.github.com/spec/v1
+oid sha256:e3c7ccff106d247d8f02cbc334f123ea940015ec128bbbe88a61ea7238576e7a
+size 266

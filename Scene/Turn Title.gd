@@ -1,19 +1,3 @@
-extends Label
-
-@onready var timer = $Timer
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	GlobalSignalBus.connect("turn_start",_on_turn_start)
-	hide()
-
-
-func _on_turn_start(turn):
-	if turn == "player":
-		self.text = "Player Turn!"
-	elif turn == "enemy":
-		self.text = "Enemey Turn!"
-	self.show()
-	timer.start()
-	await timer.timeout
-	self.hide()
+version https://git-lfs.github.com/spec/v1
+oid sha256:6395d48baa92e3b56269bb0e1b262accc3f6d2b39873271ffddd89519a30f31d
+size 380

@@ -1,34 +1,3 @@
-[remap]
-
-importer="texture"
-type="CompressedTexture2D"
-uid="uid://dwevk0fjfcnb1"
-path="res://.godot/imported/arrow_3.png-95acf7047845281c2f493fe64c339790.ctex"
-metadata={
-"vram_texture": false
-}
-
-[deps]
-
-source_file="res://textures/arrow_3.png"
-dest_files=["res://.godot/imported/arrow_3.png-95acf7047845281c2f493fe64c339790.ctex"]
-
-[params]
-
-compress/mode=0
-compress/high_quality=false
-compress/lossy_quality=0.7
-compress/hdr_compression=1
-compress/normal_map=0
-compress/channel_pack=0
-mipmaps/generate=false
-mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
-process/fix_alpha_border=true
-process/premult_alpha=false
-process/normal_map_invert_y=false
-process/hdr_as_srgb=false
-process/hdr_clamp_exposure=false
-process/size_limit=0
-detect_3d/compress_to=1
+version https://git-lfs.github.com/spec/v1
+oid sha256:c8c34126df71c35563f4eeb861fb475cd476a7e33314447c5740d5d91f39a827
+size 764

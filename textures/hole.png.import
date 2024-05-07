@@ -1,34 +1,3 @@
-[remap]
-
-importer="texture"
-type="CompressedTexture2D"
-uid="uid://c1jwyix2jfjbb"
-path="res://.godot/imported/hole.png-a7b154b049cb1937a06c59e988e16b59.ctex"
-metadata={
-"vram_texture": false
-}
-
-[deps]
-
-source_file="res://textures/hole.png"
-dest_files=["res://.godot/imported/hole.png-a7b154b049cb1937a06c59e988e16b59.ctex"]
-
-[params]
-
-compress/mode=0
-compress/high_quality=false
-compress/lossy_quality=0.7
-compress/hdr_compression=1
-compress/normal_map=0
-compress/channel_pack=0
-mipmaps/generate=false
-mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
-process/fix_alpha_border=true
-process/premult_alpha=false
-process/normal_map_invert_y=false
-process/hdr_as_srgb=false
-process/hdr_clamp_exposure=false
-process/size_limit=0
-detect_3d/compress_to=1
+version https://git-lfs.github.com/spec/v1
+oid sha256:e7da7f54f8bda0eb12d896381b56ed7d2b8576b7a4b3225e84e7e125f3398dd6
+size 755

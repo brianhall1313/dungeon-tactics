@@ -1,9 +1,3 @@
-class_name AITurn
-extends State
-signal ai_turn_start
-signal ai_turn_over
-
-
-func _enter_state():
-	ai_turn_start.emit(  )
-	print("now it's the AI's turn")
+version https://git-lfs.github.com/spec/v1
+oid sha256:8e84aa331d22b4d09588062f4f0139d4cd8c4fb7078192d5a73eddb309788da0
+size 153

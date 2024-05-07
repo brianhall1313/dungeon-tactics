@@ -1,8 +1,3 @@
-[gd_scene load_steps=2 format=3 uid="uid://2ceg2fgbqvbq"]
-
-[ext_resource type="Script" path="res://Global/input.gd" id="1_3ho70"]
-
-[node name="input" type="Control"]
-layout_mode = 3
-anchors_preset = 0
-script = ExtResource("1_3ho70")
+version https://git-lfs.github.com/spec/v1
+oid sha256:6ff7768e84e931825f0c1fd555d5f2462409f89d05b383a8b2cd71668825aac2
+size 233

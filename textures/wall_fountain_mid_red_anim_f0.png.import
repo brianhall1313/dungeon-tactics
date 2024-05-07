@@ -1,34 +1,3 @@
-[remap]
-
-importer="texture"
-type="CompressedTexture2D"
-uid="uid://b0vesp8ctvum7"
-path="res://.godot/imported/wall_fountain_mid_red_anim_f0.png-e6956f4e8091b238868c492f4416a3b2.ctex"
-metadata={
-"vram_texture": false
-}
-
-[deps]
-
-source_file="res://textures/wall_fountain_mid_red_anim_f0.png"
-dest_files=["res://.godot/imported/wall_fountain_mid_red_anim_f0.png-e6956f4e8091b238868c492f4416a3b2.ctex"]
-
-[params]
-
-compress/mode=0
-compress/high_quality=false
-compress/lossy_quality=0.7
-compress/hdr_compression=1
-compress/normal_map=0
-compress/channel_pack=0
-mipmaps/generate=false
-mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
-process/fix_alpha_border=true
-process/premult_alpha=false
-process/normal_map_invert_y=false
-process/hdr_as_srgb=false
-process/hdr_clamp_exposure=false
-process/size_limit=0
-detect_3d/compress_to=1
+version https://git-lfs.github.com/spec/v1
+oid sha256:7cab191c0ba38d935197b3e16f541d1b08292b4a31d9fc0143abeb86e584fb66
+size 830

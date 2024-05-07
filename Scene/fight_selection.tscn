@@ -1,6 +1,3 @@
-[gd_scene load_steps=2 format=3 uid="uid://b1d23rdcv88xt"]
-
-[ext_resource type="Script" path="res://Scene/fight_selection.gd" id="1_u8e2f"]
-
-[node name="fight_selection" type="Node"]
-script = ExtResource("1_u8e2f")
+version https://git-lfs.github.com/spec/v1
+oid sha256:39dc0502e48ab385a83f7acf284a428d5030e4cc5fd56e02dbec59c7b3f16427
+size 215

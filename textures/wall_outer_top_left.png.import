@@ -1,34 +1,3 @@
-[remap]
-
-importer="texture"
-type="CompressedTexture2D"
-uid="uid://b1tchlg3gjn3i"
-path="res://.godot/imported/wall_outer_top_left.png-44d8a50115057ec136638aac433964ca.ctex"
-metadata={
-"vram_texture": false
-}
-
-[deps]
-
-source_file="res://textures/wall_outer_top_left.png"
-dest_files=["res://.godot/imported/wall_outer_top_left.png-44d8a50115057ec136638aac433964ca.ctex"]
-
-[params]
-
-compress/mode=0
-compress/high_quality=false
-compress/lossy_quality=0.7
-compress/hdr_compression=1
-compress/normal_map=0
-compress/channel_pack=0
-mipmaps/generate=false
-mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
-process/fix_alpha_border=true
-process/premult_alpha=false
-process/normal_map_invert_y=false
-process/hdr_as_srgb=false
-process/hdr_clamp_exposure=false
-process/size_limit=0
-detect_3d/compress_to=1
+version https://git-lfs.github.com/spec/v1
+oid sha256:9781144d9a3db82aa1a871d48f77609ede65b95c5493a3a72dc901554ad3fa14
+size 800

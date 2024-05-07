@@ -1,34 +1,3 @@
-[remap]
-
-importer="texture"
-type="CompressedTexture2D"
-uid="uid://cblhmx8nvd6ln"
-path="res://.godot/imported/dungeon background 4.png-5bcb4551ed821bb2adb7a9382f005a00.ctex"
-metadata={
-"vram_texture": false
-}
-
-[deps]
-
-source_file="res://Art/dungeon background 4.png"
-dest_files=["res://.godot/imported/dungeon background 4.png-5bcb4551ed821bb2adb7a9382f005a00.ctex"]
-
-[params]
-
-compress/mode=0
-compress/high_quality=false
-compress/lossy_quality=0.7
-compress/hdr_compression=1
-compress/normal_map=0
-compress/channel_pack=0
-mipmaps/generate=false
-mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
-process/fix_alpha_border=true
-process/premult_alpha=false
-process/normal_map_invert_y=false
-process/hdr_as_srgb=false
-process/hdr_clamp_exposure=false
-process/size_limit=0
-detect_3d/compress_to=1
+version https://git-lfs.github.com/spec/v1
+oid sha256:d1c9fd60fd10fa75ab7e4c376f5d0abacefb86fee16fe3dd7d4aa6f8e75bf302
+size 798

@@ -1,5 +1,3 @@
-{"unarmored":{"name":"None","type":"cloth","bonus":0,"move_modifier":0,"add_effects":[]},
-"light_armor":{"name":"Light Armor","type":"armor","bonus":1,"move_modifier":0,"add_effects":[]},
-"heavy_armor":{"name":"Heavy Armor","type":"armor","bonus":2,"move_modifier":-1,"add_effects":[]},
-"shield":{"name":"Shield","type":"shield","bonus":1,"move_modifier":0,"add_effects":[]}
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:2734924b53b777093b6c5e8291f9810d8f39d03a5b3bda7ab0dc9e439360279a
+size 377

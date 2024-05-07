@@ -1,6 +1,3 @@
-extends Sprite2D
-@export var grid_position: Vector2i=Vector2i(0,0)
-
-func movement(pos:Vector2i,raw:Vector2):
-	grid_position=pos
-	self.position=raw
+version https://git-lfs.github.com/spec/v1
+oid sha256:78ce1c13c9ba8db90127e722318e2d1db9860fcfb450ddfe21bf31cccc5e6e36
+size 147
